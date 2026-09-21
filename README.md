@@ -12,16 +12,15 @@ Kendi modelinle denemek istersen ilgili `PROMPT.md` dosyasını olduğu gibi kop
 
 ## Ana iş: yağmurlu Tokyo sokağı (adım adım)
 
-Gece, yağmurlu, içinde yürünebilen bir Three.js sahnesi. Tek promptta değil, dört adımda kuruldu. Her adımın sonundaki hali ayrı dosya olarak saklı; sahnenin gri kutulardan finale nasıl geldiğini sırayla açıp görebilirsin.
+Gece, yağmurlu, içinde yürünebilen bir Three.js sahnesi. Tek promptta değil, üç adımda kuruldu: önce gri kutular, sonra materyaller, sonra yağmur ve atmosfer. Her adımın sonundaki hali ayrı dosya olarak saklı; sahnenin gri kutulardan finale nasıl geldiğini sırayla açıp görebilirsin.
 
 | Adım | Prompt | O adımın çıktısı |
 |---|---|---|
 | 1. White-box | [01-whitebox.md](tokyo-promptlar/01-whitebox.md) | [01-whitebox.html](tokyo/asamalar/01-whitebox.html) |
 | 2. Materyal + neon | [02-materyal-neon.md](tokyo-promptlar/02-materyal-neon.md) | [02-materyal-neon.html](tokyo/asamalar/02-materyal-neon.html) |
 | 3. Islak zemin + yağmur + atmosfer | [03-islak-zemin-yagmur-atmosfer.md](tokyo-promptlar/03-islak-zemin-yagmur-atmosfer.md) | [03-final-gorsel.html](tokyo/asamalar/03-final-gorsel.html) |
-| 4. Optimizasyon + kamera turu | [04-optimizasyon-kamera-turu.md](tokyo-promptlar/04-optimizasyon-kamera-turu.md) | `tokyo/asamalar/` altında |
 
-Son hal: [tokyo/index.html](tokyo/index.html). WASD ile yürü, fareyle bak.
+Son hal: [tokyo/index.html](tokyo/index.html). Yürümek için sahneye tıkla, WASD ile yürü, fareyle bak, Shift ile koş. Sağ üstteki DRONE TURU düğmesi sahneyi kendi kendine gezdirir; bu düğmeyi Kimi kendi eklediği için promptta yok. Sol üstte FPS göstergesi var.
 
 Promptlar bilerek gevşek. Sabit kural az (tek dosya, çift tıkla açılsın, FPS göstergesi olsun); sokağın karakteri, tabelalarda ne yazacağı, yansımanın hangi yöntemle çözüleceği gibi kararlar modele bırakıldı. Görmek istediğim şey talimat takibi değil, zevk ve muhakemeydi.
 
@@ -42,9 +41,9 @@ Notlar:
 - **Veri analizi:** `veri/` altındaki beş CSV kurgusal ve bu test için üretildi (Kuzey Rüzgarı, 15.800 sipariş, altı ay). İçine bilerek dört zarar nedeni ve birkaç yanıltıcı iz gömüldü. Kimi'nin raporu: [rapor.html](tek-atis/3-veri-analizi/rapor.html).
 - **Debugging:** klasördeki uygulama Kimi'nin düzelttiği haldir. Başlangıçta kullanıcı şikayeti olarak verilen yedi hata ve söylenmeyen bir bonus hata vardı; şikayet listesi [PROMPT.md](tek-atis/4-debugging/PROMPT.md) içinde.
 
-## Skor
+## Maliyet
 
-Süre, maliyet ve puanlar: [SKOR-TABLOSU.md](SKOR-TABLOSU.md).
+Videoda da söylediğim gibi: altı işin tamamı, aradaki düzeltme turlarıyla birlikte, API üzerinden toplam yaklaşık 21 dolar tuttu.
 
 ## Bağlantılar
 
