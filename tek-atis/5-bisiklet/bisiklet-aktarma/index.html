@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bisiklet Aktarma Sistemi — Etkileşimli 3B</title>
+<style>
+  :root{
+    --amber:#ffb454; --amber2:#e8913a; --ink:#e8ecf1; --dim:#9aa4b2;
+    --panel:rgba(13,16,22,.80); --line:rgba(255,180,84,.20);
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%; overflow:hidden; background:#0b0e13; color:var(--ink);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  canvas{display:block}
+  .panel{position:fixed; background:var(--panel); border:1px solid var(--line);
+    border-radius:14px; padding:12px 16px; backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px); box-shadow:0 8px 30px rgba(0,0,0,.45); z-index:5}
+  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+
+  /* sol üst: başlık + büyük hız */
+  #p-sol{top:16px; left:16px; min-width:270px}
+  #p-sol h1{font-size:13px; font-weight:650; letter-spacing:.14em; color:var(--amber); text-transform:uppercase}
+  #p-sol .alt{font-size:11px; color:var(--dim); margin-top:2px}
+  #h-hiz{font-size:46px; font-weight:750; letter-spacing:-.02em; margin-top:8px; line-height:1}
+  #h-hiz small{font-size:15px; font-weight:500; color:var(--dim); margin-left:4px}
+  #h-sub{font-size:12px; color:var(--dim); margin-top:7px}
+  #h-sub b{color:var(--ink); font-weight:600}
+  .chip{display:inline-block; font-size:10.5px; padding:2.5px 9px; border-radius:99px;
+    border:1px solid var(--line); margin-top:9px; margin-right:6px; color:var(--dim)}
+  .chip.yes{color:#8fdb9b; border-color:rgba(120,220,140,.35)}
+  .chip.free{color:#8fc3f0; border-color:rgba(120,180,240,.35)}
+  .chip.warn{color:var(--amber); border-color:rgba(255,180,84,.5)}
+  #h-capraz{display:none}
+
+  /* sağ üst: fizik paneli */
+  #p-fizik{top:16px; right:16px; width:295px; font-size:11.5px}
+  #p-fizik h2{font-size:11px; font-weight:650; letter-spacing:.14em; color:var(--amber); text-transform:uppercase; margin-bottom:8px}
+  #p-fizik .row{display:flex; justify-content:space-between; padding:2.5px 0; border-bottom:1px dashed rgba(255,255,255,.06)}
+  #p-fizik .row span:first-child{color:var(--dim)}
+  #p-fizik .row span:last-child{font-weight:600}
+  #p-fizik .not{margin-top:9px; font-size:10px; color:var(--dim); line-height:1.55}
+
+  /* alt: kontroller */
+  #p-alt{bottom:16px; left:50%; transform:translateX(-50%); width:min(860px,94vw)}
+  #chips{display:flex; gap:5px; align-items:center; justify-content:center; margin-bottom:10px; flex-wrap:wrap}
+  .gchip{font-size:10.5px; min-width:34px; text-align:center; padding:3px 0; border-radius:7px;
+    background:rgba(255,255,255,.05); color:var(--dim); border:1px solid transparent; transition:all .25s}
+  .gchip.on{background:rgba(255,180,84,.18); color:var(--amber); border-color:rgba(255,180,84,.55); font-weight:700}
+  .gsep{width:1px; height:16px; background:rgba(255,255,255,.12); margin:0 6px}
+  .ggrp{font-size:9.5px; color:var(--dim); letter-spacing:.1em; margin-right:2px}
+  #kontrol-satir{display:flex; gap:18px; align-items:center; justify-content:center; flex-wrap:wrap}
+  .vgrup{display:flex; align-items:center; gap:7px}
+  .vgrup .etiket{font-size:10.5px; color:var(--dim); letter-spacing:.08em}
+  .vbtn{width:30px; height:30px; border-radius:9px; border:1px solid var(--line); background:rgba(255,255,255,.05);
+    color:var(--amber); font-size:17px; font-weight:700; cursor:pointer; transition:background .15s}
+  .vbtn:hover{background:rgba(255,180,84,.18)}
+  .vbtn:active{transform:scale(.93)}
+  .vdger{font-size:13px; font-weight:700; min-width:64px; text-align:center}
+  .vdger small{display:block; font-size:9px; color:var(--dim); font-weight:500}
+  .sgrup{display:flex; flex-direction:column; gap:2px}
+  .sgrup label{font-size:9.5px; color:var(--dim); letter-spacing:.08em; display:flex; justify-content:space-between; gap:10px}
+  .sgrup input[type=range]{width:150px; accent-color:var(--amber)}
+  .tgrup{display:flex; gap:5px}
+  .tbtn{font-size:10.5px; padding:5px 10px; border-radius:8px; border:1px solid var(--line);
+    background:rgba(255,255,255,.04); color:var(--dim); cursor:pointer}
+  .tbtn.on{color:var(--amber); background:rgba(255,180,84,.15); border-color:rgba(255,180,84,.5)}
+
+  /* 3B etiketler */
+  .lbl{position:fixed; pointer-events:none; z-index:4; font-size:10.5px; letter-spacing:.03em;
+    background:rgba(13,16,22,.78); border-left:2px solid var(--amber); border-radius:5px;
+    padding:3px 8px; color:var(--ink); white-space:nowrap; transform:translate(-50%,-130%);
+    box-shadow:0 3px 12px rgba(0,0,0,.4)}
+  .lbl b{color:var(--amber)}
+
+  #ipucu{position:fixed; bottom:16px; left:16px; font-size:10px; color:var(--dim); line-height:1.7; z-index:5}
+  #ipucu b{color:var(--ink); font-weight:600}
+  #cdn-uyari{position:fixed; inset:0; display:none; place-items:center; background:#0b0e13; z-index:50;
+    font-size:14px; color:var(--dim); text-align:center; line-height:2}
+  @media (max-width:900px){ #p-fizik{display:none} }
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+</head>
+<body>
+
+<div id="cdn-uyari"><div>Three.js CDN'den yüklenemedi.<br>Bu sayfa internet bağlantısı gerektirir (jsdelivr.net).</div></div>
+
+<div class="panel" id="p-sol">
+  <h1>Bisiklet Aktarma Sistemi</h1>
+  <div class="alt">aynakol · zincir · kaset · arka aktarıcı — canlı fizik</div>
+  <div id="h-hiz">0.0<small>km/s</small></div>
+  <div id="h-sub">kadans <b>—</b> · teker <b>—</b> · gelişim <b>—</b></div>
+  <div>
+    <span class="chip yes" id="h-durum">güç aktarılıyor</span>
+    <span class="chip warn" id="h-capraz">çapraz zincir hattı</span>
+  </div>
+</div>
+
+<div class="panel mono" id="p-fizik">
+  <h2>Fizik — canlı hesap</h2>
+  <div class="row"><span>dişliler (ön/arka)</span><span id="f-disli">—</span></div>
+  <div class="row"><span>oran i = Zön/Zarka</span><span id="f-oran">—</span></div>
+  <div class="row"><span>gelişim d = i·C</span><span id="f-gelisim">—</span></div>
+  <div class="row"><span>zincir vz = n·Zön·p</span><span id="f-zincir">—</span></div>
+  <div class="row"><span>teker nt = n·i</span><span id="f-teker">—</span></div>
+  <div class="row"><span>hız v = nt·C</span><span id="f-v">—</span></div>
+  <div class="row"><span>aktarıcı kafes açısı</span><span id="f-kafes">—</span></div>
+  <div class="not">
+    r = p/(2·sin π/Z) ile her dişlinin yarıçapı diş sayısından birebir hesaplanır (p = 12,7 mm zincir adımı).
+    Zincir 112 bakla; kafes açısı, zincir uzunluğu tam kapanacak şekilde her viteste yeniden çözülür.
+    Teker çevresi C = 2,098 m (700×25c). Kadans 0 iken serbest teker (freewheel) devrede.
+    Göstergeler diş sayılarından birebir hesaplanır; 3B hareket bölüm dairesi üzerinden işlediği için
+    anlık hız çokgen etkisiyle ortalamadan %1,5'e kadar sapar (gerçek zincir fiziği).
+  </div>
+</div>
+
+<div class="panel" id="p-alt">
+  <div id="chips"></div>
+  <div id="kontrol-satir">
+    <div class="vgrup">
+      <span class="etiket">ÖN VİTES</span>
+      <button class="vbtn" id="b-on-eksi">−</button>
+      <div class="vdger" id="d-on">42T<small>aynakol</small></div>
+      <button class="vbtn" id="b-on-arti">+</button>
+    </div>
+    <div class="vgrup">
+      <span class="etiket">ARKA VİTES</span>
+      <button class="vbtn" id="b-arka-eksi">−</button>
+      <div class="vdger" id="d-arka">19T<small>kaset</small></div>
+      <button class="vbtn" id="b-arka-arti">+</button>
+    </div>
+    <div class="sgrup">
+      <label><span>KADANS</span><span id="v-kadans" class="mono">85 d/dk</span></label>
+      <input type="range" id="s-kadans" min="0" max="130" value="85" step="1">
+    </div>
+    <div class="sgrup">
+      <label><span>PATLATILMIŞ GÖRÜNÜM</span><span id="v-patlat" class="mono">%0</span></label>
+      <input type="range" id="s-patlat" min="0" max="100" value="0" step="1">
+    </div>
+    <div class="tgrup">
+      <button class="tbtn on" id="t-yol">yol akışı</button>
+      <button class="tbtn" id="t-tur">kamera turu</button>
+      <button class="tbtn on" id="t-etiket">etiketler</button>
+    </div>
+  </div>
+</div>
+
+<div id="ipucu">
+  <b>←/→</b> ön vites &nbsp; <b>↑/↓</b> arka vites<br>
+  <b>sürükle</b> döndür &nbsp; <b>tekerlek</b> yakınlaştır &nbsp; <b>sağ tık</b> kaydır
+</div>
+
+<div id="lbls"></div>
+
+<script>
+  setTimeout(()=>{ if(!window.__ok) document.getElementById('cdn-uyari').style.display='grid'; }, 7000);
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+window.__ok = true;
+
+/* ================================================================
+   1) SABİTLER — geometri ve fizik (Node ile doğrulanmış değerler)
+   ================================================================ */
+const TAU = Math.PI * 2;
+const P = 0.0127;                                  // zincir adımı: 12,7 mm (1/2")
+const pitchR = Z => P / (2 * Math.sin(Math.PI / Z)); // bölüm dairesi yarıçapı
+const RINGS = [30, 42, 52];                        // aynakol dişlileri (üçlü)
+const COGS  = [11, 13, 15, 17, 19, 21, 24, 28, 32]; // 9'lu kaset
+const N_LINK = 112;                                // zincir bakla sayısı (sabit!)
+const BB   = { x: 0, y: 0.285 };                   // orta göbek (aynakol merkezi)
+const AXLE = { x: -0.425, y: 0.334 };              // arka teker mili
+const WHEEL_R = 0.334;                             // 700×25c teker yarıçapı
+const WHEEL_C = TAU * WHEEL_R;                     // çevre: 2,098 m
+const R_PUL = 0.020, CAGE_L = 0.100, B_GAP = 0.006;
+const G_ANGLE = 253 * Math.PI / 180;               // kılavuz makaranın dişliye göre açısı
+const CRANK = 0.172;                               // kol boyu
+const RING_Z0 = 0.013, COG_Z0 = 0.0085;            // dişli eksenel aralıklar (görsel için hafif geniş)
+
+const angNorm = a => { a %= TAU; return a < 0 ? a + TAU : a; };
+const signedA = a => { a = angNorm(a); return a > Math.PI ? a - TAU : a; };
+const lerp = (a, b, t) => a + (b - a) * t;
+const easeIO = t => t < .5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2) / 2;
+
+/* ================================================================
+   2) ZİNCİR YOLU — teğet geometri + sarmal sayısı + kafes çözümü
+   Akış sırası: F(ön dişli) -> T(alt makara) -> G(üst makara) -> C(kaset) -> F
+   Ön dişli ön tarafından, kaset arka tarafından sarılır (ikisi de CW).
+   ================================================================ */
+function tangentCands(A, B) {
+  const dx = B.x - A.x, dy = B.y - A.y, d = Math.hypot(dx, dy);
+  const base = Math.atan2(dy, dx), same = (A.w === B.w);
+  const c = same ? (A.r - B.r) / d : (A.r + B.r) / d;
+  if (Math.abs(c) > 1) return [];
+  const phi = Math.acos(Math.max(-1, Math.min(1, c)));
+  const out = [];
+  for (const s of [1, -1]) {
+    const aA = base + s * phi, aB = same ? aA : aA + Math.PI;
+    const vAx = -A.w * Math.sin(aA), vAy = A.w * Math.cos(aA);
+    const pAx = A.x + A.r * Math.cos(aA), pAy = A.y + A.r * Math.sin(aA);
+    const pBx = B.x + B.r * Math.cos(aB), pBy = B.y + B.r * Math.sin(aB);
+    const tx = pBx - pAx, ty = pBy - pAy;
+    const vBx = -B.w * Math.sin(aB), vBy = B.w * Math.cos(aB);
+    if ((vAx*tx + vAy*ty) > 0 && (vBx*tx + vBy*ty) > 0)
+      out.push({ aA: angNorm(aA), aB: angNorm(aB), len: Math.hypot(tx, ty) });
+  }
+  return out;
+}
+const dirAt = (a, w) => Math.atan2(w * Math.cos(a), -w * Math.sin(a));
+
+function buildPath(rF, rC, cagePhi) {
+  const gd = rC + R_PUL + B_GAP;
+  const gx = AXLE.x + gd * Math.cos(G_ANGLE), gy = AXLE.y + gd * Math.sin(G_ANGLE);
+  let best = null;
+  for (const wT of [1, -1]) for (const wG of [1, -1]) {
+    const F = { x: BB.x, y: BB.y, r: rF, w: -1 };
+    const C = { x: AXLE.x, y: AXLE.y, r: rC, w: -1 };
+    const G = { x: gx, y: gy, r: R_PUL, w: wG };
+    const T = { x: gx + CAGE_L * Math.cos(cagePhi), y: gy + CAGE_L * Math.sin(cagePhi), r: R_PUL, w: wT };
+    const cand = [tangentCands(F,T), tangentCands(T,G), tangentCands(G,C), tangentCands(C,F)];
+    if (cand.some(c => c.length === 0)) continue;
+    for (let m = 0; m < 16; m++) {
+      if (cand.some((c,i) => c.length === 1 && ((m>>i)&1) === 1)) continue;
+      const [tFT, tTG, tGC, tCF] = cand.map((c,i) => c[(m>>i)&1] ?? c[0]);
+      const arc = (cc, a0, a1) => cc.w > 0 ? angNorm(a1 - a0) : angNorm(a0 - a1);
+      const dF = arc(F, tCF.aB, tFT.aA), dT = arc(T, tFT.aB, tTG.aA);
+      const dG = arc(G, tTG.aB, tGC.aA), dC = arc(C, tGC.aB, tCF.aA);
+      if (dF < .05 || dC < .05 || dG < .05 || dT < .05) continue;
+      const pt = (cc,a) => ({ x: cc.x + cc.r*Math.cos(a), y: cc.y + cc.r*Math.sin(a) });
+      const pFTa = pt(F,tFT.aA), pFTb = pt(T,tFT.aB), pTGa = pt(T,tTG.aA), pTGb = pt(G,tTG.aB);
+      const pGCa = pt(G,tGC.aA), pGCb = pt(C,tGC.aB), pCFa = pt(C,tCF.aA), pCFb = pt(F,tCF.aB);
+      const psiFT = Math.atan2(pFTb.y-pFTa.y, pFTb.x-pFTa.x);
+      const psiTG = Math.atan2(pTGb.y-pTGa.y, pTGb.x-pTGa.x);
+      const psiGC = Math.atan2(pGCb.y-pGCa.y, pGCb.x-pGCa.x);
+      const psiCF = Math.atan2(pCFb.y-pCFa.y, pCFb.x-pCFa.x);
+      let turn = 0;
+      turn += signedA(psiFT - dirAt(tFT.aA, F.w)) + signedA(dirAt(tFT.aB, T.w) - psiFT);
+      turn += signedA(psiTG - dirAt(tTG.aA, T.w)) + signedA(dirAt(tTG.aB, G.w) - psiTG);
+      turn += signedA(psiGC - dirAt(tGC.aA, G.w)) + signedA(dirAt(tGC.aB, C.w) - psiGC);
+      turn += signedA(psiCF - dirAt(tCF.aA, C.w)) + signedA(dirAt(tCF.aB, F.w) - psiCF);
+      turn += F.w*dF + T.w*dT + G.w*dG + C.w*dC;
+      if (Math.abs(turn + TAU) > .05) continue;      // basit kapalı eğri (saat yönü) değil
+      const totalLen = tFT.len + tTG.len + tGC.len + tCF.len + dF*F.r + dT*T.r + dG*G.r + dC*C.r;
+      if (!best || totalLen < best.totalLen)
+        best = { F, C, G, T, tFT, tTG, tGC, tCF, dF, dC, dG, dT, totalLen };
+    }
+  }
+  return best;
+}
+
+// bakla-esdeğer uzunluk: düz parçalar adım/P, yaylar kiriş-adımı ile
+function linkEquiv(p) {
+  const a = (d, r) => d / (2 * Math.asin(P / (2*r)));
+  return (p.tFT.len + p.tTG.len + p.tGC.len + p.tCF.len) / P +
+    a(p.dF, p.F.r) + a(p.dC, p.C.r) + a(p.dG, p.G.r) + a(p.dT, p.T.r);
+}
+
+// kafes açısını çöz: zincir tam 112 bakla ile kapansın (tarama + biseksiyon)
+function solveCage(rF, rC) {
+  const LO = 190 * Math.PI/180, HI = 340 * Math.PI/180;
+  let prevV = null, prevPhi = 0, bestPhi = null, bestAbs = 1e9;
+  for (let i = 0; i <= 60; i++) {
+    const phi = LO + (HI - LO) * i / 60;
+    const p = buildPath(rF, rC, phi);
+    if (!p) { prevV = null; continue; }
+    const v = linkEquiv(p) - N_LINK;
+    if (Math.abs(v) < bestAbs) { bestAbs = Math.abs(v); bestPhi = phi; }
+    if (prevV !== null && prevV * v < 0) {
+      let a = prevPhi, b = phi, fa = prevV;
+      for (let k = 0; k < 42; k++) {
+        const m = (a + b) / 2, pm = buildPath(rF, rC, m);
+        if (!pm) { a = m; continue; }
+        const fm = linkEquiv(pm) - N_LINK;
+        if (fa * fm <= 0) b = m; else { a = m; fa = fm; }
+      }
+      return (a + b) / 2;
+    }
+    prevV = v; prevPhi = phi;
+  }
+  return bestPhi ?? 265 * Math.PI/180;   // pratikte buraya hiç düşmez
+}
+
+/* ================================================================
+   3) YOL POLİGONU + BAKLA YÜRÜTÜCÜ
+   XY yolu 0,6 mm adımlarla örneklenir, z (yanal konum) parça parça
+   eklenir; baklalar tam P=12,7 mm kiriş adımıyla yürütülür.
+   ================================================================ */
+const SEG = { ARC_F:0, LN_FT:1, ARC_T:2, LN_TG:3, ARC_G:4, LN_GC:5, ARC_C:6, LN_CF:7 };
+let poly = null;   // {x,y,z,cum,seg,count,len}
+let pathInfo = null;
+
+function rebuildPolyline(rF, zF, rC, zC, zD) {
+  const phi = solveCage(rF, rC);
+  const p = buildPath(rF, rC, phi);
+  const segs = [];
+  const arcSeg = (tag, c, a0, dAng, z0, z1) =>
+    segs.push({ tag, c, a0, dAng, len: dAng * c.r, arc: true, z0, z1 });
+  const lineSeg = (tag, c1, a1, c2, a2, len, z0, z1) =>
+    segs.push({ tag, len, arc: false, z0, z1,
+      x0: c1.x + c1.r*Math.cos(a1), y0: c1.y + c1.r*Math.sin(a1),
+      x1: c2.x + c2.r*Math.cos(a2), y1: c2.y + c2.r*Math.sin(a2) });
+  arcSeg(SEG.ARC_F, p.F, p.tCF.aB, p.dF, zF, zF);
+  lineSeg(SEG.LN_FT, p.F, p.tFT.aA, p.T, p.tFT.aB, p.tFT.len, zF, zD);
+  arcSeg(SEG.ARC_T, p.T, p.tFT.aB, p.dT, zD, zD);
+  lineSeg(SEG.LN_TG, p.T, p.tTG.aA, p.G, p.tTG.aB, p.tTG.len, zD, zD);
+  arcSeg(SEG.ARC_G, p.G, p.tTG.aB, p.dG, zD, zD);
+  lineSeg(SEG.LN_GC, p.G, p.tGC.aA, p.C, p.tGC.aB, p.tGC.len, zD, zC);
+  arcSeg(SEG.ARC_C, p.C, p.tGC.aB, p.dC, zC, zC);
+  lineSeg(SEG.LN_CF, p.C, p.tCF.aA, p.F, p.tCF.aB, p.tCF.len, zC, zF);
+
+  const STEP = 0.0006, xs = [], ys = [], zs = [], sg = [];
+  for (const s of segs) {
+    const n = Math.max(2, Math.ceil(s.len / STEP));
+    for (let i = 0; i < n; i++) {
+      const t = i / n;
+      if (s.arc) {
+        const a = s.a0 + s.c.w * s.dAng * t;
+        xs.push(s.c.x + s.c.r*Math.cos(a)); ys.push(s.c.y + s.c.r*Math.sin(a));
+      } else {
+        xs.push(lerp(s.x0, s.x1, t)); ys.push(lerp(s.y0, s.y1, t));
+      }
+      zs.push(lerp(s.z0, s.z1, t)); sg.push(s.tag);
+    }
+  }
+  const M = xs.length, cum = new Float32Array(M + 1);
+  for (let i = 0; i < M; i++) {
+    const j = (i + 1) % M;
+    cum[i+1] = cum[i] + Math.hypot(xs[j]-xs[i], ys[j]-ys[i], zs[j]-zs[i]);
+  }
+  poly = { x: new Float32Array(xs), y: new Float32Array(ys), z: new Float32Array(zs),
+           seg: new Uint8Array(sg), cum, count: M, len: cum[M] };
+  pathInfo = { phi, p,
+    topMid: { x: (p.tCF ? (p.C.x + p.C.r*Math.cos(p.tCF.aA) + p.F.x + p.F.r*Math.cos(p.tCF.aB))/2 : 0),
+              y: (p.C.y + p.C.r*Math.sin(p.tCF.aA) + p.F.y + p.F.r*Math.sin(p.tCF.aB))/2 } };
+  return phi;
+}
+
+// baklaları yürüt: faz (m) konumundan başla, her bakla P kiriş ileride
+const pins = [];
+for (let i = 0; i < N_LINK; i++) pins.push({ x:0, y:0, z:0, seg:0 });
+function walkPins(phase) {
+  const { x, y, z, seg, cum, count } = poly;
+  const L = poly.len;
+  let s0 = ((phase % L) + L) % L;
+  let lo = 0, hi = count;                       // cum[lo] <= s0 < cum[lo+1]
+  while (lo < hi) { const m = (lo + hi + 1) >> 1; (cum[m] <= s0) ? lo = m : hi = m - 1; }
+  let idx = lo;
+  const at = (i, t) => {                        // polyline noktası i..i+1 arası
+    const j = (i + 1) % count;
+    return { x: lerp(x[i], x[j], t), y: lerp(y[i], y[j], t), z: lerp(z[i], z[j], t), seg: seg[i] };
+  };
+  const f0 = (s0 - cum[idx]) / Math.max(1e-9, cum[idx+1] - cum[idx]);
+  pins[0] = at(idx, Math.min(1, Math.max(0, f0)));
+  let pi = 0;
+  for (let k = 1; k < N_LINK; k++) {
+    const from = pins[k-1];
+    let j = idx + 1, guard = 0;
+    while (guard++ < count) {
+      const jj = j % count;
+      const dx = x[jj]-from.x, dy = y[jj]-from.y, dz = z[jj]-from.z;
+      if (dx*dx + dy*dy + dz*dz >= P*P) break;
+      j++;
+    }
+    const aI = (j - 1 + count) % count, bI = j % count;
+    const A = { x: x[aI], y: y[aI], z: z[aI] }, B = { x: x[bI], y: y[bI], z: z[bI] };
+    const dA = Math.hypot(A.x-from.x, A.y-from.y, A.z-from.z);
+    const dB = Math.hypot(B.x-from.x, B.y-from.y, B.z-from.z);
+    const t = Math.min(1, Math.max(0, (P - dA) / (dB - dA + 1e-12)));
+    pins[k] = { x: lerp(A.x,B.x,t), y: lerp(A.y,B.y,t), z: lerp(A.z,B.z,t), seg: seg[aI] };
+    pi++; idx = (j - 1 + count) % count;
+  }
+  return pi + 1;
+}
+
+/* ================================================================
+   4) THREE.JS SAHNE
+   ================================================================ */
+const qp = new URLSearchParams(location.search);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(innerWidth, innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.12;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0b0e13);
+scene.fog = new THREE.Fog(0x0b0e13, 5.5, 13);
+
+const camera = new THREE.PerspectiveCamera(38, innerWidth/innerHeight, 0.02, 60);
+const camTarget = new THREE.Vector3(-0.08, 0.27, 0);
+if (qp.get('hedef')) { const v = qp.get('hedef').split(',').map(Number); camTarget.set(v[0], v[1], v[2]); }
+const camPos = new THREE.Vector3(0.62, 0.52, 0.82);
+if (qp.get('kam')) { const v = qp.get('kam').split(',').map(Number); camPos.set(v[0], v[1], v[2]); }
+
+/* --- ışıklar --- */
+scene.add(new THREE.HemisphereLight(0x8fa3c0, 0x11141a, 0.55));
+const key = new THREE.DirectionalLight(0xfff1dd, 2.6);
+key.position.set(1.7, 2.3, 1.5);
+key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+key.shadow.camera.left = key.shadow.camera.bottom = -1.1;
+key.shadow.camera.right = key.shadow.camera.top = 1.1;
+key.shadow.camera.far = 8; key.shadow.bias = -0.0006;
+scene.add(key);
+const rim = new THREE.DirectionalLight(0x6fa8ff, 1.15);
+rim.position.set(-2.2, 1.3, -1.7); scene.add(rim);
+const fill = new THREE.DirectionalLight(0xdfe8ff, 0.4);
+fill.position.set(-0.6, 0.5, 2.0); scene.add(fill);
+
+/* --- zemin + ızgara + akan yol --- */
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(30, 30),
+  new THREE.MeshStandardMaterial({ color: 0x0d1015, roughness: 0.96, metalness: 0 }));
+ground.rotation.x = -Math.PI/2; ground.receiveShadow = true; scene.add(ground);
+const grid = new THREE.GridHelper(16, 32, 0x233046, 0x151c28);
+grid.position.y = 0.0025; scene.add(grid);
+
+function roadTexture() {
+  const cv = document.createElement('canvas'); cv.width = cv.height = 256;
+  const g = cv.getContext('2d');
+  g.fillStyle = '#171b22'; g.fillRect(0, 0, 256, 256);
+  g.fillStyle = '#262e3d'; g.fillRect(0, 12, 256, 5); g.fillRect(0, 239, 256, 5);
+  g.fillStyle = '#cfd6e0'; g.fillRect(80, 122, 96, 12);   // kesikli şerit (4 m'de bir)
+  const t = new THREE.CanvasTexture(cv);
+  t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(10, 1); t.anisotropy = 4;
+  return t;
+}
+const roadTex = roadTexture();
+const road = new THREE.Mesh(
+  new THREE.PlaneGeometry(40, 0.92),
+  new THREE.MeshStandardMaterial({ map: roadTex, roughness: 0.94, metalness: 0 }));
+road.rotation.x = -Math.PI/2; road.position.y = 0.006; road.receiveShadow = true; scene.add(road);
+
+/* --- malzemeler --- */
+const M = {
+  gear:   new THREE.MeshStandardMaterial({ color: 0x9aa2ac, metalness: .92, roughness: .32 }),
+  gearIn: new THREE.MeshStandardMaterial({ color: 0x565d66, metalness: .9,  roughness: .42 }),
+  ringBody: new THREE.MeshStandardMaterial({ color: 0x32363d, metalness: .85, roughness: .4 }),
+  crank:  new THREE.MeshStandardMaterial({ color: 0x23262c, metalness: .8, roughness: .38 }),
+  chainO: new THREE.MeshStandardMaterial({ color: 0xb4bac2, metalness: .85, roughness: .38 }),
+  chainI: new THREE.MeshStandardMaterial({ color: 0x7d858e, metalness: .85, roughness: .42 }),
+  roller: new THREE.MeshStandardMaterial({ color: 0x494f57, metalness: .9, roughness: .35 }),
+  frame:  new THREE.MeshStandardMaterial({ color: 0x2b7a78, metalness: .55, roughness: .45, transparent: true, opacity: .55 }),
+  rd:     new THREE.MeshStandardMaterial({ color: 0x1b1d22, metalness: .75, roughness: .45 }),
+  cage:   new THREE.MeshStandardMaterial({ color: 0x2c3038, metalness: .8, roughness: .4 }),
+  pulley: new THREE.MeshStandardMaterial({ color: 0xe8913a, metalness: .6, roughness: .45 }),
+  rim:    new THREE.MeshStandardMaterial({ color: 0xc9ced6, metalness: .95, roughness: .24 }),
+  tire:   new THREE.MeshStandardMaterial({ color: 0x16181d, metalness: .1, roughness: .92 }),
+  hub:    new THREE.MeshStandardMaterial({ color: 0x8b929c, metalness: .9, roughness: .35 }),
+};
+
+/* --- dişli geometrisi: yamuk dişler; boşluk merkezleri açı k·τ'da --- */
+function gearGeo(Z, thickness, holeR) {
+  const r = pitchR(Z), rTip = r + 0.0032, rRoot = r - 0.0042, tau = TAU / Z;
+  const sh = new THREE.Shape();
+  for (let k = 0; k < Z; k++) {
+    const a = k * tau;
+    const pts = [[rRoot, a], [rRoot, a + .30*tau], [rTip, a + .42*tau], [rTip, a + .58*tau], [rRoot, a + .70*tau]];
+    for (const [rr, aa] of pts) {
+      const x = rr * Math.cos(aa), y = rr * Math.sin(aa);
+      (k === 0 && rr === rRoot && aa === a) ? sh.moveTo(x, y) : sh.lineTo(x, y);
+    }
+  }
+  sh.closePath();
+  if (holeR) { const h = new THREE.Path(); h.absarc(0, 0, holeR, 0, TAU, true); sh.holes.push(h); }
+  const g = new THREE.ExtrudeGeometry(sh, { depth: thickness, bevelEnabled: true,
+    bevelThickness: .0004, bevelSize: .0004, bevelSegments: 1, curveSegments: 3 });
+  g.translate(0, 0, -thickness/2);
+  return g;
+}
+
+/* --- aynakol: 3 dişli + örümcek + kollar + pedallar --- */
+const crankGroup = new THREE.Group(); crankGroup.position.set(BB.x, BB.y, 0); scene.add(crankGroup);
+const ringMeshes = [], ringMats = [];
+{
+  RINGS.forEach((Z, i) => {
+    const mat = M.gear.clone();
+    // ince halka + buyuk delik: arkadaki zincir gorunur kalir
+    const holeF = i === 2 ? 0.87 : (i === 1 ? 0.80 : 0.55);
+    const mesh = new THREE.Mesh(gearGeo(Z, 0.0019, pitchR(Z) * holeF), mat);
+    mesh.castShadow = true; crankGroup.add(mesh);
+    ringMeshes.push(mesh); ringMats.push(mat);
+  });
+  const spider = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.005, 20), M.ringBody);
+  spider.rotation.x = Math.PI/2; spider.position.z = 0.006; spider.castShadow = true; crankGroup.add(spider);
+  for (let k = 0; k < 5; k++) {
+    const arm = new THREE.Mesh(new THREE.BoxGeometry(0.075, 0.015, 0.0035), M.ringBody);
+    const a = k * TAU/5;
+    arm.position.set(Math.cos(a)*0.0585, Math.sin(a)*0.0585, 0.006);
+    arm.rotation.z = a; arm.castShadow = true; crankGroup.add(arm);
+  }
+  const armR = new THREE.Mesh(new THREE.BoxGeometry(CRANK, 0.023, 0.012), M.crank);
+  armR.position.set(CRANK/2, 0, 0.030); armR.castShadow = true; crankGroup.add(armR);
+}
+const armLGroup = new THREE.Group(); armLGroup.position.set(BB.x, BB.y, 0); scene.add(armLGroup);
+{
+  const armL = new THREE.Mesh(new THREE.BoxGeometry(CRANK, 0.023, 0.012), M.crank);
+  armL.position.set(CRANK/2, 0, -0.048); armL.castShadow = true; armLGroup.add(armL);
+}
+const pedalR = new THREE.Mesh(new THREE.BoxGeometry(0.085, 0.016, 0.055), M.rd);
+const pedalL = pedalR.clone();
+pedalR.castShadow = pedalL.castShadow = true; scene.add(pedalR, pedalL);
+const spinGeo = new THREE.CylinderGeometry(0.005, 0.005, 0.075, 8);
+spinGeo.rotateX(Math.PI/2);
+const spinR = new THREE.Mesh(spinGeo, M.crank), spinL = spinR.clone();
+scene.add(spinR, spinL);
+
+/* --- kaset (zincirle döner) + serbest göbek (tekerle döner) --- */
+const cassetteGroup = new THREE.Group(); cassetteGroup.position.set(AXLE.x, AXLE.y, 0); scene.add(cassetteGroup);
+const cogMeshes = [], cogMats = [];
+COGS.forEach((Z, j) => {
+  const mat = (j === COGS.length-1 ? M.gear : M.gearIn).clone();
+  const mesh = new THREE.Mesh(gearGeo(Z, 0.0015, pitchR(Math.min(Z,14)) * 0.8), mat);
+  mesh.castShadow = true; cassetteGroup.add(mesh);
+  cogMeshes.push(mesh); cogMats.push(mat);
+});
+
+/* --- arka teker --- */
+const wheelGroup = new THREE.Group(); wheelGroup.position.set(AXLE.x, AXLE.y, 0); scene.add(wheelGroup);
+{
+  const tire = new THREE.Mesh(new THREE.TorusGeometry(0.318, 0.0165, 18, 72), M.tire);
+  tire.castShadow = true; wheelGroup.add(tire);
+  const rimM = new THREE.Mesh(new THREE.TorusGeometry(0.296, 0.0115, 12, 64), M.rim);
+  rimM.castShadow = true; wheelGroup.add(rimM);
+  const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.013, 0.013, 0.095, 16), M.hub);
+  hub.rotation.x = Math.PI/2; wheelGroup.add(hub);
+  const freehub = new THREE.Mesh(new THREE.CylinderGeometry(0.017, 0.017, 0.055, 16), M.hub);
+  freehub.rotation.x = Math.PI/2; freehub.position.z = 0.012; wheelGroup.add(freehub);
+  for (const zs of [-0.032, 0.032]) {
+    const fl = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 0.002, 20), M.hub);
+    fl.rotation.x = Math.PI/2; fl.position.z = zs; wheelGroup.add(fl);
+  }
+  const sp = [];
+  for (let i = 0; i < 26; i++) for (const s of [1, -1]) {
+    const a = i / 26 * TAU, b = a + s * 0.62;
+    sp.push(0.028*Math.cos(a), 0.028*Math.sin(a), s*0.032,
+            0.296*Math.cos(b), 0.296*Math.sin(b), s*0.004);
+  }
+  const sg = new THREE.BufferGeometry();
+  sg.setAttribute('position', new THREE.Float32BufferAttribute(sp, 3));
+  wheelGroup.add(new THREE.LineSegments(sg, new THREE.LineBasicMaterial({ color: 0x8a9099, transparent: true, opacity: .8 })));
+  for (const a of [0, Math.PI]) {                      // jant reflektörleri: dönüşü gösterir
+    const dec = new THREE.Mesh(new THREE.BoxGeometry(0.012, 0.05, 0.026),
+      new THREE.MeshStandardMaterial({ color: 0xffb454, emissive: 0xff9d2e, emissiveIntensity: .55 }));
+    dec.position.set(0.296*Math.cos(a), 0.296*Math.sin(a), 0); dec.rotation.z = a; wheelGroup.add(dec);
+  }
+}
+
+/* --- arka aktarıcı: kunka + biyel + kafes + 2 makara --- */
+const rdGroup = new THREE.Group(); scene.add(rdGroup);
+const knuckle = new THREE.Mesh(new THREE.BoxGeometry(0.024, 0.03, 0.02), M.rd); knuckle.castShadow = true;
+const bLink = new THREE.Mesh(new THREE.BoxGeometry(1, 0.014, 0.012), M.rd); bLink.castShadow = true;
+const cagePlate1 = new THREE.Mesh(new THREE.BoxGeometry(CAGE_L + 0.03, 0.007, 0.0022), M.cage);
+const cagePlate2 = cagePlate1.clone(); cagePlate1.castShadow = cagePlate2.castShadow = true;
+const pulG = new THREE.Mesh(new THREE.CylinderGeometry(R_PUL, R_PUL, 0.0075, 24), M.pulley);
+const pulT = pulG.clone(); pulG.castShadow = pulT.castShadow = true;
+for (const pl of [pulG, pulT]) {
+  pl.geometry = pl.geometry.clone(); pl.geometry.rotateX(Math.PI/2);
+  const groove = new THREE.Mesh(new THREE.TorusGeometry(R_PUL*0.55, 0.0022, 8, 24), M.rd);
+  pl.add(groove);
+}
+rdGroup.add(knuckle, bLink, cagePlate1, cagePlate2, pulG, pulT);
+
+/* --- ön aktarıcı: sele borusu kelepçesi + kafes --- */
+const fdGroup = new THREE.Group(); scene.add(fdGroup);
+{
+  const clamp = new THREE.Mesh(new THREE.TorusGeometry(0.018, 0.004, 8, 24), M.rd);
+  clamp.rotation.x = Math.PI/2; fdGroup.add(clamp);
+  const armFD = new THREE.Mesh(new THREE.BoxGeometry(0.012, 0.012, 0.05), M.rd);
+  armFD.position.set(0.004, 0.0, 0.028); fdGroup.add(armFD);
+}
+const fdP1 = new THREE.Mesh(new THREE.BoxGeometry(0.062, 0.034, 0.0016), M.cage);
+const fdP2 = fdP1.clone(); fdP1.castShadow = true; fdGroup.add(fdP1, fdP2);
+
+/* --- kadro silüeti (hayalet) --- */
+function tube(a, b, r) {
+  const d = new THREE.Vector3().subVectors(b, a), l = d.length();
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, l, 10), M.frame);
+  m.position.copy(a).addScaledVector(d, 0.5);
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), d.normalize());
+  m.castShadow = true; scene.add(m); return m;
+}
+{
+  const bb3 = new THREE.Vector3(BB.x, BB.y, 0), ax = new THREE.Vector3(AXLE.x, AXLE.y, 0);
+  const seatTop = new THREE.Vector3(-0.075, 0.66, 0);
+  tube(bb3, seatTop, 0.016);                                   // sele borusu
+  tube(bb3, new THREE.Vector3(0.36, 0.55, 0), 0.019);          // alt boru (kesik)
+  for (const s of [1, -1]) {
+    tube(new THREE.Vector3(BB.x, BB.y, s*0.054), new THREE.Vector3(AXLE.x, AXLE.y, s*0.050), 0.008); // zincir ayakları
+    tube(seatTop, new THREE.Vector3(AXLE.x, AXLE.y, s*0.048), 0.006);                                // üst ayaklar
+  }
+  const bbShell = new THREE.Mesh(new THREE.CylinderGeometry(0.021, 0.021, 0.09, 16), M.frame);
+  bbShell.rotation.x = Math.PI/2; bbShell.position.copy(bb3); scene.add(bbShell);
+}
+
+/* --- zincir: instanced baklalar + makaralar --- */
+const rollerGeo = new THREE.CylinderGeometry(0.0034, 0.0034, 0.0068, 10);
+rollerGeo.rotateX(Math.PI/2);
+const rollers = new THREE.InstancedMesh(rollerGeo, M.roller, N_LINK);
+const linkGeo = new THREE.BoxGeometry(0.0104, 0.0074, 0.0078);
+const linkMat = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: .85, roughness: .4 });
+const links = new THREE.InstancedMesh(linkGeo, linkMat, N_LINK);
+{
+  const cO = new THREE.Color(0xb9bfc8), cI = new THREE.Color(0x7d858e);
+  for (let i = 0; i < N_LINK; i++) links.setColorAt(i, i % 2 ? cI : cO);
+  links.instanceColor.needsUpdate = true;
+}
+links.castShadow = rollers.castShadow = true;
+links.frustumCulled = rollers.frustumCulled = false;
+scene.add(links, rollers);
+
+/* ================================================================
+   5) DURUM + FİZİK DÖNGÜSÜ
+   ================================================================ */
+const clampI = (v,a,b) => Math.max(a, Math.min(b, v));
+const ringZ = (i,e) => (i - 1) * RING_Z0 * (1 + 5.5*e);
+const cogZ  = (j,e) => (4 - j) * COG_Z0 * (1 + 6*e) + 0.045*e;
+const derZRaw = (j,e) => cogZ(j,e) + 0.055 + 0.13*e;
+const wheelZ = e => -0.20 * e;
+
+const S = {
+  ring: 1, cog: 4, kadans: 85, explode: 0,
+  rF: pitchR(RINGS[1]), rC: pitchR(COGS[4]),
+  crank: 0, phase: 0, corr: 0,
+  cogRot: 0, wheelRot: 0, wFree: 0, engaged: true, wheelVel: 0, vBike: 0,
+  shiftF: null, shiftR: null,
+  yol: true, tur: false, etiket: true,
+  zFcur: 0, zCcur: 0, zDcur: 0, roadOff: 0,
+};
+
+function rebuild() {
+  const e = S.explode;
+  let zF = ringZ(S.ring, e), zC = cogZ(S.cog, e), zD = derZRaw(S.cog, e);
+  if (S.shiftF) { const t = easeIO(S.shiftF.t); zF = lerp(ringZ(S.shiftF.from, e), ringZ(S.shiftF.to, e), t); }
+  if (S.shiftR) {
+    const t = easeIO(S.shiftR.t);
+    zC = lerp(cogZ(S.shiftR.from, e), cogZ(S.shiftR.to, e), t);
+    zD = lerp(derZRaw(S.shiftR.from, e), derZRaw(S.shiftR.to, e), t);
+  }
+  rebuildPolyline(S.rF, zF, S.rC, zC, zD);
+  ringMeshes.forEach((m, i) => m.position.z = ringZ(i, e));
+  cogMeshes.forEach((m, j) => m.position.z = cogZ(j, e));
+  wheelGroup.position.z = wheelZ(e);
+  S.zFcur = zF; S.zCcur = zC; S.zDcur = zD;
+}
+
+// zincir baklasını ön dişlinin boşluklarına hizala (vites sonrası oturtma)
+function resnapRing(instant) {
+  for (const pn of pins) {
+    if (pn.seg !== SEG.ARC_F) continue;
+    const alpha = Math.atan2(pn.y - BB.y, pn.x - BB.x);
+    const tau = TAU / RINGS[S.ring];
+    const target = Math.round((alpha + S.crank) / tau) * tau - S.crank;
+    const corr = -(target - alpha) * S.rF;         // faz artışı açıyı azaltır (CW)
+    if (instant) S.phase += corr; else S.corr += corr;
+    break;
+  }
+}
+
+function refreshHighlights() {
+  ringMats.forEach((m, i) => {
+    const on = i === S.ring;
+    m.emissive.setHex(on ? 0xff9d2e : 0x000000); m.emissiveIntensity = on ? .22 : 0;
+    m.color.setHex(on ? 0xaab3bd : 0x565d66);
+  });
+  cogMats.forEach((m, j) => {
+    const on = j === S.cog;
+    m.emissive.setHex(on ? 0xff9d2e : 0x000000); m.emissiveIntensity = on ? .28 : 0;
+    m.color.setHex(on ? 0xbfc7d1 : (j === COGS.length-1 ? 0x9aa2ac : 0x565d66));
+  });
+}
+
+function shiftFront(d) {
+  if (S.shiftF) return;
+  const n = S.ring + d; if (n < 0 || n >= RINGS.length) return;
+  S.shiftF = { from: S.ring, to: n, t: 0, dur: 0.7, rFrom: S.rF, rTo: pitchR(RINGS[n]) };
+  S.ring = n; refreshHighlights(); updateChips();
+}
+function shiftRear(d) {
+  if (S.shiftR) return;
+  const n = S.cog + d; if (n < 0 || n >= COGS.length) return;
+  S.shiftR = { from: S.cog, to: n, t: 0, dur: 0.5, rFrom: S.rC, rTo: pitchR(COGS[n]) };
+  S.cog = n; refreshHighlights(); updateChips();
+}
+
+/* --- per-frame fizik --- */
+const m4 = new THREE.Matrix4(), vA = new THREE.Vector3(), vB = new THREE.Vector3(),
+      vC = new THREE.Vector3(), vP = new THREE.Vector3(), ZH = new THREE.Vector3(0,0,1);
+
+function step(dt) {
+  // vites animasyonları
+  let dirty = false;
+  if (S.shiftF) {
+    S.shiftF.t += dt / S.shiftF.dur;
+    const t = easeIO(Math.min(1, S.shiftF.t));
+    S.rF = lerp(S.shiftF.rFrom, S.shiftF.rTo, t);
+    if (S.shiftF.t >= 1) { S.shiftF = null; resnapRing(false); }
+    dirty = true;
+  }
+  if (S.shiftR) {
+    S.shiftR.t += dt / S.shiftR.dur;
+    S.rC = lerp(S.shiftR.rFrom, S.shiftR.rTo, easeIO(Math.min(1, S.shiftR.t)));
+    if (S.shiftR.t >= 1) S.shiftR = null;
+    dirty = true;
+  }
+  if (dirty) rebuild();
+
+  // tahrik: kadans -> krang -> zincir
+  const omega = S.kadans * TAU / 60;              // rad/s (büyüklük, CW)
+  const chainV = omega * S.rF;                    // zincir hızı m/s
+  S.crank += omega * dt;
+  if (Math.abs(S.corr) > 1e-7) { const st = S.corr * Math.min(1, dt*5); S.phase += st; S.corr -= st; }
+  S.phase += chainV * dt;
+
+  // baklalar
+  walkPins(S.phase);
+  for (const pn of pins) if (pn.seg === SEG.ARC_C) { S.cogRot = Math.atan2(pn.y - AXLE.y, pn.x - AXLE.x); break; }
+  for (let i = 0; i < N_LINK; i++) {
+    const a = pins[i], b = pins[(i + 1) % N_LINK];
+    vA.set(b.x-a.x, b.y-a.y, b.z-a.z).normalize();
+    vC.copy(ZH).addScaledVector(vA, -ZH.dot(vA)).normalize();
+    vB.crossVectors(vC, vA);
+    m4.makeBasis(vA, vB, vC);
+    vP.set((a.x+b.x)/2, (a.y+b.y)/2, (a.z+b.z)/2); m4.setPosition(vP);
+    links.setMatrixAt(i, m4);
+    vP.set(a.x, a.y, a.z); m4.setPosition(vP);
+    rollers.setMatrixAt(i, m4);
+  }
+  links.instanceMatrix.needsUpdate = true;
+  rollers.instanceMatrix.needsUpdate = true;
+
+  // serbest teker (freewheel): zincir yavaşsa teker kendi devrinde
+  const omegaChain = chainV / S.rC;
+  if (S.engaged && omegaChain < S.wFree - 0.02) S.engaged = false;
+  if (!S.engaged) {
+    S.wFree *= Math.exp(-dt / 12);
+    if (omegaChain >= S.wFree) { S.engaged = true; S.wFree = omegaChain; }
+  }
+  S.wheelVel = S.engaged ? omegaChain : S.wFree;
+  S.wheelRot -= S.wheelVel * dt;
+  S.vBike = S.wheelVel * WHEEL_R;
+
+  // dönüşler
+  crankGroup.rotation.z = -S.crank;
+  armLGroup.rotation.z = -S.crank + Math.PI;
+  cassetteGroup.rotation.z = S.cogRot;
+  wheelGroup.rotation.z = S.wheelRot;
+  const aR = -S.crank;
+  pedalR.position.set(BB.x + CRANK*Math.cos(aR), BB.y + CRANK*Math.sin(aR), 0.098);
+  pedalL.position.set(BB.x - CRANK*Math.cos(aR), BB.y - CRANK*Math.sin(aR), -0.112);
+  spinR.position.set(pedalR.position.x, pedalR.position.y, 0.064);
+  spinL.position.set(pedalL.position.x, pedalL.position.y, -0.080);
+
+  // arka aktarıcı gövdesi yolu takip eder
+  const p = pathInfo.p, zD = S.zDcur;
+  knuckle.position.set(AXLE.x + 0.006, AXLE.y - 0.004, zD + 0.018);
+  const kdx = p.G.x - knuckle.position.x, kdy = p.G.y - knuckle.position.y;
+  bLink.position.set((knuckle.position.x + p.G.x)/2, (knuckle.position.y + p.G.y)/2, zD + 0.012);
+  bLink.scale.x = Math.hypot(kdx, kdy); bLink.rotation.z = Math.atan2(kdy, kdx);
+  const cmx = (p.G.x + p.T.x)/2, cmy = (p.G.y + p.T.y)/2;
+  cagePlate1.position.set(cmx, cmy, zD + 0.0085); cagePlate1.rotation.z = pathInfo.phi;
+  cagePlate2.position.set(cmx, cmy, zD - 0.0085); cagePlate2.rotation.z = pathInfo.phi;
+  pulG.position.set(p.G.x, p.G.y, zD); pulT.position.set(p.T.x, p.T.y, zD);
+  pulG.rotation.z += p.G.w * chainV / R_PUL * dt;
+  pulT.rotation.z += p.T.w * chainV / R_PUL * dt;
+
+  // ön aktarıcı kafesi aktif dişliyi izler
+  const fdA = 100 * Math.PI/180;
+  const fdX = BB.x + (S.rF + 0.009) * Math.cos(fdA), fdY = BB.y + (S.rF + 0.009) * Math.sin(fdA);
+  fdP1.position.set(fdX, fdY, S.zFcur + 0.0115);
+  fdP2.position.set(fdX, fdY, S.zFcur - 0.0115);
+  fdP1.rotation.z = fdP2.rotation.z = fdA + Math.PI/2;
+  S.fdPos = { x: fdX, y: fdY, z: S.zFcur };
+
+  // yol akışı: v = ω·r ile birebir
+  if (S.yol) {
+    S.roadOff += S.vBike * dt;
+    roadTex.offset.x = (S.roadOff / 4) % 1;
+  }
+
+  updateCamera(dt);
+  updateLabels();
+  if ((frameNo++ % 6) === 0) updateHUD();
+}
+
+/* ================================================================
+   6) KAMERA (özel orbit) 
+   ================================================================ */
+const sph = new THREE.Spherical().setFromVector3(camPos.clone().sub(camTarget));
+const sphT = sph.clone(), tgtT = camTarget.clone(), tgt = camTarget.clone();
+{
+  const ptrs = new Map();
+  let panning = false;
+  renderer.domElement.addEventListener('pointerdown', e => {
+    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    panning = (e.button === 2) || e.shiftKey;
+    renderer.domElement.setPointerCapture(e.pointerId);
+  });
+  renderer.domElement.addEventListener('pointermove', e => {
+    const pr = ptrs.get(e.pointerId); if (!pr) return;
+    const dx = e.clientX - pr.x, dy = e.clientY - pr.y;
+    if (ptrs.size === 2) {
+      const o = [...ptrs.values()];
+      const d0 = Math.hypot(o[0].x-o[1].x, o[0].y-o[1].y);
+      pr.x = e.clientX; pr.y = e.clientY;
+      const d1 = Math.hypot(o[0].x-o[1].x, o[0].y-o[1].y);
+      if (d0 > 0) sphT.radius = THREE.MathUtils.clamp(sphT.radius * d0/d1, 0.3, 4.5);
+      return;
+    }
+    pr.x = e.clientX; pr.y = e.clientY;
+    if (panning) {
+      const s = sph.radius * 0.0012;
+      const fwd = new THREE.Vector3().subVectors(tgtT, camera.position).normalize();
+      const right = new THREE.Vector3().crossVectors(fwd, camera.up).normalize();
+      const up = new THREE.Vector3().crossVectors(right, fwd);
+      tgtT.addScaledVector(right, dx*s).addScaledVector(up, dy*s);
+    } else {
+      sphT.theta -= dx * 0.0055;
+      sphT.phi = THREE.MathUtils.clamp(sphT.phi - dy * 0.0055, 0.12, 1.53);
+    }
+  });
+  const up = e => ptrs.delete(e.pointerId);
+  renderer.domElement.addEventListener('pointerup', up);
+  renderer.domElement.addEventListener('pointercancel', up);
+  renderer.domElement.addEventListener('wheel', e => {
+    e.preventDefault();
+    sphT.radius = THREE.MathUtils.clamp(sphT.radius * Math.exp(e.deltaY * 0.0011), 0.3, 4.5);
+  }, { passive: false });
+  renderer.domElement.addEventListener('contextmenu', e => e.preventDefault());
+}
+function updateCamera(dt) {
+  if (S.tur) sphT.theta += dt * 0.16;
+  const k = 1 - Math.exp(-dt * 9);
+  sph.radius += (sphT.radius - sph.radius) * k;
+  sph.theta += (sphT.theta - sph.theta) * k;
+  sph.phi += (sphT.phi - sph.phi) * k;
+  tgt.lerp(tgtT, k);
+  camera.position.setFromSpherical(sph).add(tgt);
+  camera.lookAt(tgt);
+}
+
+/* ================================================================
+   7) HUD + ETİKETLER + UI
+   ================================================================ */
+let frameNo = 0;
+const $ = id => document.getElementById(id);
+const chipEls = { on: [], arka: [] };
+{
+  const box = $('chips');
+  const mk = (txt, arr, i) => {
+    const s = document.createElement('span'); s.className = 'gchip'; s.textContent = txt;
+    arr[i] = s; box.appendChild(s);
+  };
+  const g = document.createElement('span'); g.className = 'ggrp'; g.textContent = 'ÖN'; box.appendChild(g);
+  RINGS.forEach((Z, i) => mk(Z, chipEls.on, i));
+  const sep = document.createElement('span'); sep.className = 'gsep'; box.appendChild(sep);
+  const g2 = document.createElement('span'); g2.className = 'ggrp'; g2.textContent = 'ARKA'; box.appendChild(g2);
+  COGS.forEach((Z, j) => mk(Z, chipEls.arka, j));
+}
+function updateChips() {
+  chipEls.on.forEach((el, i) => el.classList.toggle('on', i === S.ring));
+  chipEls.arka.forEach((el, j) => el.classList.toggle('on', j === S.cog));
+  $('d-on').innerHTML = `${RINGS[S.ring]}T<small>aynakol</small>`;
+  $('d-arka').innerHTML = `${COGS[S.cog]}T<small>kaset</small>`;
+}
+
+const lblBox = $('lbls');
+const labelDefs = [
+  { html: 'Aynakol <b>52/42/30T</b>', pos: () => [BB.x + 0.115, BB.y + 0.085, ringZ(2, S.explode) + 0.02] },
+  { html: 'Ön aktarıcı', pos: () => [S.fdPos.x + 0.015, S.fdPos.y + 0.05, S.fdPos.z] },
+  { html: 'Zincir <b>112 bakla</b>', pos: () => [pathInfo.topMid.x, pathInfo.topMid.y + 0.055, S.zCcur * 0.5] },
+  { html: 'Kaset <b>11–32T · 9&apos;lu</b>', pos: () => [AXLE.x - 0.05, AXLE.y + 0.105, S.zCcur] },
+  { html: 'Arka aktarıcı', pos: () => [pathInfo.p.T.x - 0.035, pathInfo.p.T.y - 0.065, S.zDcur] },
+  { html: 'Arka teker <b>700×25c</b>', pos: () => [AXLE.x - 0.24, AXLE.y - 0.235, wheelZ(S.explode)] },
+];
+const lblEls = labelDefs.map(d => {
+  const el = document.createElement('div'); el.className = 'lbl'; el.innerHTML = d.html;
+  lblBox.appendChild(el); return el;
+});
+const projV = new THREE.Vector3();
+function updateLabels() {
+  lblBox.style.display = S.etiket ? 'block' : 'none';
+  if (!S.etiket) return;
+  labelDefs.forEach((d, i) => {
+    const [x, y, z] = d.pos();
+    projV.set(x, y, z).project(camera);
+    const el = lblEls[i];
+    if (projV.z > 1 || projV.z < -1) { el.style.display = 'none'; return; }
+    el.style.display = 'block';
+    el.style.left = (projV.x * .5 + .5) * innerWidth + 'px';
+    el.style.top = (-projV.y * .5 + .5) * innerHeight + 'px';
+  });
+}
+
+function updateHUD() {
+  const ratio = RINGS[S.ring] / COGS[S.cog];
+  const chainV_d = S.kadans / 60 * RINGS[S.ring] * P;            // vz = n·Zön·p (birebir)
+  const wheelRpm_d = S.engaged ? S.kadans * ratio : S.wheelVel * 60 / TAU;
+  const v_d = S.engaged ? S.kadans / 60 * ratio * WHEEL_C : S.vBike;
+  $('h-hiz').innerHTML = `${(v_d * 3.6).toFixed(1)}<small>km/s</small>`;
+  $('h-sub').innerHTML = `kadans <b>${S.kadans} d/dk</b> · teker <b>${wheelRpm_d.toFixed(0)} d/dk</b> · gelişim <b>${(ratio*WHEEL_C).toFixed(2)} m</b>`;
+  $('f-disli').textContent = `${RINGS[S.ring]}T / ${COGS[S.cog]}T`;
+  $('f-oran').textContent = ratio.toFixed(2);
+  $('f-gelisim').textContent = `${(ratio*WHEEL_C).toFixed(2)} m/tur`;
+  $('f-zincir').textContent = `${chainV_d.toFixed(2)} m/s`;
+  $('f-teker').textContent = `${wheelRpm_d.toFixed(0)} d/dk`;
+  $('f-v').textContent = `${(v_d * 3.6).toFixed(1)} km/s`;
+  $('f-kafes').textContent = `${(pathInfo.phi*180/Math.PI).toFixed(0)}°`;
+  const d = $('h-durum');
+  if (S.vBike < 0.05 && S.kadans === 0) { d.textContent = 'duruyor'; d.className = 'chip'; }
+  else if (S.engaged) { d.textContent = 'güç aktarılıyor'; d.className = 'chip yes'; }
+  else { d.textContent = 'serbest teker (freewheel)'; d.className = 'chip free'; }
+  $('h-capraz').style.display =
+    ((S.ring === 2 && S.cog >= 7) || (S.ring === 0 && S.cog <= 1)) ? 'inline-block' : 'none';
+}
+
+/* --- UI olayları --- */
+$('b-on-eksi').onclick = () => shiftFront(-1);
+$('b-on-arti').onclick = () => shiftFront(1);
+$('b-arka-eksi').onclick = () => shiftRear(-1);
+$('b-arka-arti').onclick = () => shiftRear(1);
+$('s-kadans').oninput = e => { S.kadans = +e.target.value; $('v-kadans').textContent = `${S.kadans} d/dk`; };
+$('s-patlat').oninput = e => {
+  S.explode = +e.target.value / 100;
+  $('v-patlat').textContent = `%${e.target.value}`;
+  rebuild();
+};
+const mkToggle = (id, fn, init) => {
+  const el = $(id);
+  el.classList.toggle('on', init);
+  el.onclick = () => { const on = el.classList.toggle('on'); fn(on); };
+  return on => el.classList.toggle('on', on);
+};
+const setYol = mkToggle('t-yol', on => { S.yol = on; road.visible = on; }, S.yol);
+const setTur = mkToggle('t-tur', on => { S.tur = on; }, S.tur);
+const setEtk = mkToggle('t-etiket', on => { S.etiket = on; }, S.etiket);
+addEventListener('keydown', e => {
+  if (e.repeat || /INPUT|BUTTON/.test(e.target.tagName)) return;
+  if (e.key === 'ArrowLeft') { shiftFront(-1); e.preventDefault(); }
+  else if (e.key === 'ArrowRight') { shiftFront(1); e.preventDefault(); }
+  else if (e.key === 'ArrowDown') { shiftRear(-1); e.preventDefault(); }
+  else if (e.key === 'ArrowUp') { shiftRear(1); e.preventDefault(); }
+});
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+/* --- URL parametreleriyle başlangıç durumu --- */
+if (qp.get('on') !== null) S.ring = clampI(+qp.get('on'), 0, 2);
+if (qp.get('arka') !== null) S.cog = clampI(+qp.get('arka'), 0, 8);
+if (qp.get('kadans') !== null) { S.kadans = clampI(+qp.get('kadans'), 0, 130); $('s-kadans').value = S.kadans; $('v-kadans').textContent = `${S.kadans} d/dk`; }
+if (qp.get('patlat') !== null) { S.explode = THREE.MathUtils.clamp(+qp.get('patlat'), 0, 1); $('s-patlat').value = S.explode * 100; $('v-patlat').textContent = `%${Math.round(S.explode*100)}`; }
+if (qp.get('tur') === '1') { S.tur = true; setTur(true); }
+if (qp.get('yol') === '0') { S.yol = false; road.visible = false; setYol(false); }
+if (qp.get('etiket') === '0') { S.etiket = false; setEtk(false); }
+S.rF = pitchR(RINGS[S.ring]); S.rC = pitchR(COGS[S.cog]);
+
+// test: zamanlanmis vites degisimi (?sonra=arka:5 / ?sonra=on:2)
+function applySonra() {
+  const [tip, hedef] = qp.get('sonra').split(':');
+  if (tip === 'arka') shiftRear(clampI(+hedef, 0, 8) - S.cog);
+  else shiftFront(clampI(+hedef, 0, 2) - S.ring);
+}
+if (qp.get('sonra')) setTimeout(applySonra, 800);
+
+rebuild();
+walkPins(0);
+resnapRing(true);
+refreshHighlights();
+updateChips();
+updateHUD();
+
+// test: deterministik simulasyon (?sim=2.5 -> donguden once 2.5 sn fizik calistir)
+if (qp.get('sim')) {
+  const T = +qp.get('sim');
+  for (let t = 0; t < T; t += 1/60) {
+    if (qp.get('sonra') && t >= 0.8 && t < 0.8 + 1/60) applySonra();
+    step(1/60);
+  }
+}
+
+const clock = new THREE.Clock();
+renderer.setAnimationLoop(() => {
+  const dt = Math.min(clock.getDelta(), 0.05);
+  step(dt);
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>

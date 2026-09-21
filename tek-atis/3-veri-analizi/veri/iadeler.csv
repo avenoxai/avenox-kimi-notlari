@@ -1,0 +1,1526 @@
+siparis_id,urun_id,adet,iade_tarihi,neden,iade_edilen_tutar,iade_kargo_maliyeti,yeniden_satilabilir
+S100118,U205,1,2026-03-06,beden uymadı,1290.00,172.03,hayır
+S100150,U103,1,2026-03-08,üründen memnun kalmadım,3290.00,103.66,evet
+S100149,U205,1,2026-03-09,üründen memnun kalmadım,1290.00,97.97,evet
+S100232,U602,1,2026-03-09,hasarlı geldi,290.00,102.65,hayır
+S100049,U204,1,2026-03-10,beden uymadı,2290.00,104.75,hayır
+S100244,U105,1,2026-03-11,beden uymadı,1890.00,172.14,hayır
+S100224,U406,1,2026-03-12,geç teslimat,990.00,79.05,evet
+S100406,U101,1,2026-03-12,üründen memnun kalmadım,5490.00,102.39,hayır
+S100183,U205,1,2026-03-13,beden uymadı,903.00,92.58,evet
+S100510,U207,1,2026-03-14,beden uymadı,5490.00,113.38,evet
+S100077,U203,1,2026-03-15,üründen memnun kalmadım,2793.00,96.36,evet
+S100098,U203,1,2026-03-16,üründen memnun kalmadım,3990.00,90.37,hayır
+S100323,U408,2,2026-03-16,üründen memnun kalmadım,1380.00,94.51,evet
+S100629,U602,1,2026-03-16,üründen memnun kalmadım,246.50,86.89,hayır
+S100436,U202,1,2026-03-17,beden uymadı,2790.00,100.11,evet
+S100493,U207,1,2026-03-17,beden uymadı,3843.00,158.68,hayır
+S100430,U104,1,2026-03-18,geç teslimat,2490.00,109.88,evet
+S100615,U605,1,2026-03-18,geç teslimat,890.00,106.11,evet
+S100651,U206,1,2026-03-18,beden uymadı,4490.00,87.59,evet
+S100750,U406,3,2026-03-18,üründen memnun kalmadım,2970.00,94.40,evet
+S100697,U404,1,2026-03-19,beden uymadı,1043.00,96.94,evet
+S100133,U104,1,2026-03-20,üründen memnun kalmadım,2490.00,162.70,evet
+S100194,U206,1,2026-03-20,yanlış ürün gönderildi,4490.00,105.44,hayır
+S100274,U204,1,2026-03-20,hasarlı geldi,2290.00,101.36,hayır
+S100314,U105,1,2026-03-20,üründen memnun kalmadım,1890.00,116.55,evet
+S100473,U602,1,2026-03-20,hasarlı geldi,290.00,82.20,hayır
+S100569,U203,1,2026-03-20,beden uymadı,3990.00,107.94,hayır
+S100008,U407,1,2026-03-21,beden uymadı,1690.00,114.22,evet
+S100171,U306,1,2026-03-21,geç teslimat,690.00,84.92,evet
+S100243,U503,1,2026-03-21,üründen memnun kalmadım,590.00,119.26,evet
+S100253,U206,1,2026-03-21,beden uymadı,3143.00,110.03,hayır
+S100386,U101,1,2026-03-21,fikir değiştirdim,5490.00,120.06,evet
+S100702,U101,1,2026-03-21,hasarlı geldi,4666.50,78.43,evet
+S100753,U201,1,2026-03-21,beden uymadı,2966.50,88.79,evet
+S100782,U103,1,2026-03-21,beden uymadı,2796.50,79.55,evet
+S100873,U106,1,2026-03-21,fikir değiştirdim,3990.00,102.85,evet
+S100019,U503,1,2026-03-22,fikir değiştirdim,590.00,166.16,hayır
+S100144,U303,1,2026-03-22,üründen memnun kalmadım,1290.00,79.38,evet
+S100170,U104,1,2026-03-22,beden uymadı,2490.00,157.19,hayır
+S100474,U201,1,2026-03-22,geç teslimat,3490.00,105.18,hayır
+S100534,U305,1,2026-03-22,hasarlı geldi,1690.00,150.88,hayır
+S100639,U202,1,2026-03-22,hasarlı geldi,1953.00,99.84,evet
+S100731,U104,1,2026-03-22,üründen memnun kalmadım,2490.00,96.88,evet
+S100602,U105,1,2026-03-23,yanlış ürün gönderildi,1606.50,100.47,hayır
+S100648,U201,1,2026-03-23,beden uymadı,3490.00,144.98,evet
+S100658,U404,2,2026-03-23,üründen memnun kalmadım,2086.00,91.65,evet
+S100755,U204,1,2026-03-23,yanlış ürün gönderildi,2290.00,83.09,hayır
+S100474,U202,1,2026-03-24,beden uymadı,2790.00,105.27,evet
+S100698,U201,1,2026-03-24,beden uymadı,3490.00,105.47,hayır
+S100779,U303,1,2026-03-24,fikir değiştirdim,1290.00,104.29,evet
+S100788,U107,1,2026-03-24,üründen memnun kalmadım,6490.00,151.43,evet
+S101007,U501,1,2026-03-24,geç teslimat,1190.00,77.89,evet
+S101023,U202,2,2026-03-24,beden uymadı,3906.00,106.63,evet
+S100189,U106,1,2026-03-25,fikir değiştirdim,3990.00,101.43,evet
+S100275,U304,1,2026-03-25,beden uymadı,1743.00,105.46,evet
+S100311,U207,1,2026-03-25,üründen memnun kalmadım,3843.00,83.47,evet
+S100933,U101,1,2026-03-25,beden uymadı,5490.00,106.47,evet
+S100221,U604,2,2026-03-26,hasarlı geldi,1180.00,104.10,hayır
+S100368,U408,3,2026-03-26,üründen memnun kalmadım,2070.00,112.37,hayır
+S100372,U501,1,2026-03-26,üründen memnun kalmadım,1190.00,92.64,evet
+S100452,U104,1,2026-03-26,üründen memnun kalmadım,2490.00,106.54,evet
+S100804,U202,1,2026-03-26,fikir değiştirdim,2790.00,88.28,hayır
+S100992,U204,1,2026-03-26,üründen memnun kalmadım,2290.00,171.77,evet
+S101105,U105,1,2026-03-26,fikir değiştirdim,1890.00,111.92,evet
+S100370,U202,1,2026-03-27,beden uymadı,2790.00,91.82,evet
+S100382,U501,1,2026-03-27,beden uymadı,833.00,93.79,evet
+S100644,U201,1,2026-03-27,beden uymadı,3490.00,81.36,evet
+S100768,U302,1,2026-03-27,beden uymadı,3690.00,146.02,evet
+S100973,U207,1,2026-03-27,fikir değiştirdim,3843.00,106.19,evet
+S101020,U104,1,2026-03-27,geç teslimat,2490.00,112.94,evet
+S101109,U206,1,2026-03-27,beden uymadı,4490.00,80.95,evet
+S100994,U506,1,2026-03-28,fikir değiştirdim,890.00,85.40,evet
+S101101,U203,1,2026-03-28,beden uymadı,3990.00,117.42,hayır
+S101181,U404,1,2026-03-28,üründen memnun kalmadım,1490.00,121.24,hayır
+S100411,U408,1,2026-03-29,beden uymadı,690.00,104.94,evet
+S100528,U505,1,2026-03-29,hasarlı geldi,973.00,86.97,hayır
+S100594,U202,1,2026-03-29,fikir değiştirdim,2371.50,79.06,hayır
+S100693,U203,1,2026-03-29,beden uymadı,3990.00,111.69,hayır
+S100748,U602,1,2026-03-29,fikir değiştirdim,290.00,87.99,evet
+S100824,U505,1,2026-03-29,geç teslimat,1181.50,82.68,evet
+S100966,U206,1,2026-03-29,beden uymadı,4490.00,110.50,evet
+S101096,U105,1,2026-03-29,yanlış ürün gönderildi,1890.00,90.44,evet
+S100550,U206,1,2026-03-30,beden uymadı,3143.00,117.16,hayır
+S100582,U105,1,2026-03-30,fikir değiştirdim,1890.00,87.88,evet
+S100668,U202,1,2026-03-30,beden uymadı,1953.00,91.78,evet
+S100871,U203,1,2026-03-30,geç teslimat,3990.00,106.52,evet
+S101004,U207,1,2026-03-30,beden uymadı,5490.00,104.34,hayır
+S101214,U206,1,2026-03-30,beden uymadı,4490.00,92.72,hayır
+S101079,U201,1,2026-03-31,hasarlı geldi,3490.00,78.72,hayır
+S101173,U205,1,2026-03-31,beden uymadı,903.00,93.69,hayır
+S100529,U103,1,2026-04-01,fikir değiştirdim,3290.00,82.33,evet
+S100718,U403,1,2026-04-01,yanlış ürün gönderildi,2890.00,83.84,hayır
+S100943,U204,1,2026-04-01,beden uymadı,2290.00,90.93,hayır
+S101234,U501,2,2026-04-01,fikir değiştirdim,2380.00,88.91,evet
+S101259,U201,1,2026-04-01,beden uymadı,3490.00,108.17,evet
+S101330,U202,1,2026-04-01,beden uymadı,2790.00,97.48,evet
+S100593,U203,1,2026-04-02,beden uymadı,3990.00,110.69,evet
+S100836,U107,1,2026-04-02,fikir değiştirdim,6490.00,106.11,evet
+S100869,U105,2,2026-04-02,hasarlı geldi,2646.00,91.07,evet
+S100606,U203,1,2026-04-03,beden uymadı,3990.00,86.53,evet
+S100866,U503,1,2026-04-03,üründen memnun kalmadım,413.00,164.74,evet
+S100920,U602,1,2026-04-03,üründen memnun kalmadım,290.00,88.08,hayır
+S101448,U405,1,2026-04-03,hasarlı geldi,833.00,118.18,hayır
+S101486,U503,1,2026-04-03,fikir değiştirdim,501.50,78.55,evet
+S100816,U201,1,2026-04-04,beden uymadı,3490.00,96.51,evet
+S100964,U201,1,2026-04-04,beden uymadı,3490.00,157.54,evet
+S100971,U604,2,2026-04-04,beden uymadı,1180.00,109.30,evet
+S101002,U304,1,2026-04-04,hasarlı geldi,1743.00,103.02,hayır
+S101446,U104,1,2026-04-04,üründen memnun kalmadım,2490.00,97.25,hayır
+S100719,U107,1,2026-04-05,yanlış ürün gönderildi,4543.00,77.76,hayır
+S100726,U502,1,2026-04-05,fikir değiştirdim,790.00,92.80,evet
+S100816,U303,1,2026-04-05,fikir değiştirdim,1290.00,100.32,evet
+S101369,U105,2,2026-04-05,üründen memnun kalmadım,3780.00,102.51,evet
+S101435,U602,3,2026-04-05,fikir değiştirdim,870.00,153.38,evet
+S101480,U306,2,2026-04-05,hasarlı geldi,1380.00,102.74,hayır
+S101611,U403,1,2026-04-05,beden uymadı,2890.00,90.55,hayır
+S100851,U603,1,2026-04-06,fikir değiştirdim,390.00,110.33,evet
+S101453,U202,1,2026-04-06,beden uymadı,2790.00,107.76,hayır
+S101587,U605,1,2026-04-06,geç teslimat,890.00,103.09,evet
+S100990,U302,1,2026-04-07,beden uymadı,3690.00,94.35,evet
+S101082,U602,1,2026-04-07,hasarlı geldi,290.00,86.42,hayır
+S101203,U202,1,2026-04-07,yanlış ürün gönderildi,2790.00,88.72,evet
+S101254,U206,1,2026-04-07,beden uymadı,4490.00,82.60,hayır
+S101377,U201,1,2026-04-07,beden uymadı,3490.00,90.79,evet
+S101442,U201,1,2026-04-07,beden uymadı,2443.00,79.80,evet
+S101459,U105,1,2026-04-07,üründen memnun kalmadım,1890.00,98.05,evet
+S101647,U404,1,2026-04-07,geç teslimat,1266.50,119.81,evet
+S101060,U106,1,2026-04-08,hasarlı geldi,2793.00,91.71,hayır
+S101411,U501,1,2026-04-08,üründen memnun kalmadım,1190.00,177.83,evet
+S101428,U102,1,2026-04-08,üründen memnun kalmadım,8900.00,98.08,evet
+S101495,U605,1,2026-04-08,geç teslimat,890.00,100.12,evet
+S101629,U206,1,2026-04-08,geç teslimat,4490.00,95.41,hayır
+S101643,U103,1,2026-04-08,üründen memnun kalmadım,2796.50,88.58,evet
+S101725,U502,3,2026-04-08,hasarlı geldi,1659.00,81.79,hayır
+S100908,U205,1,2026-04-09,beden uymadı,903.00,91.19,evet
+S100953,U408,2,2026-04-09,fikir değiştirdim,1380.00,85.90,evet
+S100996,U202,1,2026-04-09,geç teslimat,2790.00,105.29,hayır
+S101610,U407,1,2026-04-09,üründen memnun kalmadım,1690.00,111.66,evet
+S101624,U606,1,2026-04-09,üründen memnun kalmadım,490.00,82.82,evet
+S101218,U302,1,2026-04-10,fikir değiştirdim,3690.00,120.54,evet
+S101431,U501,1,2026-04-10,beden uymadı,1190.00,89.90,evet
+S101466,U202,1,2026-04-10,fikir değiştirdim,2790.00,92.53,evet
+S101656,U501,1,2026-04-10,beden uymadı,1190.00,84.35,evet
+S101008,U503,1,2026-04-11,üründen memnun kalmadım,590.00,80.27,evet
+S101136,U204,1,2026-04-11,beden uymadı,2290.00,77.94,evet
+S101262,U205,1,2026-04-11,hasarlı geldi,1290.00,120.15,evet
+S101344,U202,1,2026-04-11,beden uymadı,2371.50,166.30,evet
+S101525,U606,1,2026-04-11,fikir değiştirdim,343.00,123.13,evet
+S101625,U501,1,2026-04-11,fikir değiştirdim,1190.00,78.82,evet
+S101683,U203,1,2026-04-11,fikir değiştirdim,3990.00,163.97,hayır
+S101697,U405,1,2026-04-11,fikir değiştirdim,1190.00,104.52,evet
+S101743,U204,1,2026-04-11,beden uymadı,2290.00,86.45,evet
+S101815,U603,2,2026-04-11,fikir değiştirdim,546.00,84.04,evet
+S101854,U205,1,2026-04-11,beden uymadı,1290.00,101.55,hayır
+S101897,U201,1,2026-04-11,beden uymadı,3490.00,102.44,hayır
+S101071,U207,1,2026-04-12,beden uymadı,5490.00,92.75,evet
+S101215,U506,1,2026-04-12,geç teslimat,890.00,93.86,evet
+S101462,U603,1,2026-04-12,fikir değiştirdim,331.50,167.50,evet
+S101470,U205,1,2026-04-12,beden uymadı,1290.00,107.40,hayır
+S101510,U501,2,2026-04-12,fikir değiştirdim,2380.00,85.92,evet
+S101532,U206,1,2026-04-12,fikir değiştirdim,4490.00,81.67,evet
+S101735,U206,1,2026-04-12,beden uymadı,4490.00,85.89,evet
+S101142,U103,1,2026-04-13,geç teslimat,3290.00,99.79,evet
+S101256,U102,1,2026-04-13,hasarlı geldi,8900.00,112.68,hayır
+S101258,U203,1,2026-04-13,hasarlı geldi,3391.50,87.85,hayır
+S101345,U202,1,2026-04-14,beden uymadı,2790.00,107.12,hayır
+S101382,U306,1,2026-04-14,hasarlı geldi,690.00,111.33,hayır
+S101440,U602,2,2026-04-14,fikir değiştirdim,580.00,78.01,evet
+S101519,U102,1,2026-04-14,üründen memnun kalmadım,8900.00,80.69,evet
+S101520,U601,1,2026-04-14,geç teslimat,1096.50,104.55,evet
+S101554,U201,1,2026-04-14,beden uymadı,3490.00,77.84,evet
+S101601,U205,1,2026-04-14,beden uymadı,903.00,83.07,evet
+S101665,U406,2,2026-04-14,fikir değiştirdim,1386.00,143.19,evet
+S101858,U604,1,2026-04-14,üründen memnun kalmadım,413.00,111.50,evet
+S102145,U602,1,2026-04-14,fikir değiştirdim,203.00,121.38,evet
+S102153,U404,1,2026-04-14,üründen memnun kalmadım,1490.00,86.83,evet
+S101253,U201,1,2026-04-15,beden uymadı,2966.50,92.00,evet
+S101931,U202,1,2026-04-15,fikir değiştirdim,2790.00,78.58,evet
+S101991,U606,2,2026-04-15,geç teslimat,980.00,102.42,evet
+S101275,U206,1,2026-04-16,beden uymadı,4490.00,103.82,evet
+S101369,U207,1,2026-04-16,beden uymadı,5490.00,102.81,evet
+S101603,U207,1,2026-04-16,beden uymadı,5490.00,99.88,hayır
+S101614,U201,1,2026-04-16,beden uymadı,3490.00,99.92,evet
+S101636,U501,1,2026-04-16,hasarlı geldi,1190.00,168.65,evet
+S101703,U604,1,2026-04-16,fikir değiştirdim,590.00,166.23,evet
+S101983,U204,1,2026-04-16,beden uymadı,2290.00,90.79,evet
+S102048,U101,1,2026-04-16,hasarlı geldi,5490.00,85.89,hayır
+S101351,U206,1,2026-04-17,beden uymadı,3816.50,117.90,evet
+S101551,U203,1,2026-04-17,beden uymadı,3990.00,97.59,evet
+S101723,U303,1,2026-04-17,hasarlı geldi,1096.50,79.00,hayır
+S101860,U202,1,2026-04-17,beden uymadı,1953.00,104.10,evet
+S101873,U204,1,2026-04-17,üründen memnun kalmadım,2290.00,170.88,evet
+S101962,U601,1,2026-04-17,fikir değiştirdim,1290.00,84.48,evet
+S101326,U104,1,2026-04-18,yanlış ürün gönderildi,2490.00,103.77,hayır
+S101402,U302,1,2026-04-18,hasarlı geldi,3690.00,106.94,evet
+S101423,U505,1,2026-04-18,üründen memnun kalmadım,1390.00,104.86,evet
+S101598,U205,1,2026-04-18,hasarlı geldi,1290.00,85.05,hayır
+S101621,U201,1,2026-04-18,üründen memnun kalmadım,3490.00,92.71,hayır
+S101667,U603,2,2026-04-18,fikir değiştirdim,546.00,164.40,evet
+S101714,U501,1,2026-04-18,beden uymadı,1190.00,94.79,evet
+S102293,U104,1,2026-04-18,fikir değiştirdim,2490.00,102.00,evet
+S102346,U205,1,2026-04-18,beden uymadı,1290.00,99.59,evet
+S101373,U206,1,2026-04-19,geç teslimat,3143.00,175.63,hayır
+S101386,U205,1,2026-04-19,hasarlı geldi,1290.00,102.98,hayır
+S101533,U205,2,2026-04-19,geç teslimat,2580.00,96.24,evet
+S101734,U506,1,2026-04-19,üründen memnun kalmadım,890.00,114.17,evet
+S101915,U606,2,2026-04-19,üründen memnun kalmadım,980.00,95.19,evet
+S102226,U306,1,2026-04-19,hasarlı geldi,690.00,81.36,hayır
+S102327,U201,1,2026-04-19,beden uymadı,3490.00,92.87,evet
+S102362,U606,3,2026-04-19,fikir değiştirdim,1470.00,89.32,evet
+S101741,U205,1,2026-04-20,beden uymadı,1096.50,104.70,evet
+S101817,U202,1,2026-04-20,beden uymadı,1953.00,83.19,evet
+S101825,U203,1,2026-04-20,hasarlı geldi,3990.00,110.22,evet
+S101906,U604,2,2026-04-20,fikir değiştirdim,1180.00,106.39,evet
+S101911,U407,1,2026-04-20,fikir değiştirdim,1690.00,101.54,evet
+S102032,U202,1,2026-04-20,beden uymadı,2790.00,100.92,evet
+S102217,U304,1,2026-04-20,yanlış ürün gönderildi,2116.50,103.49,hayır
+S102337,U101,1,2026-04-20,yanlış ürün gönderildi,5490.00,80.36,hayır
+S102383,U202,1,2026-04-20,beden uymadı,2790.00,98.85,evet
+S102529,U105,1,2026-04-20,hasarlı geldi,1890.00,96.61,evet
+S102057,U207,1,2026-04-21,beden uymadı,3843.00,123.11,hayır
+S102072,U101,1,2026-04-21,üründen memnun kalmadım,5490.00,103.40,evet
+S102143,U201,1,2026-04-21,beden uymadı,3490.00,101.48,evet
+S102212,U302,1,2026-04-21,fikir değiştirdim,3690.00,122.27,evet
+S102462,U408,1,2026-04-21,beden uymadı,690.00,96.92,evet
+S101544,U404,1,2026-04-22,üründen memnun kalmadım,1043.00,80.99,evet
+S101545,U602,1,2026-04-22,hasarlı geldi,290.00,94.88,evet
+S101654,U302,1,2026-04-22,fikir değiştirdim,3690.00,91.18,evet
+S101726,U602,1,2026-04-22,üründen memnun kalmadım,290.00,106.59,evet
+S101911,U606,1,2026-04-22,üründen memnun kalmadım,490.00,89.87,hayır
+S102199,U204,1,2026-04-22,hasarlı geldi,1603.00,101.24,hayır
+S102509,U104,2,2026-04-22,üründen memnun kalmadım,4980.00,165.23,evet
+S102523,U104,1,2026-04-22,fikir değiştirdim,2490.00,104.17,evet
+S102553,U501,1,2026-04-22,fikir değiştirdim,1190.00,88.92,evet
+S101617,U401,1,2026-04-23,üründen memnun kalmadım,6990.00,83.79,evet
+S101880,U201,1,2026-04-23,üründen memnun kalmadım,3490.00,104.41,evet
+S102278,U106,1,2026-04-23,yanlış ürün gönderildi,3990.00,102.78,hayır
+S102369,U203,1,2026-04-23,beden uymadı,3990.00,97.66,evet
+S102450,U502,1,2026-04-23,üründen memnun kalmadım,790.00,87.68,evet
+S102607,U203,1,2026-04-23,beden uymadı,3990.00,114.18,hayır
+S102645,U205,1,2026-04-23,beden uymadı,1290.00,89.92,hayır
+S101691,U204,1,2026-04-24,beden uymadı,2290.00,84.68,evet
+S101931,U204,1,2026-04-24,üründen memnun kalmadım,2290.00,85.44,evet
+S101986,U204,1,2026-04-24,beden uymadı,1946.50,85.41,hayır
+S102001,U102,1,2026-04-24,üründen memnun kalmadım,6230.00,86.12,evet
+S102092,U606,3,2026-04-24,fikir değiştirdim,1249.50,122.34,evet
+S102211,U505,1,2026-04-24,hasarlı geldi,1390.00,86.46,evet
+S102232,U202,1,2026-04-24,beden uymadı,2790.00,81.91,evet
+S102312,U202,1,2026-04-24,beden uymadı,2790.00,161.42,hayır
+S101948,U303,1,2026-04-25,fikir değiştirdim,903.00,80.60,hayır
+S102341,U203,1,2026-04-25,beden uymadı,3990.00,91.25,evet
+S102521,U204,1,2026-04-25,beden uymadı,2290.00,91.04,evet
+S102582,U502,1,2026-04-25,fikir değiştirdim,790.00,90.17,evet
+S102801,U304,1,2026-04-25,yanlış ürün gönderildi,2490.00,92.12,hayır
+S101932,U106,1,2026-04-26,geç teslimat,3990.00,160.51,hayır
+S102072,U405,1,2026-04-26,beden uymadı,1190.00,89.62,evet
+S102145,U503,1,2026-04-26,geç teslimat,413.00,109.88,hayır
+S102433,U606,1,2026-04-26,yanlış ürün gönderildi,490.00,85.55,hayır
+S102560,U104,1,2026-04-26,yanlış ürün gönderildi,2490.00,83.71,evet
+S101796,U204,1,2026-04-27,beden uymadı,2290.00,95.92,hayır
+S101804,U203,1,2026-04-27,geç teslimat,2793.00,78.69,evet
+S101882,U206,1,2026-04-27,beden uymadı,4490.00,107.09,hayır
+S101929,U408,2,2026-04-27,fikir değiştirdim,1173.00,88.06,evet
+S102037,U505,1,2026-04-27,fikir değiştirdim,1390.00,98.63,hayır
+S102089,U206,1,2026-04-27,beden uymadı,4490.00,81.05,evet
+S102165,U105,1,2026-04-27,geç teslimat,1890.00,91.72,evet
+S102251,U305,2,2026-04-27,üründen memnun kalmadım,2366.00,91.28,evet
+S102352,U205,1,2026-04-27,beden uymadı,1290.00,78.87,hayır
+S102090,U601,1,2026-04-28,fikir değiştirdim,1290.00,90.26,evet
+S102248,U201,1,2026-04-28,beden uymadı,3490.00,94.89,evet
+S102320,U203,1,2026-04-28,yanlış ürün gönderildi,3990.00,92.43,hayır
+S102349,U205,1,2026-04-28,üründen memnun kalmadım,1290.00,99.68,evet
+S102457,U606,1,2026-04-28,fikir değiştirdim,490.00,89.77,evet
+S102500,U303,1,2026-04-28,üründen memnun kalmadım,903.00,113.91,evet
+S102528,U304,1,2026-04-28,üründen memnun kalmadım,2490.00,78.52,evet
+S102543,U205,3,2026-04-28,beden uymadı,3870.00,99.15,hayır
+S102674,U204,1,2026-04-28,beden uymadı,2290.00,106.60,evet
+S102696,U206,1,2026-04-28,beden uymadı,3143.00,103.43,evet
+S102953,U101,1,2026-04-28,üründen memnun kalmadım,5490.00,97.69,evet
+S102091,U604,1,2026-04-29,fikir değiştirdim,590.00,104.43,evet
+S102132,U404,1,2026-04-29,üründen memnun kalmadım,1490.00,94.93,hayır
+S102160,U201,1,2026-04-29,üründen memnun kalmadım,3490.00,100.11,hayır
+S102183,U105,2,2026-04-29,üründen memnun kalmadım,2646.00,102.51,evet
+S102218,U305,1,2026-04-29,üründen memnun kalmadım,1183.00,103.96,evet
+S102284,U201,1,2026-04-29,fikir değiştirdim,3490.00,101.58,evet
+S102454,U406,3,2026-04-29,hasarlı geldi,2970.00,87.94,evet
+S102461,U202,1,2026-04-29,beden uymadı,1953.00,94.96,hayır
+S102674,U506,2,2026-04-29,hasarlı geldi,1780.00,109.19,evet
+S102864,U405,1,2026-04-29,yanlış ürün gönderildi,1190.00,91.07,evet
+S102065,U602,1,2026-04-30,fikir değiştirdim,203.00,114.37,evet
+S102159,U602,1,2026-04-30,beden uymadı,203.00,86.50,evet
+S102220,U502,2,2026-04-30,hasarlı geldi,1580.00,95.62,evet
+S102414,U102,1,2026-04-30,fikir değiştirdim,8900.00,84.08,evet
+S102530,U204,1,2026-04-30,beden uymadı,2290.00,103.07,evet
+S102637,U205,1,2026-04-30,beden uymadı,1290.00,101.78,evet
+S102783,U201,1,2026-04-30,fikir değiştirdim,3490.00,79.68,evet
+S102834,U506,1,2026-04-30,yanlış ürün gönderildi,890.00,106.26,hayır
+S102898,U103,1,2026-04-30,beden uymadı,3290.00,99.06,evet
+S103087,U606,1,2026-04-30,fikir değiştirdim,490.00,80.55,evet
+S103094,U203,1,2026-04-30,beden uymadı,3990.00,122.16,evet
+S102052,U602,1,2026-05-01,hasarlı geldi,290.00,112.82,evet
+S102053,U504,1,2026-05-01,geç teslimat,490.00,104.20,evet
+S102200,U406,1,2026-05-01,fikir değiştirdim,841.50,98.88,evet
+S102574,U504,2,2026-05-01,hasarlı geldi,980.00,96.22,hayır
+S102821,U105,1,2026-05-01,üründen memnun kalmadım,1890.00,92.92,evet
+S102917,U501,2,2026-05-01,üründen memnun kalmadım,2380.00,84.76,evet
+S102969,U105,1,2026-05-01,üründen memnun kalmadım,1890.00,92.87,evet
+S103133,U202,1,2026-05-01,beden uymadı,2790.00,169.76,evet
+S102266,U306,1,2026-05-02,fikir değiştirdim,690.00,112.90,evet
+S102704,U104,1,2026-05-02,fikir değiştirdim,2490.00,95.27,evet
+S102776,U207,1,2026-05-02,beden uymadı,5490.00,103.27,evet
+S102959,U503,1,2026-05-02,beden uymadı,590.00,97.07,evet
+S103012,U204,1,2026-05-02,beden uymadı,2290.00,95.23,hayır
+S103061,U201,1,2026-05-02,beden uymadı,3490.00,86.78,evet
+S103167,U102,1,2026-05-02,beden uymadı,8900.00,106.02,evet
+S103184,U603,1,2026-05-02,üründen memnun kalmadım,390.00,90.89,evet
+S103199,U603,1,2026-05-02,üründen memnun kalmadım,390.00,83.95,evet
+S102176,U101,1,2026-05-03,geç teslimat,3843.00,111.37,evet
+S102258,U404,1,2026-05-03,fikir değiştirdim,1490.00,107.55,evet
+S102410,U206,1,2026-05-03,beden uymadı,4490.00,83.68,hayır
+S102740,U205,1,2026-05-03,beden uymadı,1290.00,116.24,hayır
+S102741,U203,2,2026-05-03,beden uymadı,7980.00,91.60,evet
+S102817,U602,3,2026-05-03,hasarlı geldi,870.00,121.18,evet
+S102256,U504,3,2026-05-04,hasarlı geldi,1470.00,100.20,evet
+S102669,U202,1,2026-05-04,geç teslimat,2790.00,101.49,evet
+S103151,U601,1,2026-05-04,üründen memnun kalmadım,903.00,88.46,evet
+S103274,U202,1,2026-05-04,beden uymadı,2790.00,119.10,evet
+S102484,U104,1,2026-05-05,geç teslimat,1743.00,88.95,evet
+S102632,U406,2,2026-05-05,üründen memnun kalmadım,1980.00,106.40,hayır
+S102881,U305,1,2026-05-05,beden uymadı,1690.00,91.18,evet
+S102461,U203,1,2026-05-06,beden uymadı,2793.00,101.51,hayır
+S102609,U205,1,2026-05-06,beden uymadı,1290.00,94.48,evet
+S102615,U105,2,2026-05-06,beden uymadı,3780.00,93.11,hayır
+S102845,U604,2,2026-05-06,yanlış ürün gönderildi,1180.00,118.27,hayır
+S102914,U205,1,2026-05-06,beden uymadı,1290.00,89.65,evet
+S102655,U201,1,2026-05-07,beden uymadı,3490.00,97.04,evet
+S102952,U202,1,2026-05-07,fikir değiştirdim,2790.00,89.44,hayır
+S102998,U501,1,2026-05-07,beden uymadı,833.00,106.28,evet
+S103328,U403,1,2026-05-07,üründen memnun kalmadım,2890.00,100.54,evet
+S102807,U204,1,2026-05-08,hasarlı geldi,2290.00,97.61,hayır
+S102852,U103,1,2026-05-08,üründen memnun kalmadım,3290.00,91.76,evet
+S103109,U407,1,2026-05-08,fikir değiştirdim,1690.00,107.46,hayır
+S103208,U205,1,2026-05-08,beden uymadı,1290.00,88.85,evet
+S103301,U201,1,2026-05-08,üründen memnun kalmadım,2443.00,147.23,evet
+S103337,U205,1,2026-05-08,geç teslimat,1290.00,115.54,hayır
+S103475,U206,1,2026-05-08,beden uymadı,4490.00,87.83,hayır
+S103556,U403,1,2026-05-08,geç teslimat,2023.00,89.31,hayır
+S103644,U204,1,2026-05-08,beden uymadı,2290.00,77.76,evet
+S102683,U402,1,2026-05-09,üründen memnun kalmadım,9900.00,110.98,hayır
+S102694,U204,1,2026-05-09,beden uymadı,2290.00,146.52,hayır
+S103205,U605,1,2026-05-09,fikir değiştirdim,890.00,152.01,hayır
+S103532,U606,1,2026-05-09,hasarlı geldi,343.00,100.88,hayır
+S103661,U408,1,2026-05-09,beden uymadı,690.00,91.40,hayır
+S102843,U201,1,2026-05-10,beden uymadı,3490.00,80.74,evet
+S102927,U502,1,2026-05-10,beden uymadı,790.00,79.72,hayır
+S103089,U205,1,2026-05-10,üründen memnun kalmadım,1290.00,99.85,evet
+S103148,U506,1,2026-05-10,beden uymadı,623.00,106.04,evet
+S103455,U404,1,2026-05-10,üründen memnun kalmadım,1490.00,108.27,hayır
+S103480,U204,3,2026-05-10,beden uymadı,6870.00,107.13,evet
+S103607,U101,1,2026-05-10,üründen memnun kalmadım,5490.00,88.53,hayır
+S102763,U406,3,2026-05-11,üründen memnun kalmadım,2970.00,91.57,evet
+S102876,U207,1,2026-05-11,beden uymadı,5490.00,78.55,hayır
+S103054,U105,1,2026-05-11,fikir değiştirdim,1323.00,88.84,evet
+S103200,U606,3,2026-05-11,geç teslimat,1029.00,78.16,evet
+S103202,U501,1,2026-05-11,fikir değiştirdim,1190.00,153.04,evet
+S103423,U207,1,2026-05-11,beden uymadı,3843.00,89.58,hayır
+S103517,U405,1,2026-05-11,hasarlı geldi,1190.00,79.58,hayır
+S103557,U605,1,2026-05-11,hasarlı geldi,623.00,109.24,hayır
+S103599,U201,1,2026-05-11,beden uymadı,3490.00,174.52,evet
+S103063,U201,1,2026-05-12,beden uymadı,3490.00,81.40,hayır
+S103072,U105,1,2026-05-12,üründen memnun kalmadım,1890.00,90.33,evet
+S103108,U205,1,2026-05-12,beden uymadı,1290.00,103.64,hayır
+S103250,U403,1,2026-05-12,fikir değiştirdim,2023.00,95.74,hayır
+S103275,U206,1,2026-05-12,üründen memnun kalmadım,4490.00,99.80,evet
+S103345,U207,1,2026-05-12,beden uymadı,5490.00,103.01,hayır
+S103526,U207,1,2026-05-12,hasarlı geldi,5490.00,88.88,hayır
+S103708,U505,1,2026-05-12,geç teslimat,1390.00,96.07,evet
+S103063,U106,1,2026-05-13,üründen memnun kalmadım,3990.00,89.15,evet
+S103153,U408,2,2026-05-13,hasarlı geldi,1380.00,77.91,hayır
+S103206,U304,1,2026-05-13,fikir değiştirdim,2490.00,145.29,evet
+S103416,U504,1,2026-05-13,fikir değiştirdim,490.00,112.94,evet
+S103436,U204,1,2026-05-13,fikir değiştirdim,2290.00,105.27,hayır
+S103625,U103,1,2026-05-13,fikir değiştirdim,2303.00,98.14,evet
+S103660,U406,1,2026-05-13,hasarlı geldi,990.00,83.30,hayır
+S103916,U205,1,2026-05-13,beden uymadı,903.00,144.55,hayır
+S102836,U201,1,2026-05-14,beden uymadı,2443.00,77.75,evet
+S103096,U205,1,2026-05-14,beden uymadı,903.00,86.47,evet
+S103131,U403,1,2026-05-14,üründen memnun kalmadım,2023.00,103.14,hayır
+S103169,U306,1,2026-05-14,üründen memnun kalmadım,690.00,78.75,evet
+S103234,U102,1,2026-05-14,üründen memnun kalmadım,8900.00,96.08,evet
+S103341,U205,1,2026-05-14,beden uymadı,1290.00,109.78,hayır
+S103997,U201,1,2026-05-14,beden uymadı,3490.00,84.08,hayır
+S102889,U103,1,2026-05-15,üründen memnun kalmadım,3290.00,93.84,evet
+S103057,U204,1,2026-05-15,beden uymadı,1603.00,92.36,hayır
+S103108,U104,1,2026-05-15,fikir değiştirdim,2490.00,99.15,evet
+S103217,U204,1,2026-05-15,geç teslimat,2290.00,91.00,hayır
+S103847,U401,1,2026-05-15,fikir değiştirdim,6990.00,82.56,hayır
+S103861,U501,1,2026-05-15,üründen memnun kalmadım,1190.00,101.54,hayır
+S103885,U205,1,2026-05-15,beden uymadı,1290.00,158.62,hayır
+S103924,U201,1,2026-05-15,fikir değiştirdim,3490.00,81.37,evet
+S104019,U305,1,2026-05-15,yanlış ürün gönderildi,1183.00,96.14,evet
+S104049,U201,2,2026-05-15,hasarlı geldi,4886.00,85.74,hayır
+S103514,U201,1,2026-05-16,beden uymadı,3490.00,101.85,evet
+S103567,U602,2,2026-05-16,fikir değiştirdim,580.00,100.83,evet
+S103608,U205,1,2026-05-16,geç teslimat,1290.00,95.56,evet
+S103623,U601,1,2026-05-16,üründen memnun kalmadım,1290.00,104.59,evet
+S103637,U406,3,2026-05-16,hasarlı geldi,2970.00,119.77,evet
+S104026,U201,1,2026-05-16,beden uymadı,3490.00,81.11,hayır
+S103142,U408,3,2026-05-17,üründen memnun kalmadım,1449.00,80.88,evet
+S103206,U606,1,2026-05-17,geç teslimat,490.00,149.20,evet
+S103312,U603,1,2026-05-17,üründen memnun kalmadım,390.00,88.10,evet
+S103361,U202,1,2026-05-17,beden uymadı,2790.00,114.62,hayır
+S103818,U205,1,2026-05-17,beden uymadı,1290.00,98.78,hayır
+S104001,U205,1,2026-05-17,hasarlı geldi,903.00,160.21,hayır
+S104006,U405,1,2026-05-17,beden uymadı,1190.00,102.89,evet
+S104072,U506,1,2026-05-17,üründen memnun kalmadım,890.00,89.79,evet
+S104124,U502,1,2026-05-17,üründen memnun kalmadım,790.00,80.49,hayır
+S103163,U101,1,2026-05-18,fikir değiştirdim,5490.00,89.20,hayır
+S103284,U503,1,2026-05-18,hasarlı geldi,590.00,100.54,hayır
+S103441,U506,1,2026-05-18,yanlış ürün gönderildi,890.00,105.41,evet
+S103458,U205,1,2026-05-18,beden uymadı,1290.00,90.22,evet
+S103489,U206,1,2026-05-18,beden uymadı,4490.00,157.45,hayır
+S103747,U101,1,2026-05-18,üründen memnun kalmadım,5490.00,93.46,evet
+S103777,U105,3,2026-05-18,geç teslimat,5670.00,80.53,evet
+S103792,U202,1,2026-05-18,beden uymadı,2790.00,87.27,evet
+S103896,U601,1,2026-05-18,hasarlı geldi,903.00,104.07,hayır
+S104011,U502,1,2026-05-18,beden uymadı,790.00,146.29,evet
+S104078,U201,1,2026-05-18,beden uymadı,3490.00,156.63,evet
+S104176,U505,1,2026-05-18,üründen memnun kalmadım,1390.00,152.17,evet
+S104212,U202,1,2026-05-18,beden uymadı,2790.00,119.81,evet
+S103264,U503,1,2026-05-19,fikir değiştirdim,590.00,88.98,evet
+S103277,U207,1,2026-05-19,fikir değiştirdim,5490.00,83.49,evet
+S103308,U105,1,2026-05-19,üründen memnun kalmadım,1890.00,94.19,evet
+S103579,U408,1,2026-05-19,üründen memnun kalmadım,690.00,80.72,evet
+S103664,U407,1,2026-05-19,beden uymadı,1690.00,98.35,evet
+S103762,U205,1,2026-05-19,beden uymadı,1290.00,105.77,evet
+S104345,U202,1,2026-05-19,beden uymadı,2790.00,94.72,evet
+S103415,U503,3,2026-05-20,fikir değiştirdim,1770.00,113.49,hayır
+S103478,U206,1,2026-05-20,beden uymadı,3143.00,106.91,evet
+S103522,U202,1,2026-05-20,beden uymadı,2790.00,107.20,evet
+S103603,U201,1,2026-05-20,beden uymadı,3490.00,98.43,evet
+S103632,U205,1,2026-05-20,hasarlı geldi,1290.00,158.52,hayır
+S103748,U205,1,2026-05-20,beden uymadı,1290.00,100.55,evet
+S103752,U203,1,2026-05-20,beden uymadı,3990.00,90.95,hayır
+S103992,U604,2,2026-05-20,hasarlı geldi,826.00,162.64,evet
+S104087,U203,1,2026-05-20,beden uymadı,3990.00,92.92,hayır
+S104243,U206,1,2026-05-20,beden uymadı,4490.00,114.55,evet
+S104256,U206,1,2026-05-20,beden uymadı,4490.00,81.65,evet
+S104294,U207,1,2026-05-20,beden uymadı,3843.00,78.52,evet
+S103276,U206,1,2026-05-21,beden uymadı,4490.00,102.59,evet
+S103331,U304,1,2026-05-21,üründen memnun kalmadım,2490.00,93.63,evet
+S103929,U202,1,2026-05-21,beden uymadı,2790.00,97.55,evet
+S104290,U408,2,2026-05-21,fikir değiştirdim,1380.00,95.60,evet
+S104404,U102,1,2026-05-21,geç teslimat,8900.00,78.91,evet
+S103320,U602,2,2026-05-22,yanlış ürün gönderildi,580.00,104.29,hayır
+S103405,U203,2,2026-05-22,geç teslimat,7980.00,149.78,evet
+S103408,U202,1,2026-05-22,beden uymadı,2790.00,118.98,evet
+S103483,U206,2,2026-05-22,fikir değiştirdim,8980.00,89.21,evet
+S103618,U406,1,2026-05-22,fikir değiştirdim,990.00,101.59,evet
+S103750,U406,1,2026-05-22,fikir değiştirdim,990.00,81.33,evet
+S103659,U402,1,2026-05-23,yanlış ürün gönderildi,9900.00,77.97,hayır
+S104106,U407,1,2026-05-23,fikir değiştirdim,1690.00,167.06,hayır
+S104153,U407,1,2026-05-23,fikir değiştirdim,1690.00,80.77,evet
+S104427,U201,1,2026-05-23,beden uymadı,2443.00,99.89,hayır
+S104554,U405,1,2026-05-23,geç teslimat,1190.00,122.32,hayır
+S104582,U502,2,2026-05-23,yanlış ürün gönderildi,1580.00,123.02,hayır
+S104584,U201,1,2026-05-23,fikir değiştirdim,3490.00,83.38,evet
+S103551,U106,1,2026-05-24,beden uymadı,3990.00,91.09,evet
+S103622,U201,1,2026-05-24,beden uymadı,2443.00,108.43,evet
+S103711,U204,1,2026-05-24,beden uymadı,2290.00,91.98,evet
+S103807,U105,1,2026-05-24,fikir değiştirdim,1890.00,105.60,hayır
+S103845,U506,2,2026-05-24,beden uymadı,1780.00,170.80,evet
+S104296,U202,1,2026-05-24,geç teslimat,2790.00,110.65,hayır
+S104535,U203,1,2026-05-24,beden uymadı,3990.00,79.94,hayır
+S104604,U501,1,2026-05-24,fikir değiştirdim,833.00,80.04,hayır
+S103568,U205,1,2026-05-25,fikir değiştirdim,1290.00,92.51,evet
+S103636,U205,1,2026-05-25,beden uymadı,903.00,97.61,evet
+S103696,U102,1,2026-05-25,üründen memnun kalmadım,8900.00,104.03,evet
+S103964,U105,1,2026-05-25,beden uymadı,1890.00,84.81,evet
+S104002,U201,1,2026-05-25,üründen memnun kalmadım,3490.00,103.87,hayır
+S104401,U204,2,2026-05-25,beden uymadı,4580.00,92.76,evet
+S103872,U204,1,2026-05-26,beden uymadı,2290.00,91.34,evet
+S104008,U503,1,2026-05-26,üründen memnun kalmadım,590.00,84.78,evet
+S104103,U203,1,2026-05-26,beden uymadı,3990.00,94.82,evet
+S104112,U504,1,2026-05-26,üründen memnun kalmadım,490.00,77.94,evet
+S104181,U606,1,2026-05-26,hasarlı geldi,343.00,89.11,hayır
+S104208,U403,1,2026-05-26,fikir değiştirdim,2890.00,100.55,hayır
+S104317,U204,1,2026-05-26,beden uymadı,2290.00,110.24,evet
+S104476,U207,1,2026-05-26,beden uymadı,5490.00,87.09,hayır
+S104497,U104,1,2026-05-26,fikir değiştirdim,2490.00,102.53,evet
+S104660,U204,3,2026-05-26,üründen memnun kalmadım,4809.00,101.82,evet
+S104853,U203,1,2026-05-26,beden uymadı,3990.00,113.35,evet
+S103948,U207,2,2026-05-27,yanlış ürün gönderildi,10980.00,101.56,hayır
+S104072,U207,1,2026-05-27,beden uymadı,5490.00,80.11,hayır
+S104207,U101,1,2026-05-27,hasarlı geldi,5490.00,151.37,evet
+S104211,U202,1,2026-05-27,beden uymadı,1953.00,83.18,evet
+S104259,U401,1,2026-05-27,üründen memnun kalmadım,6990.00,80.22,evet
+S104416,U202,1,2026-05-27,beden uymadı,2790.00,103.24,evet
+S104570,U203,1,2026-05-27,beden uymadı,3990.00,113.37,evet
+S104774,U506,2,2026-05-27,üründen memnun kalmadım,1780.00,160.97,evet
+S105045,U405,3,2026-05-27,üründen memnun kalmadım,3570.00,80.94,evet
+S103814,U606,1,2026-05-28,geç teslimat,490.00,102.45,hayır
+S103828,U201,1,2026-05-28,hasarlı geldi,3490.00,86.93,hayır
+S104012,U202,1,2026-05-28,fikir değiştirdim,2790.00,79.76,evet
+S104071,U408,1,2026-05-28,hasarlı geldi,690.00,113.35,evet
+S104423,U205,1,2026-05-28,beden uymadı,1290.00,81.96,hayır
+S104911,U104,1,2026-05-28,fikir değiştirdim,2490.00,87.09,evet
+S103963,U603,2,2026-05-29,fikir değiştirdim,546.00,167.30,evet
+S104183,U408,2,2026-05-29,üründen memnun kalmadım,1380.00,116.26,evet
+S104199,U205,1,2026-05-29,beden uymadı,1290.00,143.36,evet
+S104395,U606,2,2026-05-29,geç teslimat,980.00,88.78,evet
+S104415,U404,1,2026-05-29,geç teslimat,1490.00,154.57,hayır
+S104497,U201,1,2026-05-29,beden uymadı,3490.00,93.73,hayır
+S104568,U202,1,2026-05-29,beden uymadı,2790.00,88.52,hayır
+S104698,U404,1,2026-05-29,üründen memnun kalmadım,1490.00,107.65,hayır
+S104703,U602,2,2026-05-29,hasarlı geldi,580.00,102.86,hayır
+S104715,U404,1,2026-05-29,üründen memnun kalmadım,1490.00,85.41,evet
+S105174,U503,1,2026-05-29,hasarlı geldi,590.00,113.61,evet
+S103885,U105,1,2026-05-30,beden uymadı,1890.00,173.11,evet
+S103922,U104,1,2026-05-30,yanlış ürün gönderildi,2490.00,84.20,hayır
+S103967,U206,1,2026-05-30,beden uymadı,4490.00,80.63,hayır
+S104173,U104,1,2026-05-30,geç teslimat,2490.00,175.67,evet
+S104479,U201,1,2026-05-30,üründen memnun kalmadım,3490.00,146.50,evet
+S104573,U406,3,2026-05-30,beden uymadı,2970.00,113.67,evet
+S104654,U605,1,2026-05-30,geç teslimat,890.00,149.14,hayır
+S105066,U202,1,2026-05-30,fikir değiştirdim,1953.00,104.93,evet
+S105139,U206,1,2026-05-30,hasarlı geldi,4490.00,78.36,hayır
+S104486,U402,1,2026-05-31,fikir değiştirdim,9900.00,93.90,evet
+S104512,U403,1,2026-05-31,üründen memnun kalmadım,2890.00,100.78,hayır
+S104517,U406,1,2026-05-31,hasarlı geldi,990.00,102.07,evet
+S104557,U206,1,2026-05-31,beden uymadı,4490.00,112.92,evet
+S104858,U602,1,2026-05-31,üründen memnun kalmadım,290.00,98.89,evet
+S104940,U203,1,2026-05-31,beden uymadı,3990.00,168.23,evet
+S105021,U306,1,2026-05-31,fikir değiştirdim,690.00,88.12,evet
+S105286,U602,1,2026-05-31,üründen memnun kalmadım,290.00,108.29,evet
+S104137,U405,1,2026-06-01,fikir değiştirdim,1190.00,112.01,evet
+S104403,U203,1,2026-06-01,beden uymadı,3990.00,89.18,evet
+S104555,U603,3,2026-06-01,yanlış ürün gönderildi,1170.00,170.71,evet
+S105216,U202,1,2026-06-01,beden uymadı,2790.00,98.92,evet
+S105392,U204,1,2026-06-01,beden uymadı,2290.00,117.39,hayır
+S104096,U201,1,2026-06-02,fikir değiştirdim,3490.00,96.96,evet
+S104172,U201,1,2026-06-02,beden uymadı,3490.00,88.78,evet
+S104204,U105,1,2026-06-02,üründen memnun kalmadım,1890.00,85.51,evet
+S104222,U403,1,2026-06-02,yanlış ürün gönderildi,2890.00,99.36,hayır
+S104386,U205,1,2026-06-02,beden uymadı,1290.00,98.60,hayır
+S104523,U606,1,2026-06-02,hasarlı geldi,490.00,93.90,evet
+S104543,U206,1,2026-06-02,fikir değiştirdim,4490.00,89.17,evet
+S104889,U403,1,2026-06-02,yanlış ürün gönderildi,2890.00,88.17,hayır
+S104188,U408,1,2026-06-03,geç teslimat,690.00,116.83,hayır
+S104247,U106,1,2026-06-03,hasarlı geldi,3990.00,154.34,hayır
+S104261,U203,1,2026-06-03,beden uymadı,3990.00,166.92,evet
+S104813,U202,1,2026-06-03,beden uymadı,2790.00,84.98,hayır
+S104879,U202,1,2026-06-03,beden uymadı,1953.00,112.95,hayır
+S104907,U202,1,2026-06-03,beden uymadı,2790.00,92.11,hayır
+S105208,U305,2,2026-06-03,üründen memnun kalmadım,2366.00,80.66,evet
+S104428,U204,1,2026-06-04,beden uymadı,2290.00,77.86,evet
+S104473,U206,1,2026-06-04,beden uymadı,4490.00,84.92,evet
+S104578,U406,1,2026-06-04,yanlış ürün gönderildi,990.00,87.27,evet
+S105202,U501,1,2026-06-04,üründen memnun kalmadım,1190.00,87.72,evet
+S105566,U205,1,2026-06-04,beden uymadı,1290.00,113.17,evet
+S105574,U403,1,2026-06-04,fikir değiştirdim,2890.00,95.46,evet
+S104307,U204,1,2026-06-05,üründen memnun kalmadım,1603.00,90.71,evet
+S104517,U501,1,2026-06-05,fikir değiştirdim,1190.00,94.42,evet
+S104624,U405,1,2026-06-05,fikir değiştirdim,833.00,146.86,hayır
+S104861,U106,1,2026-06-05,fikir değiştirdim,3990.00,95.58,evet
+S104991,U406,2,2026-06-05,üründen memnun kalmadım,1980.00,77.74,evet
+S105202,U301,1,2026-06-05,beden uymadı,2190.00,86.77,evet
+S105675,U205,3,2026-06-05,beden uymadı,3870.00,96.20,hayır
+S105014,U501,1,2026-06-06,yanlış ürün gönderildi,1190.00,96.04,hayır
+S105489,U604,1,2026-06-06,üründen memnun kalmadım,590.00,101.68,evet
+S105552,U504,2,2026-06-06,yanlış ürün gönderildi,980.00,80.85,evet
+S104633,U205,1,2026-06-07,beden uymadı,1290.00,103.41,evet
+S105323,U406,3,2026-06-07,üründen memnun kalmadım,2970.00,109.38,evet
+S105327,U102,1,2026-06-07,üründen memnun kalmadım,8900.00,104.30,evet
+S105397,U106,1,2026-06-07,yanlış ürün gönderildi,2793.00,106.37,hayır
+S105579,U603,1,2026-06-07,beden uymadı,390.00,97.35,evet
+S105742,U502,1,2026-06-07,üründen memnun kalmadım,790.00,174.75,evet
+S104544,U201,1,2026-06-08,beden uymadı,3490.00,87.80,hayır
+S104603,U207,1,2026-06-08,hasarlı geldi,5490.00,159.49,hayır
+S104674,U603,1,2026-06-08,üründen memnun kalmadım,390.00,107.04,evet
+S104897,U602,1,2026-06-08,fikir değiştirdim,203.00,88.67,evet
+S105007,U105,1,2026-06-08,fikir değiştirdim,1890.00,112.14,evet
+S105351,U201,1,2026-06-08,hasarlı geldi,3490.00,153.13,evet
+S105412,U601,1,2026-06-08,üründen memnun kalmadım,1290.00,79.85,hayır
+S105560,U201,1,2026-06-08,beden uymadı,3490.00,107.48,hayır
+S105711,U406,3,2026-06-08,üründen memnun kalmadım,2970.00,110.19,evet
+S104608,U602,2,2026-06-09,üründen memnun kalmadım,580.00,164.76,hayır
+S104758,U506,1,2026-06-09,üründen memnun kalmadım,890.00,84.46,evet
+S105194,U203,1,2026-06-09,beden uymadı,3990.00,82.62,evet
+S105235,U202,1,2026-06-09,beden uymadı,2790.00,109.69,hayır
+S105306,U603,1,2026-06-09,hasarlı geldi,390.00,89.18,evet
+S105365,U606,1,2026-06-09,üründen memnun kalmadım,343.00,107.03,evet
+S105616,U408,2,2026-06-09,beden uymadı,1380.00,102.47,hayır
+S105893,U102,1,2026-06-09,üründen memnun kalmadım,6230.00,84.16,evet
+S106078,U202,1,2026-06-09,beden uymadı,2790.00,87.48,hayır
+S106087,U104,1,2026-06-09,hasarlı geldi,2490.00,86.05,evet
+S104801,U201,1,2026-06-10,üründen memnun kalmadım,3490.00,78.97,hayır
+S104829,U505,1,2026-06-10,geç teslimat,1390.00,115.61,evet
+S105044,U102,1,2026-06-10,beden uymadı,8900.00,115.68,evet
+S105812,U406,1,2026-06-10,fikir değiştirdim,990.00,108.86,evet
+S106221,U405,1,2026-06-10,fikir değiştirdim,1190.00,85.93,evet
+S104893,U408,1,2026-06-11,yanlış ürün gönderildi,690.00,176.43,hayır
+S104975,U205,1,2026-06-11,beden uymadı,1290.00,110.27,evet
+S104992,U603,1,2026-06-11,beden uymadı,273.00,92.64,hayır
+S105005,U104,2,2026-06-11,geç teslimat,3486.00,150.59,evet
+S106132,U605,1,2026-06-11,hasarlı geldi,623.00,104.28,hayır
+S106238,U201,1,2026-06-11,beden uymadı,3490.00,79.35,evet
+S106265,U202,1,2026-06-11,beden uymadı,1953.00,177.77,hayır
+S105129,U201,1,2026-06-12,beden uymadı,3490.00,107.58,hayır
+S105913,U406,1,2026-06-12,hasarlı geldi,990.00,98.03,hayır
+S105997,U505,1,2026-06-12,üründen memnun kalmadım,973.00,99.08,hayır
+S106403,U603,1,2026-06-12,fikir değiştirdim,390.00,119.27,hayır
+S105174,U204,1,2026-06-13,beden uymadı,2290.00,110.32,hayır
+S105538,U202,1,2026-06-13,geç teslimat,2790.00,90.71,hayır
+S106052,U502,1,2026-06-13,fikir değiştirdim,790.00,120.33,evet
+S106064,U404,1,2026-06-13,hasarlı geldi,1490.00,89.15,evet
+S106346,U603,3,2026-06-13,geç teslimat,1170.00,83.57,evet
+S105051,U606,2,2026-06-14,üründen memnun kalmadım,980.00,79.28,evet
+S105225,U206,1,2026-06-14,beden uymadı,4490.00,123.32,evet
+S105384,U401,1,2026-06-14,beden uymadı,6990.00,98.41,evet
+S105487,U404,2,2026-06-14,üründen memnun kalmadım,2980.00,89.76,hayır
+S105651,U202,1,2026-06-14,beden uymadı,2790.00,80.46,evet
+S105858,U408,1,2026-06-14,fikir değiştirdim,690.00,89.81,evet
+S105951,U408,1,2026-06-14,hasarlı geldi,483.00,78.94,hayır
+S106047,U102,1,2026-06-14,yanlış ürün gönderildi,8900.00,119.22,hayır
+S105111,U501,1,2026-06-15,üründen memnun kalmadım,1190.00,112.17,evet
+S105290,U202,1,2026-06-15,beden uymadı,2790.00,113.34,hayır
+S105339,U602,1,2026-06-15,fikir değiştirdim,290.00,87.95,evet
+S105445,U503,1,2026-06-15,yanlış ürün gönderildi,413.00,104.94,hayır
+S105551,U201,1,2026-06-15,beden uymadı,3490.00,88.45,evet
+S105740,U502,1,2026-06-15,fikir değiştirdim,790.00,103.08,evet
+S105993,U602,1,2026-06-15,fikir değiştirdim,290.00,79.51,evet
+S106382,U501,1,2026-06-15,üründen memnun kalmadım,833.00,80.40,evet
+S106487,U405,1,2026-06-15,üründen memnun kalmadım,833.00,87.57,evet
+S105527,U306,1,2026-06-16,fikir değiştirdim,690.00,100.72,evet
+S105783,U503,1,2026-06-16,üründen memnun kalmadım,590.00,89.54,evet
+S106538,U606,2,2026-06-16,beden uymadı,980.00,103.86,hayır
+S106585,U201,1,2026-06-16,üründen memnun kalmadım,3490.00,105.01,evet
+S105257,U204,1,2026-06-17,beden uymadı,2290.00,79.28,hayır
+S105358,U302,1,2026-06-17,geç teslimat,3690.00,99.38,hayır
+S105917,U601,1,2026-06-17,üründen memnun kalmadım,1290.00,95.00,evet
+S105996,U204,1,2026-06-17,beden uymadı,2290.00,78.77,hayır
+S106106,U403,1,2026-06-17,hasarlı geldi,2890.00,92.22,evet
+S106369,U105,1,2026-06-17,fikir değiştirdim,1323.00,103.59,evet
+S106558,U205,1,2026-06-17,beden uymadı,903.00,89.08,evet
+S106897,U306,3,2026-06-17,beden uymadı,1449.00,169.10,evet
+S105287,U502,1,2026-06-18,fikir değiştirdim,790.00,118.27,hayır
+S105606,U303,1,2026-06-18,üründen memnun kalmadım,903.00,96.56,evet
+S105685,U606,1,2026-06-18,yanlış ürün gönderildi,343.00,91.19,evet
+S105705,U604,1,2026-06-18,beden uymadı,590.00,88.42,evet
+S105831,U505,1,2026-06-18,üründen memnun kalmadım,1390.00,100.23,evet
+S106221,U406,2,2026-06-18,geç teslimat,1980.00,90.75,evet
+S106370,U104,1,2026-06-18,beden uymadı,2490.00,115.84,evet
+S106478,U503,1,2026-06-18,yanlış ürün gönderildi,590.00,100.84,evet
+S106889,U604,1,2026-06-18,üründen memnun kalmadım,413.00,80.82,evet
+S106893,U306,1,2026-06-18,fikir değiştirdim,690.00,90.73,evet
+S106934,U203,1,2026-06-18,beden uymadı,3990.00,106.95,evet
+S105405,U204,1,2026-06-19,beden uymadı,2290.00,105.81,evet
+S105539,U202,1,2026-06-19,beden uymadı,1953.00,105.77,evet
+S105561,U605,1,2026-06-19,geç teslimat,890.00,82.06,evet
+S105608,U205,2,2026-06-19,beden uymadı,2580.00,84.97,evet
+S105814,U501,1,2026-06-19,üründen memnun kalmadım,833.00,113.24,evet
+S105900,U503,2,2026-06-19,üründen memnun kalmadım,1180.00,108.07,evet
+S105996,U603,3,2026-06-19,fikir değiştirdim,1170.00,79.11,evet
+S106300,U606,1,2026-06-19,üründen memnun kalmadım,490.00,86.31,evet
+S106349,U205,1,2026-06-19,beden uymadı,903.00,156.72,hayır
+S106462,U206,1,2026-06-19,beden uymadı,3143.00,83.19,hayır
+S106536,U104,1,2026-06-19,hasarlı geldi,2490.00,147.55,evet
+S106569,U505,1,2026-06-19,yanlış ürün gönderildi,1390.00,109.00,evet
+S106790,U606,2,2026-06-19,yanlış ürün gönderildi,980.00,104.07,hayır
+S106825,U301,1,2026-06-19,beden uymadı,2190.00,97.27,hayır
+S107070,U602,1,2026-06-19,fikir değiştirdim,290.00,102.18,evet
+S105473,U506,3,2026-06-20,fikir değiştirdim,2670.00,79.93,hayır
+S105673,U408,1,2026-06-20,hasarlı geldi,483.00,176.45,evet
+S106284,U408,1,2026-06-20,geç teslimat,690.00,80.31,evet
+S106573,U604,2,2026-06-20,beden uymadı,1180.00,100.18,evet
+S106621,U203,1,2026-06-20,beden uymadı,3990.00,85.46,hayır
+S106814,U404,1,2026-06-20,hasarlı geldi,1490.00,91.72,evet
+S106862,U306,1,2026-06-20,üründen memnun kalmadım,690.00,156.30,evet
+S105737,U306,3,2026-06-21,geç teslimat,2070.00,80.93,hayır
+S106036,U206,1,2026-06-21,beden uymadı,4490.00,90.61,evet
+S106604,U602,1,2026-06-21,hasarlı geldi,290.00,98.95,hayır
+S106625,U401,1,2026-06-21,hasarlı geldi,6990.00,81.34,hayır
+S106749,U406,1,2026-06-21,üründen memnun kalmadım,990.00,107.25,evet
+S106868,U604,1,2026-06-21,fikir değiştirdim,590.00,145.41,evet
+S105723,U202,1,2026-06-22,beden uymadı,2790.00,91.88,hayır
+S105943,U203,1,2026-06-22,beden uymadı,3990.00,106.41,hayır
+S105953,U604,1,2026-06-22,üründen memnun kalmadım,590.00,99.40,evet
+S106045,U205,1,2026-06-22,beden uymadı,1290.00,91.26,evet
+S106197,U207,1,2026-06-22,üründen memnun kalmadım,5490.00,99.67,evet
+S106546,U206,1,2026-06-22,beden uymadı,4490.00,121.74,evet
+S106674,U201,1,2026-06-22,beden uymadı,2443.00,97.21,evet
+S106759,U301,2,2026-06-22,üründen memnun kalmadım,4380.00,88.17,evet
+S106773,U205,2,2026-06-22,beden uymadı,2580.00,86.57,hayır
+S107144,U604,1,2026-06-22,yanlış ürün gönderildi,590.00,91.94,hayır
+S107225,U202,1,2026-06-22,beden uymadı,2790.00,84.32,hayır
+S105674,U205,1,2026-06-23,beden uymadı,1290.00,110.95,evet
+S105899,U201,1,2026-06-23,beden uymadı,2443.00,101.09,hayır
+S106167,U504,1,2026-06-23,üründen memnun kalmadım,490.00,111.70,evet
+S106410,U205,2,2026-06-23,beden uymadı,2580.00,91.20,hayır
+S106526,U204,1,2026-06-23,üründen memnun kalmadım,2290.00,89.38,evet
+S106595,U205,1,2026-06-23,beden uymadı,903.00,90.85,hayır
+S106602,U202,1,2026-06-23,üründen memnun kalmadım,2790.00,82.40,hayır
+S106682,U302,1,2026-06-23,üründen memnun kalmadım,3690.00,98.93,hayır
+S106755,U503,1,2026-06-23,fikir değiştirdim,590.00,116.83,evet
+S107206,U202,1,2026-06-23,hasarlı geldi,2790.00,118.94,evet
+S107586,U602,1,2026-06-23,hasarlı geldi,290.00,110.96,evet
+S106350,U404,1,2026-06-24,geç teslimat,1490.00,116.55,evet
+S106551,U606,1,2026-06-24,fikir değiştirdim,490.00,81.99,evet
+S106578,U306,1,2026-06-24,fikir değiştirdim,483.00,101.68,evet
+S107035,U201,1,2026-06-24,beden uymadı,3490.00,95.60,hayır
+S107183,U403,1,2026-06-24,beden uymadı,2890.00,112.47,evet
+S107279,U504,1,2026-06-24,beden uymadı,490.00,102.67,evet
+S107393,U503,1,2026-06-24,fikir değiştirdim,590.00,106.45,evet
+S105921,U207,1,2026-06-25,hasarlı geldi,3843.00,91.38,evet
+S106148,U205,1,2026-06-25,fikir değiştirdim,1290.00,102.05,hayır
+S106474,U103,1,2026-06-25,geç teslimat,3290.00,171.47,hayır
+S106802,U602,1,2026-06-25,yanlış ürün gönderildi,290.00,104.32,evet
+S106947,U503,1,2026-06-25,üründen memnun kalmadım,590.00,91.58,evet
+S107190,U105,1,2026-06-25,üründen memnun kalmadım,1890.00,99.93,evet
+S107355,U202,1,2026-06-25,beden uymadı,2790.00,164.87,hayır
+S107613,U501,1,2026-06-25,üründen memnun kalmadım,1190.00,90.90,evet
+S106011,U301,2,2026-06-26,hasarlı geldi,4380.00,87.84,hayır
+S106015,U604,1,2026-06-26,üründen memnun kalmadım,590.00,90.49,hayır
+S106181,U205,1,2026-06-26,beden uymadı,1290.00,104.08,evet
+S106237,U401,1,2026-06-26,fikir değiştirdim,6990.00,118.23,evet
+S106319,U602,2,2026-06-26,hasarlı geldi,580.00,94.29,hayır
+S106320,U201,1,2026-06-26,üründen memnun kalmadım,2443.00,104.64,hayır
+S106326,U302,1,2026-06-26,hasarlı geldi,3690.00,118.30,evet
+S106938,U106,1,2026-06-26,üründen memnun kalmadım,3990.00,97.67,evet
+S106942,U306,1,2026-06-26,üründen memnun kalmadım,690.00,92.93,evet
+S107504,U602,1,2026-06-26,üründen memnun kalmadım,290.00,161.14,evet
+S107547,U502,1,2026-06-26,fikir değiştirdim,553.00,163.50,evet
+S107610,U204,1,2026-06-26,beden uymadı,2290.00,91.81,evet
+S107687,U201,1,2026-06-26,beden uymadı,2443.00,107.91,evet
+S106098,U502,1,2026-06-27,üründen memnun kalmadım,790.00,85.16,evet
+S106201,U101,1,2026-06-27,üründen memnun kalmadım,5490.00,77.79,evet
+S106505,U106,1,2026-06-27,beden uymadı,2793.00,89.02,evet
+S106572,U602,1,2026-06-27,üründen memnun kalmadım,290.00,104.02,evet
+S106681,U503,1,2026-06-27,beden uymadı,590.00,109.57,evet
+S106689,U306,2,2026-06-27,hasarlı geldi,1380.00,96.87,hayır
+S106799,U205,1,2026-06-27,beden uymadı,903.00,160.81,hayır
+S106845,U602,1,2026-06-27,hasarlı geldi,203.00,81.06,hayır
+S107033,U502,1,2026-06-27,fikir değiştirdim,790.00,88.60,evet
+S107456,U501,1,2026-06-27,hasarlı geldi,1190.00,146.56,hayır
+S107479,U201,1,2026-06-27,beden uymadı,3490.00,101.82,evet
+S107490,U603,2,2026-06-27,yanlış ürün gönderildi,780.00,82.50,evet
+S107611,U207,1,2026-06-27,beden uymadı,3843.00,159.28,evet
+S107773,U303,1,2026-06-27,üründen memnun kalmadım,903.00,95.51,evet
+S107778,U204,1,2026-06-27,beden uymadı,2290.00,158.22,evet
+S108004,U602,1,2026-06-27,fikir değiştirdim,203.00,103.57,evet
+S106587,U202,1,2026-06-29,beden uymadı,2790.00,82.92,evet
+S106903,U405,2,2026-06-29,üründen memnun kalmadım,2380.00,121.85,hayır
+S106943,U501,1,2026-06-29,yanlış ürün gönderildi,1190.00,107.56,hayır
+S107179,U306,1,2026-06-29,üründen memnun kalmadım,690.00,91.61,evet
+S107181,U603,1,2026-06-29,üründen memnun kalmadım,390.00,96.06,evet
+S107552,U604,1,2026-06-29,üründen memnun kalmadım,590.00,98.77,evet
+S107810,U602,1,2026-06-29,üründen memnun kalmadım,203.00,96.00,evet
+S106490,U606,1,2026-06-30,üründen memnun kalmadım,490.00,155.26,evet
+S106877,U306,1,2026-06-30,hasarlı geldi,690.00,78.09,hayır
+S106998,U301,1,2026-06-30,fikir değiştirdim,2190.00,92.50,evet
+S107046,U408,1,2026-06-30,beden uymadı,483.00,85.72,evet
+S107207,U204,1,2026-06-30,hasarlı geldi,2290.00,90.09,evet
+S107377,U408,1,2026-06-30,beden uymadı,690.00,89.58,evet
+S107493,U405,1,2026-06-30,geç teslimat,1190.00,174.16,hayır
+S107782,U207,1,2026-06-30,üründen memnun kalmadım,5490.00,82.56,evet
+S108152,U407,1,2026-06-30,üründen memnun kalmadım,1690.00,85.31,evet
+S108196,U406,1,2026-06-30,yanlış ürün gönderildi,693.00,105.61,hayır
+S106612,U604,1,2026-07-01,hasarlı geldi,590.00,103.90,hayır
+S106751,U603,1,2026-07-01,geç teslimat,390.00,86.61,evet
+S106966,U602,2,2026-07-01,üründen memnun kalmadım,580.00,99.34,evet
+S107028,U202,1,2026-07-01,üründen memnun kalmadım,2790.00,103.20,evet
+S107222,U205,1,2026-07-01,beden uymadı,1290.00,86.56,evet
+S107575,U205,1,2026-07-01,beden uymadı,1290.00,143.70,evet
+S107706,U206,1,2026-07-01,beden uymadı,4490.00,165.24,evet
+S108260,U505,1,2026-07-01,fikir değiştirdim,1390.00,86.84,evet
+S108428,U205,1,2026-07-01,beden uymadı,1290.00,82.55,evet
+S106651,U406,1,2026-07-02,geç teslimat,990.00,177.47,evet
+S106882,U105,1,2026-07-02,fikir değiştirdim,1890.00,98.88,hayır
+S107288,U401,1,2026-07-02,üründen memnun kalmadım,6990.00,98.55,evet
+S108120,U501,1,2026-07-02,üründen memnun kalmadım,833.00,81.92,evet
+S108314,U501,1,2026-07-02,üründen memnun kalmadım,1190.00,102.03,evet
+S108329,U504,1,2026-07-02,geç teslimat,343.00,169.51,evet
+S106671,U501,1,2026-07-03,geç teslimat,1190.00,83.98,evet
+S106713,U206,1,2026-07-03,beden uymadı,4490.00,105.36,hayır
+S106761,U205,1,2026-07-03,beden uymadı,903.00,88.09,evet
+S106863,U501,1,2026-07-03,beden uymadı,1190.00,107.29,evet
+S106900,U104,1,2026-07-03,hasarlı geldi,1743.00,103.51,evet
+S106989,U501,1,2026-07-03,beden uymadı,1190.00,79.95,evet
+S107165,U202,1,2026-07-03,beden uymadı,2790.00,106.94,evet
+S107430,U603,1,2026-07-03,yanlış ürün gönderildi,390.00,85.62,evet
+S107737,U105,1,2026-07-03,beden uymadı,1323.00,101.13,evet
+S108547,U205,1,2026-07-03,beden uymadı,1290.00,91.80,evet
+S106759,U602,1,2026-07-04,beden uymadı,290.00,91.30,evet
+S106848,U401,1,2026-07-04,fikir değiştirdim,6990.00,93.82,evet
+S106925,U204,1,2026-07-04,üründen memnun kalmadım,2290.00,99.57,evet
+S107012,U204,1,2026-07-04,beden uymadı,2290.00,155.01,hayır
+S107053,U501,1,2026-07-04,üründen memnun kalmadım,1190.00,112.27,evet
+S107058,U502,1,2026-07-04,üründen memnun kalmadım,790.00,92.10,evet
+S107739,U408,1,2026-07-04,üründen memnun kalmadım,690.00,109.82,hayır
+S107947,U602,1,2026-07-04,hasarlı geldi,290.00,156.07,hayır
+S108191,U202,1,2026-07-04,geç teslimat,1953.00,90.91,evet
+S108531,U205,1,2026-07-04,beden uymadı,903.00,158.12,hayır
+S106991,U202,1,2026-07-05,beden uymadı,2790.00,163.70,hayır
+S107247,U503,2,2026-07-05,geç teslimat,1180.00,84.36,evet
+S107335,U406,2,2026-07-05,fikir değiştirdim,1980.00,80.98,evet
+S107347,U602,1,2026-07-05,fikir değiştirdim,203.00,95.21,evet
+S107551,U501,1,2026-07-05,geç teslimat,833.00,107.66,evet
+S107571,U201,1,2026-07-05,beden uymadı,3490.00,83.39,evet
+S107571,U202,1,2026-07-05,beden uymadı,2790.00,86.44,evet
+S107812,U602,1,2026-07-05,üründen memnun kalmadım,290.00,88.08,evet
+S108055,U408,2,2026-07-05,hasarlı geldi,1380.00,81.06,hayır
+S108276,U202,1,2026-07-05,beden uymadı,2790.00,103.99,evet
+S108419,U504,1,2026-07-05,beden uymadı,490.00,82.30,evet
+S108552,U603,1,2026-07-05,beden uymadı,390.00,153.21,evet
+S107282,U204,1,2026-07-06,beden uymadı,2290.00,163.31,hayır
+S107558,U101,1,2026-07-06,beden uymadı,5490.00,95.27,evet
+S107594,U105,1,2026-07-06,geç teslimat,1323.00,92.59,evet
+S107776,U606,1,2026-07-06,hasarlı geldi,490.00,88.48,evet
+S108272,U602,1,2026-07-06,geç teslimat,203.00,90.96,evet
+S108283,U401,1,2026-07-06,geç teslimat,6990.00,100.97,evet
+S108718,U303,1,2026-07-06,beden uymadı,1290.00,100.07,evet
+S107368,U204,1,2026-07-07,yanlış ürün gönderildi,2290.00,91.98,hayır
+S107486,U301,1,2026-07-07,hasarlı geldi,2190.00,82.88,hayır
+S107844,U501,1,2026-07-07,üründen memnun kalmadım,833.00,155.09,evet
+S107854,U101,1,2026-07-07,üründen memnun kalmadım,5490.00,85.23,evet
+S107857,U204,2,2026-07-07,beden uymadı,4580.00,91.07,evet
+S108112,U503,2,2026-07-07,yanlış ürün gönderildi,1180.00,93.13,evet
+S108550,U205,1,2026-07-07,beden uymadı,903.00,84.34,evet
+S108769,U204,1,2026-07-07,beden uymadı,1603.00,82.26,hayır
+S108813,U106,1,2026-07-07,üründen memnun kalmadım,3990.00,99.61,hayır
+S108989,U206,1,2026-07-07,beden uymadı,4490.00,83.63,hayır
+S107270,U205,1,2026-07-08,fikir değiştirdim,1290.00,88.28,hayır
+S107653,U504,1,2026-07-08,beden uymadı,343.00,87.24,hayır
+S108556,U602,3,2026-07-08,geç teslimat,870.00,148.84,evet
+S108568,U201,1,2026-07-08,beden uymadı,3490.00,102.97,hayır
+S108842,U506,1,2026-07-08,üründen memnun kalmadım,623.00,84.67,hayır
+S109115,U205,1,2026-07-08,beden uymadı,1290.00,85.24,evet
+S107399,U202,1,2026-07-09,beden uymadı,2790.00,98.87,evet
+S107401,U501,1,2026-07-09,hasarlı geldi,833.00,121.99,hayır
+S107569,U407,1,2026-07-09,geç teslimat,1183.00,110.72,evet
+S107753,U604,1,2026-07-09,üründen memnun kalmadım,413.00,160.78,evet
+S107780,U103,1,2026-07-09,hasarlı geldi,3290.00,151.35,hayır
+S107944,U304,1,2026-07-09,hasarlı geldi,2490.00,87.95,hayır
+S108310,U407,1,2026-07-09,fikir değiştirdim,1690.00,113.83,evet
+S108973,U506,1,2026-07-09,geç teslimat,623.00,104.52,evet
+S109075,U503,2,2026-07-09,fikir değiştirdim,1180.00,98.67,evet
+S107407,U303,1,2026-07-10,fikir değiştirdim,1290.00,89.21,hayır
+S107542,U202,1,2026-07-10,beden uymadı,1953.00,110.56,evet
+S107629,U204,1,2026-07-10,beden uymadı,2290.00,107.83,evet
+S107775,U101,1,2026-07-10,hasarlı geldi,5490.00,105.77,evet
+S107855,U204,1,2026-07-10,üründen memnun kalmadım,2290.00,78.26,evet
+S108049,U204,1,2026-07-10,beden uymadı,2290.00,94.84,evet
+S108777,U501,1,2026-07-10,hasarlı geldi,833.00,81.68,evet
+S109032,U206,1,2026-07-10,beden uymadı,4490.00,79.11,evet
+S109258,U202,1,2026-07-10,beden uymadı,1953.00,101.07,hayır
+S109373,U203,1,2026-07-10,beden uymadı,3990.00,174.42,evet
+S107483,U104,1,2026-07-11,üründen memnun kalmadım,2490.00,88.46,evet
+S107530,U205,1,2026-07-11,beden uymadı,1290.00,82.25,hayır
+S107559,U604,1,2026-07-11,yanlış ürün gönderildi,590.00,91.83,hayır
+S107825,U406,1,2026-07-11,hasarlı geldi,693.00,106.02,hayır
+S108147,U202,1,2026-07-11,beden uymadı,2790.00,97.64,evet
+S108338,U201,1,2026-07-11,beden uymadı,3490.00,83.24,evet
+S108782,U304,1,2026-07-11,üründen memnun kalmadım,2490.00,110.66,evet
+S109162,U501,1,2026-07-11,fikir değiştirdim,1190.00,99.30,evet
+S107949,U502,1,2026-07-12,geç teslimat,790.00,110.43,evet
+S107974,U303,1,2026-07-12,üründen memnun kalmadım,1290.00,81.07,evet
+S108091,U204,1,2026-07-12,beden uymadı,2290.00,83.91,hayır
+S108148,U203,1,2026-07-12,fikir değiştirdim,3990.00,88.63,hayır
+S109246,U503,3,2026-07-12,fikir değiştirdim,1770.00,101.85,evet
+S109568,U402,1,2026-07-12,fikir değiştirdim,6930.00,87.18,evet
+S108252,U305,1,2026-07-13,üründen memnun kalmadım,1690.00,89.50,evet
+S108427,U604,3,2026-07-13,geç teslimat,1770.00,114.11,evet
+S108566,U405,1,2026-07-13,üründen memnun kalmadım,833.00,92.25,evet
+S108724,U501,2,2026-07-13,fikir değiştirdim,1666.00,105.34,hayır
+S109529,U203,1,2026-07-13,beden uymadı,3990.00,83.13,evet
+S109695,U303,1,2026-07-13,fikir değiştirdim,1161.00,104.65,evet
+S109703,U506,2,2026-07-13,üründen memnun kalmadım,1780.00,165.35,hayır
+S107853,U203,1,2026-07-14,beden uymadı,2793.00,91.05,evet
+S107966,U205,1,2026-07-14,üründen memnun kalmadım,1290.00,108.91,evet
+S108068,U603,1,2026-07-14,fikir değiştirdim,273.00,106.24,hayır
+S108340,U606,1,2026-07-14,üründen memnun kalmadım,490.00,95.20,evet
+S108343,U205,1,2026-07-14,fikir değiştirdim,1290.00,90.97,hayır
+S108358,U606,1,2026-07-14,geç teslimat,490.00,117.44,evet
+S108496,U205,1,2026-07-14,beden uymadı,1290.00,80.29,evet
+S108549,U501,1,2026-07-14,yanlış ürün gönderildi,1190.00,111.09,hayır
+S108749,U203,1,2026-07-14,beden uymadı,2793.00,107.04,hayır
+S108960,U503,2,2026-07-14,geç teslimat,1180.00,117.76,evet
+S109301,U501,1,2026-07-14,beden uymadı,833.00,80.04,evet
+S109668,U501,1,2026-07-14,fikir değiştirdim,1071.00,106.33,evet
+S108105,U506,1,2026-07-15,fikir değiştirdim,890.00,101.11,evet
+S108483,U205,2,2026-07-15,beden uymadı,2580.00,110.53,hayır
+S108536,U502,1,2026-07-15,yanlış ürün gönderildi,790.00,119.98,evet
+S108822,U207,1,2026-07-15,beden uymadı,5490.00,92.04,hayır
+S108955,U305,1,2026-07-15,geç teslimat,1183.00,83.62,hayır
+S109002,U501,1,2026-07-15,üründen memnun kalmadım,833.00,93.10,evet
+S109080,U602,1,2026-07-15,üründen memnun kalmadım,203.00,101.40,hayır
+S109830,U606,1,2026-07-15,hasarlı geldi,490.00,173.31,hayır
+S108185,U605,2,2026-07-16,fikir değiştirdim,1780.00,82.82,evet
+S108299,U502,1,2026-07-16,üründen memnun kalmadım,553.00,103.10,evet
+S108533,U501,1,2026-07-16,geç teslimat,1190.00,87.68,evet
+S108816,U406,1,2026-07-16,fikir değiştirdim,990.00,110.66,evet
+S109352,U104,1,2026-07-16,fikir değiştirdim,2490.00,94.49,evet
+S109542,U606,1,2026-07-16,üründen memnun kalmadım,343.00,79.28,evet
+S109701,U203,1,2026-07-16,fikir değiştirdim,3990.00,157.69,hayır
+S109769,U605,1,2026-07-16,beden uymadı,623.00,97.89,evet
+S109820,U202,1,2026-07-16,hasarlı geldi,1953.00,90.71,hayır
+S109885,U408,1,2026-07-16,fikir değiştirdim,483.00,78.48,evet
+S110072,U603,1,2026-07-16,üründen memnun kalmadım,390.00,88.94,hayır
+S108126,U601,1,2026-07-17,fikir değiştirdim,1290.00,98.47,evet
+S108205,U501,1,2026-07-17,fikir değiştirdim,833.00,176.82,evet
+S108265,U602,1,2026-07-17,fikir değiştirdim,203.00,113.35,evet
+S108630,U601,1,2026-07-17,hasarlı geldi,1290.00,79.69,hayır
+S108632,U604,1,2026-07-17,geç teslimat,590.00,175.57,evet
+S108775,U105,1,2026-07-17,yanlış ürün gönderildi,1323.00,105.01,hayır
+S108802,U202,1,2026-07-17,geç teslimat,1953.00,143.10,evet
+S109111,U501,1,2026-07-17,yanlış ürün gönderildi,833.00,109.65,hayır
+S109264,U204,1,2026-07-17,beden uymadı,2290.00,149.40,evet
+S109408,U501,1,2026-07-17,geç teslimat,833.00,100.82,evet
+S109522,U506,1,2026-07-17,fikir değiştirdim,890.00,167.59,evet
+S109868,U504,2,2026-07-17,üründen memnun kalmadım,980.00,91.78,evet
+S109912,U202,1,2026-07-17,yanlış ürün gönderildi,2790.00,156.91,evet
+S110044,U403,1,2026-07-17,yanlış ürün gönderildi,2023.00,80.36,hayır
+S108239,U301,1,2026-07-18,üründen memnun kalmadım,2190.00,83.12,evet
+S108262,U103,1,2026-07-18,üründen memnun kalmadım,2303.00,106.71,evet
+S108266,U601,2,2026-07-18,hasarlı geldi,2580.00,78.28,hayır
+S108442,U602,1,2026-07-18,geç teslimat,290.00,91.41,evet
+S108446,U501,1,2026-07-18,üründen memnun kalmadım,1190.00,111.32,evet
+S108639,U603,1,2026-07-18,yanlış ürün gönderildi,390.00,91.31,hayır
+S108671,U205,1,2026-07-18,geç teslimat,903.00,117.70,evet
+S109041,U303,1,2026-07-18,üründen memnun kalmadım,903.00,107.38,evet
+S109169,U203,1,2026-07-18,beden uymadı,3990.00,98.89,hayır
+S109482,U503,1,2026-07-18,geç teslimat,590.00,79.89,evet
+S109531,U207,1,2026-07-18,üründen memnun kalmadım,5490.00,107.14,hayır
+S110008,U404,1,2026-07-18,yanlış ürün gönderildi,1043.00,92.91,hayır
+S110169,U604,1,2026-07-18,beden uymadı,590.00,93.52,evet
+S108581,U306,3,2026-07-19,fikir değiştirdim,2070.00,98.98,evet
+S108702,U404,1,2026-07-19,fikir değiştirdim,1490.00,102.49,evet
+S108797,U503,1,2026-07-19,hasarlı geldi,590.00,108.65,evet
+S108863,U604,1,2026-07-19,hasarlı geldi,590.00,167.44,hayır
+S108903,U201,1,2026-07-19,beden uymadı,2443.00,79.05,evet
+S109131,U202,1,2026-07-19,beden uymadı,2790.00,96.48,evet
+S109530,U306,3,2026-07-19,üründen memnun kalmadım,1449.00,146.00,evet
+S109722,U105,1,2026-07-19,üründen memnun kalmadım,1890.00,80.52,evet
+S109785,U304,1,2026-07-19,yanlış ürün gönderildi,2490.00,87.43,hayır
+S108715,U404,1,2026-07-20,hasarlı geldi,1490.00,103.01,evet
+S108734,U207,1,2026-07-20,beden uymadı,5490.00,82.94,evet
+S108896,U408,1,2026-07-20,üründen memnun kalmadım,483.00,84.37,evet
+S109662,U205,1,2026-07-20,beden uymadı,903.00,102.82,hayır
+S109688,U306,1,2026-07-20,fikir değiştirdim,483.00,78.90,evet
+S109693,U204,1,2026-07-20,beden uymadı,2290.00,122.27,evet
+S109708,U404,1,2026-07-20,yanlış ürün gönderildi,1490.00,90.59,hayır
+S109915,U205,3,2026-07-20,beden uymadı,3870.00,96.51,evet
+S109929,U606,1,2026-07-20,üründen memnun kalmadım,490.00,96.59,evet
+S110094,U107,1,2026-07-20,fikir değiştirdim,4543.00,98.28,evet
+S110147,U202,1,2026-07-20,beden uymadı,2790.00,177.18,hayır
+S108558,U202,1,2026-07-21,beden uymadı,2790.00,111.03,evet
+S109624,U604,1,2026-07-21,üründen memnun kalmadım,590.00,93.42,evet
+S109677,U406,1,2026-07-21,hasarlı geldi,990.00,78.37,evet
+S110071,U203,1,2026-07-21,beden uymadı,3990.00,115.39,evet
+S110174,U602,2,2026-07-21,hasarlı geldi,522.00,107.22,evet
+S110404,U105,1,2026-07-21,beden uymadı,1890.00,80.56,evet
+S110418,U602,1,2026-07-21,geç teslimat,203.00,104.10,evet
+S108686,U606,3,2026-07-22,hasarlı geldi,1470.00,80.95,hayır
+S108927,U506,1,2026-07-22,fikir değiştirdim,623.00,91.11,evet
+S108962,U203,1,2026-07-22,beden uymadı,2793.00,86.34,hayır
+S109052,U204,1,2026-07-22,beden uymadı,2290.00,154.40,hayır
+S109170,U602,1,2026-07-22,hasarlı geldi,261.00,83.61,hayır
+S110315,U501,1,2026-07-22,geç teslimat,833.00,112.84,evet
+S110339,U501,1,2026-07-22,yanlış ürün gönderildi,833.00,91.28,hayır
+S110607,U303,1,2026-07-22,üründen memnun kalmadım,1290.00,99.92,evet
+S110616,U502,1,2026-07-22,beden uymadı,553.00,105.56,evet
+S110676,U205,1,2026-07-22,fikir değiştirdim,1290.00,110.54,evet
+S109156,U603,1,2026-07-23,üründen memnun kalmadım,390.00,90.26,evet
+S109351,U405,1,2026-07-23,fikir değiştirdim,1190.00,99.61,evet
+S109709,U203,1,2026-07-23,beden uymadı,3990.00,90.98,hayır
+S109728,U506,1,2026-07-23,beden uymadı,890.00,79.38,evet
+S110106,U502,3,2026-07-23,fikir değiştirdim,1659.00,78.24,hayır
+S110428,U602,2,2026-07-23,üründen memnun kalmadım,580.00,82.47,evet
+S110439,U305,1,2026-07-23,beden uymadı,1690.00,161.91,evet
+S110562,U606,1,2026-07-23,hasarlı geldi,490.00,96.42,hayır
+S110598,U201,1,2026-07-23,fikir değiştirdim,3490.00,81.69,evet
+S108866,U605,2,2026-07-24,üründen memnun kalmadım,1780.00,82.18,evet
+S109002,U202,1,2026-07-24,beden uymadı,1953.00,93.38,evet
+S109060,U606,1,2026-07-24,geç teslimat,490.00,154.13,evet
+S109754,U204,1,2026-07-24,beden uymadı,1603.00,98.21,hayır
+S110008,U602,1,2026-07-24,hasarlı geldi,203.00,82.13,evet
+S110141,U408,1,2026-07-24,hasarlı geldi,690.00,79.59,hayır
+S110578,U205,1,2026-07-24,beden uymadı,1290.00,87.34,evet
+S110651,U606,2,2026-07-24,hasarlı geldi,980.00,174.11,hayır
+S110654,U301,3,2026-07-24,fikir değiştirdim,6570.00,146.25,evet
+S110673,U604,1,2026-07-24,geç teslimat,590.00,82.21,evet
+S110681,U601,1,2026-07-24,beden uymadı,1290.00,85.21,evet
+S109169,U501,1,2026-07-25,üründen memnun kalmadım,1190.00,99.22,evet
+S109295,U502,1,2026-07-25,üründen memnun kalmadım,790.00,104.58,evet
+S109527,U206,1,2026-07-25,beden uymadı,4490.00,154.82,hayır
+S109724,U204,1,2026-07-25,beden uymadı,2290.00,81.46,evet
+S109949,U203,1,2026-07-25,beden uymadı,3591.00,123.39,hayır
+S110158,U202,1,2026-07-25,beden uymadı,1953.00,86.87,evet
+S110462,U201,1,2026-07-25,fikir değiştirdim,3490.00,106.35,evet
+S110544,U503,1,2026-07-25,üründen memnun kalmadım,590.00,85.87,evet
+S110579,U406,1,2026-07-25,fikir değiştirdim,990.00,97.48,evet
+S110673,U207,1,2026-07-25,beden uymadı,5490.00,90.07,hayır
+S110736,U602,2,2026-07-25,hasarlı geldi,522.00,169.00,hayır
+S110992,U502,1,2026-07-25,fikir değiştirdim,790.00,79.81,evet
+S111067,U404,1,2026-07-25,fikir değiştirdim,1043.00,100.68,evet
+S109116,U404,1,2026-07-26,hasarlı geldi,1043.00,101.56,evet
+S109272,U502,1,2026-07-26,beden uymadı,790.00,156.01,evet
+S109627,U104,1,2026-07-26,fikir değiştirdim,2490.00,113.47,evet
+S109632,U504,1,2026-07-26,hasarlı geldi,490.00,81.26,hayır
+S109773,U604,1,2026-07-26,hasarlı geldi,413.00,85.44,evet
+S110017,U501,1,2026-07-26,beden uymadı,1190.00,88.62,evet
+S110270,U504,1,2026-07-26,üründen memnun kalmadım,490.00,152.41,evet
+S110734,U205,1,2026-07-26,beden uymadı,1290.00,90.85,hayır
+S110819,U204,1,2026-07-26,beden uymadı,2290.00,165.32,hayır
+S110851,U203,1,2026-07-26,üründen memnun kalmadım,3990.00,88.73,hayır
+S110919,U205,1,2026-07-26,beden uymadı,1290.00,88.14,hayır
+S110925,U501,1,2026-07-26,beden uymadı,833.00,92.29,hayır
+S111180,U106,1,2026-07-26,beden uymadı,3990.00,108.41,evet
+S109367,U206,1,2026-07-27,beden uymadı,3143.00,154.90,evet
+S109397,U205,1,2026-07-27,beden uymadı,903.00,84.45,evet
+S109576,U502,2,2026-07-27,fikir değiştirdim,1580.00,109.79,hayır
+S109680,U404,1,2026-07-27,geç teslimat,1490.00,80.44,evet
+S109880,U401,1,2026-07-27,üründen memnun kalmadım,6291.00,97.86,evet
+S109883,U606,1,2026-07-27,beden uymadı,490.00,90.92,hayır
+S109996,U107,1,2026-07-27,fikir değiştirdim,6490.00,79.07,evet
+S110177,U501,1,2026-07-27,beden uymadı,833.00,91.10,evet
+S110543,U501,1,2026-07-27,fikir değiştirdim,833.00,91.92,evet
+S110570,U407,1,2026-07-27,fikir değiştirdim,1183.00,94.71,hayır
+S110664,U202,1,2026-07-27,beden uymadı,2790.00,79.29,hayır
+S110711,U501,1,2026-07-27,üründen memnun kalmadım,833.00,100.98,evet
+S110888,U305,2,2026-07-27,üründen memnun kalmadım,3380.00,101.35,evet
+S109458,U501,1,2026-07-28,fikir değiştirdim,833.00,172.58,evet
+S109477,U301,2,2026-07-28,üründen memnun kalmadım,4380.00,108.33,evet
+S109492,U103,1,2026-07-28,beden uymadı,2961.00,119.61,evet
+S109553,U201,1,2026-07-28,beden uymadı,3141.00,89.15,hayır
+S109840,U501,1,2026-07-28,üründen memnun kalmadım,833.00,92.67,evet
+S109879,U501,1,2026-07-28,üründen memnun kalmadım,833.00,140.91,evet
+S109882,U204,1,2026-07-28,beden uymadı,1603.00,103.63,evet
+S109939,U502,1,2026-07-28,hasarlı geldi,553.00,100.26,hayır
+S110042,U603,1,2026-07-28,hasarlı geldi,390.00,96.15,hayır
+S110215,U206,1,2026-07-28,beden uymadı,4490.00,90.40,evet
+S110560,U501,1,2026-07-28,geç teslimat,1190.00,79.30,evet
+S110618,U504,1,2026-07-28,üründen memnun kalmadım,490.00,82.63,evet
+S110832,U201,1,2026-07-28,beden uymadı,2443.00,108.37,evet
+S110854,U603,1,2026-07-28,beden uymadı,273.00,106.94,evet
+S110936,U204,1,2026-07-28,beden uymadı,2290.00,91.41,evet
+S111319,U604,1,2026-07-28,üründen memnun kalmadım,590.00,83.22,evet
+S111365,U403,1,2026-07-28,üründen memnun kalmadım,2023.00,92.13,evet
+S109436,U403,1,2026-07-29,üründen memnun kalmadım,2890.00,152.51,evet
+S109969,U404,1,2026-07-29,fikir değiştirdim,1490.00,153.54,evet
+S109971,U204,1,2026-07-29,üründen memnun kalmadım,2290.00,90.94,hayır
+S109982,U502,3,2026-07-29,fikir değiştirdim,2133.00,123.45,evet
+S110755,U501,1,2026-07-29,üründen memnun kalmadım,833.00,109.35,evet
+S111046,U205,1,2026-07-29,beden uymadı,903.00,112.77,evet
+S111112,U403,1,2026-07-29,beden uymadı,2890.00,109.51,evet
+S111275,U202,1,2026-07-29,beden uymadı,1953.00,85.06,evet
+S111284,U603,1,2026-07-29,üründen memnun kalmadım,390.00,167.73,evet
+S109499,U202,1,2026-07-30,fikir değiştirdim,1953.00,90.65,hayır
+S109795,U204,1,2026-07-30,üründen memnun kalmadım,2290.00,165.91,hayır
+S110508,U504,1,2026-07-30,hasarlı geldi,490.00,104.70,evet
+S111088,U501,1,2026-07-30,fikir değiştirdim,833.00,98.15,evet
+S111099,U408,2,2026-07-30,fikir değiştirdim,966.00,93.36,evet
+S111549,U204,3,2026-07-30,üründen memnun kalmadım,6870.00,102.01,evet
+S109683,U408,1,2026-07-31,hasarlı geldi,690.00,122.42,hayır
+S109697,U204,1,2026-07-31,yanlış ürün gönderildi,1603.00,98.21,hayır
+S109767,U202,1,2026-07-31,geç teslimat,2790.00,108.97,evet
+S109851,U404,1,2026-07-31,üründen memnun kalmadım,1490.00,108.54,evet
+S110198,U201,1,2026-07-31,beden uymadı,3490.00,104.47,evet
+S110476,U201,1,2026-07-31,beden uymadı,2443.00,101.01,hayır
+S110771,U504,2,2026-07-31,üründen memnun kalmadım,980.00,111.61,evet
+S110907,U206,1,2026-07-31,beden uymadı,4490.00,95.64,evet
+S111202,U205,1,2026-07-31,beden uymadı,1290.00,81.53,hayır
+S111341,U404,1,2026-07-31,yanlış ürün gönderildi,1043.00,95.96,hayır
+S111568,U303,2,2026-07-31,beden uymadı,2580.00,111.14,evet
+S109964,U202,1,2026-08-01,üründen memnun kalmadım,2790.00,106.40,evet
+S110167,U205,2,2026-08-01,yanlış ürün gönderildi,1806.00,157.58,hayır
+S111073,U602,1,2026-08-01,üründen memnun kalmadım,203.00,88.98,hayır
+S111090,U604,1,2026-08-01,geç teslimat,590.00,90.04,hayır
+S111139,U205,2,2026-08-01,beden uymadı,1806.00,99.98,evet
+S111148,U606,1,2026-08-01,geç teslimat,490.00,80.23,evet
+S111260,U602,1,2026-08-01,üründen memnun kalmadım,203.00,102.66,evet
+S111588,U104,1,2026-08-01,üründen memnun kalmadım,2490.00,157.74,evet
+S111735,U501,3,2026-08-01,üründen memnun kalmadım,2499.00,103.54,evet
+S109984,U205,1,2026-08-02,fikir değiştirdim,1290.00,97.65,evet
+S110048,U207,1,2026-08-02,beden uymadı,4941.00,162.41,evet
+S110185,U506,1,2026-08-02,fikir değiştirdim,890.00,86.27,evet
+S110225,U602,1,2026-08-02,hasarlı geldi,290.00,105.93,hayır
+S110256,U502,2,2026-08-02,beden uymadı,1580.00,79.45,evet
+S110296,U602,1,2026-08-02,üründen memnun kalmadım,203.00,100.82,evet
+S110772,U503,3,2026-08-02,üründen memnun kalmadım,1770.00,102.32,evet
+S110782,U202,1,2026-08-02,beden uymadı,1953.00,88.52,evet
+S110840,U105,1,2026-08-02,fikir değiştirdim,1890.00,94.12,evet
+S111049,U207,1,2026-08-02,beden uymadı,5490.00,78.35,hayır
+S111182,U406,1,2026-08-02,üründen memnun kalmadım,990.00,153.08,evet
+S111293,U603,1,2026-08-02,hasarlı geldi,390.00,92.01,hayır
+S111513,U604,1,2026-08-02,yanlış ürün gönderildi,413.00,161.14,hayır
+S110200,U204,1,2026-08-03,beden uymadı,2290.00,152.59,hayır
+S110383,U406,1,2026-08-03,hasarlı geldi,693.00,91.58,hayır
+S110496,U306,1,2026-08-03,geç teslimat,690.00,156.49,evet
+S110554,U506,1,2026-08-03,hasarlı geldi,801.00,167.63,evet
+S110672,U605,2,2026-08-03,hasarlı geldi,1780.00,87.70,hayır
+S110691,U601,2,2026-08-03,fikir değiştirdim,2580.00,83.50,evet
+S110906,U504,3,2026-08-03,fikir değiştirdim,1470.00,85.18,hayır
+S110963,U207,1,2026-08-03,beden uymadı,5490.00,113.93,evet
+S110971,U202,1,2026-08-03,geç teslimat,1953.00,101.97,evet
+S111143,U303,1,2026-08-03,üründen memnun kalmadım,1290.00,91.63,hayır
+S111228,U406,1,2026-08-03,üründen memnun kalmadım,990.00,160.87,evet
+S111429,U407,1,2026-08-03,üründen memnun kalmadım,1690.00,162.50,evet
+S111867,U202,1,2026-08-03,beden uymadı,1953.00,121.74,evet
+S111924,U601,1,2026-08-03,üründen memnun kalmadım,903.00,91.22,evet
+S110279,U205,1,2026-08-04,üründen memnun kalmadım,903.00,114.81,hayır
+S110663,U205,1,2026-08-04,beden uymadı,1290.00,91.50,hayır
+S110729,U203,1,2026-08-04,beden uymadı,3990.00,116.44,evet
+S110845,U207,1,2026-08-04,beden uymadı,5490.00,110.35,evet
+S111080,U407,1,2026-08-04,üründen memnun kalmadım,1690.00,85.88,hayır
+S111100,U202,1,2026-08-04,beden uymadı,2790.00,86.02,hayır
+S111314,U603,1,2026-08-04,geç teslimat,273.00,92.82,evet
+S111427,U203,1,2026-08-04,beden uymadı,3990.00,174.00,evet
+S111477,U501,1,2026-08-04,üründen memnun kalmadım,833.00,103.25,evet
+S111481,U203,1,2026-08-04,beden uymadı,3990.00,77.72,evet
+S112114,U504,1,2026-08-04,fikir değiştirdim,490.00,123.88,evet
+S110384,U501,1,2026-08-05,geç teslimat,1071.00,153.31,evet
+S110554,U406,1,2026-08-05,fikir değiştirdim,891.00,165.05,evet
+S111496,U602,1,2026-08-05,üründen memnun kalmadım,203.00,80.87,evet
+S111544,U501,1,2026-08-05,üründen memnun kalmadım,833.00,88.01,evet
+S111993,U502,1,2026-08-05,hasarlı geldi,790.00,97.76,evet
+S112252,U501,1,2026-08-05,üründen memnun kalmadım,1190.00,83.91,evet
+S110313,U605,1,2026-08-06,hasarlı geldi,801.00,103.81,hayır
+S110915,U206,1,2026-08-06,beden uymadı,4490.00,104.96,hayır
+S111211,U202,1,2026-08-06,beden uymadı,1953.00,144.20,evet
+S111286,U407,1,2026-08-06,üründen memnun kalmadım,1690.00,78.99,evet
+S111368,U407,1,2026-08-06,yanlış ürün gönderildi,1690.00,100.90,hayır
+S111623,U305,1,2026-08-06,üründen memnun kalmadım,1690.00,106.63,evet
+S111766,U202,1,2026-08-06,beden uymadı,2790.00,105.67,hayır
+S112077,U501,1,2026-08-06,hasarlı geldi,1190.00,92.69,hayır
+S112097,U201,1,2026-08-06,üründen memnun kalmadım,3490.00,92.45,evet
+S112346,U205,2,2026-08-06,beden uymadı,1806.00,85.96,evet
+S112371,U305,1,2026-08-06,hasarlı geldi,1690.00,112.80,hayır
+S110510,U206,1,2026-08-07,üründen memnun kalmadım,3143.00,88.59,evet
+S110865,U205,2,2026-08-07,beden uymadı,2580.00,99.13,evet
+S110924,U104,1,2026-08-07,fikir değiştirdim,2490.00,78.82,hayır
+S110985,U205,1,2026-08-07,beden uymadı,903.00,120.84,hayır
+S111029,U204,1,2026-08-07,fikir değiştirdim,2290.00,97.19,evet
+S111052,U306,3,2026-08-07,üründen memnun kalmadım,2070.00,78.24,hayır
+S111098,U504,1,2026-08-07,hasarlı geldi,490.00,106.73,hayır
+S111246,U203,1,2026-08-07,beden uymadı,3990.00,80.27,evet
+S111331,U202,1,2026-08-07,beden uymadı,1953.00,97.95,evet
+S111773,U205,1,2026-08-07,beden uymadı,1290.00,112.08,evet
+S111809,U606,1,2026-08-07,hasarlı geldi,490.00,89.60,hayır
+S111930,U207,1,2026-08-07,yanlış ürün gönderildi,5490.00,100.03,hayır
+S111985,U203,1,2026-08-07,beden uymadı,3990.00,81.71,evet
+S112069,U301,1,2026-08-07,fikir değiştirdim,2190.00,109.21,evet
+S112211,U306,2,2026-08-07,üründen memnun kalmadım,966.00,88.77,evet
+S112240,U602,2,2026-08-07,hasarlı geldi,580.00,104.26,evet
+S112317,U503,2,2026-08-07,hasarlı geldi,826.00,176.83,hayır
+S111036,U505,1,2026-08-08,fikir değiştirdim,1390.00,155.49,evet
+S111711,U408,1,2026-08-08,fikir değiştirdim,690.00,86.91,evet
+S111796,U301,1,2026-08-08,üründen memnun kalmadım,2190.00,111.10,evet
+S111828,U206,1,2026-08-08,beden uymadı,3143.00,90.74,hayır
+S112130,U205,1,2026-08-08,beden uymadı,1290.00,78.94,evet
+S112369,U202,1,2026-08-08,beden uymadı,1953.00,99.69,evet
+S112520,U408,1,2026-08-08,fikir değiştirdim,690.00,80.63,evet
+S112557,U601,1,2026-08-08,üründen memnun kalmadım,903.00,94.24,evet
+S110643,U205,1,2026-08-09,üründen memnun kalmadım,1290.00,81.91,evet
+S110724,U406,3,2026-08-09,fikir değiştirdim,2079.00,101.85,evet
+S111078,U501,1,2026-08-09,üründen memnun kalmadım,833.00,81.47,evet
+S111092,U503,1,2026-08-09,hasarlı geldi,590.00,96.56,evet
+S111156,U304,2,2026-08-09,fikir değiştirdim,3486.00,120.12,evet
+S111440,U504,1,2026-08-09,üründen memnun kalmadım,343.00,122.36,evet
+S111770,U304,1,2026-08-09,fikir değiştirdim,2490.00,108.93,evet
+S112122,U405,1,2026-08-09,fikir değiştirdim,1190.00,120.64,evet
+S112235,U504,1,2026-08-09,fikir değiştirdim,490.00,108.95,evet
+S112436,U201,1,2026-08-09,beden uymadı,3490.00,95.00,evet
+S110761,U101,1,2026-08-10,yanlış ürün gönderildi,3843.00,115.27,hayır
+S110825,U502,1,2026-08-10,geç teslimat,790.00,86.43,hayır
+S111459,U506,1,2026-08-10,üründen memnun kalmadım,890.00,84.61,hayır
+S111629,U204,1,2026-08-10,beden uymadı,2290.00,78.67,evet
+S111638,U505,1,2026-08-10,beden uymadı,1390.00,100.58,hayır
+S111794,U205,1,2026-08-10,fikir değiştirdim,1290.00,78.36,evet
+S111880,U201,1,2026-08-10,beden uymadı,3490.00,170.01,hayır
+S112420,U205,1,2026-08-10,beden uymadı,903.00,106.50,evet
+S110866,U206,1,2026-08-11,beden uymadı,4490.00,94.19,evet
+S110958,U501,1,2026-08-11,fikir değiştirdim,833.00,171.81,evet
+S111072,U404,1,2026-08-11,geç teslimat,1490.00,90.53,hayır
+S111701,U502,1,2026-08-11,hasarlı geldi,790.00,83.15,evet
+S112561,U604,1,2026-08-11,beden uymadı,590.00,103.29,evet
+S112690,U603,3,2026-08-11,fikir değiştirdim,1170.00,83.40,evet
+S111176,U202,1,2026-08-12,beden uymadı,2790.00,110.07,hayır
+S111512,U506,1,2026-08-12,beden uymadı,890.00,91.73,evet
+S111516,U207,1,2026-08-12,beden uymadı,5490.00,92.09,evet
+S111601,U501,1,2026-08-12,fikir değiştirdim,833.00,119.88,hayır
+S111704,U504,3,2026-08-12,fikir değiştirdim,1029.00,79.74,evet
+S111797,U206,1,2026-08-12,beden uymadı,4490.00,78.66,evet
+S112048,U501,1,2026-08-12,beden uymadı,1190.00,87.88,evet
+S112384,U201,2,2026-08-12,beden uymadı,4886.00,84.69,hayır
+S112825,U205,2,2026-08-12,beden uymadı,2580.00,83.50,evet
+S113093,U203,1,2026-08-12,beden uymadı,2793.00,81.21,hayır
+S111410,U606,1,2026-08-13,üründen memnun kalmadım,490.00,85.39,evet
+S111595,U602,3,2026-08-13,üründen memnun kalmadım,870.00,121.32,evet
+S111823,U302,1,2026-08-13,geç teslimat,2583.00,156.91,evet
+S111978,U104,1,2026-08-13,geç teslimat,2490.00,88.92,evet
+S112350,U406,1,2026-08-13,üründen memnun kalmadım,693.00,104.55,evet
+S112396,U305,1,2026-08-13,fikir değiştirdim,1183.00,109.23,evet
+S112578,U205,1,2026-08-13,beden uymadı,1290.00,108.12,evet
+S112806,U204,1,2026-08-13,üründen memnun kalmadım,2290.00,106.18,evet
+S113116,U301,1,2026-08-13,üründen memnun kalmadım,1533.00,110.89,evet
+S111265,U606,1,2026-08-14,üründen memnun kalmadım,490.00,102.33,evet
+S111273,U605,2,2026-08-14,fikir değiştirdim,1780.00,101.11,evet
+S111436,U206,1,2026-08-14,beden uymadı,3143.00,141.39,evet
+S111980,U205,1,2026-08-14,beden uymadı,1290.00,92.52,evet
+S112178,U205,1,2026-08-14,beden uymadı,903.00,91.91,evet
+S112397,U407,1,2026-08-14,yanlış ürün gönderildi,1690.00,89.53,hayır
+S112442,U106,1,2026-08-14,fikir değiştirdim,2793.00,79.61,evet
+S112553,U604,2,2026-08-14,hasarlı geldi,1180.00,92.02,evet
+S111418,U405,1,2026-08-15,hasarlı geldi,833.00,99.93,evet
+S111461,U602,1,2026-08-15,beden uymadı,203.00,105.35,evet
+S111830,U205,1,2026-08-15,beden uymadı,1290.00,101.11,evet
+S112150,U202,1,2026-08-15,beden uymadı,1953.00,109.65,evet
+S112272,U304,1,2026-08-15,beden uymadı,1743.00,155.85,evet
+S112338,U403,1,2026-08-15,fikir değiştirdim,2890.00,81.93,evet
+S112362,U406,2,2026-08-15,geç teslimat,1980.00,97.67,evet
+S112684,U406,2,2026-08-15,beden uymadı,1980.00,78.27,evet
+S112702,U504,1,2026-08-15,geç teslimat,490.00,117.80,evet
+S112864,U204,1,2026-08-15,beden uymadı,2290.00,84.47,hayır
+S113131,U105,1,2026-08-15,fikir değiştirdim,1890.00,105.39,evet
+S113165,U301,2,2026-08-15,geç teslimat,4380.00,112.25,evet
+S111498,U601,2,2026-08-16,geç teslimat,2580.00,102.78,evet
+S112161,U203,1,2026-08-16,beden uymadı,2793.00,117.13,evet
+S112285,U206,1,2026-08-16,beden uymadı,4490.00,84.26,hayır
+S112465,U207,1,2026-08-16,beden uymadı,5490.00,86.89,hayır
+S112701,U503,1,2026-08-16,fikir değiştirdim,590.00,89.57,evet
+S112834,U408,1,2026-08-16,beden uymadı,690.00,99.10,evet
+S113183,U205,1,2026-08-16,beden uymadı,1290.00,101.64,hayır
+S113425,U603,1,2026-08-16,üründen memnun kalmadım,390.00,79.52,evet
+S113449,U301,1,2026-08-16,yanlış ürün gönderildi,2190.00,111.55,evet
+S111671,U202,1,2026-08-17,beden uymadı,2790.00,142.27,hayır
+S111717,U404,1,2026-08-17,hasarlı geldi,1490.00,95.35,hayır
+S111878,U203,1,2026-08-17,fikir değiştirdim,3990.00,99.47,evet
+S112383,U205,1,2026-08-17,beden uymadı,1290.00,141.92,evet
+S112472,U407,1,2026-08-17,üründen memnun kalmadım,1183.00,102.60,evet
+S112500,U606,1,2026-08-17,hasarlı geldi,490.00,123.54,evet
+S112772,U204,1,2026-08-17,hasarlı geldi,2290.00,104.94,hayır
+S112776,U202,2,2026-08-17,üründen memnun kalmadım,3906.00,167.79,hayır
+S112849,U406,1,2026-08-17,üründen memnun kalmadım,990.00,160.08,evet
+S112987,U406,1,2026-08-17,fikir değiştirdim,990.00,87.75,evet
+S113463,U602,1,2026-08-17,hasarlı geldi,290.00,157.93,hayır
+S113661,U402,1,2026-08-17,üründen memnun kalmadım,6930.00,154.91,evet
+S111840,U407,1,2026-08-18,beden uymadı,1690.00,89.20,evet
+S111932,U602,2,2026-08-18,fikir değiştirdim,580.00,102.40,evet
+S112094,U501,1,2026-08-18,hasarlı geldi,1190.00,93.60,evet
+S112494,U501,1,2026-08-18,geç teslimat,833.00,81.80,evet
+S112593,U206,1,2026-08-18,geç teslimat,4490.00,81.23,evet
+S112779,U506,1,2026-08-18,üründen memnun kalmadım,890.00,90.02,evet
+S113238,U205,2,2026-08-18,beden uymadı,2580.00,95.05,evet
+S113265,U205,1,2026-08-18,beden uymadı,1290.00,86.82,evet
+S113645,U306,1,2026-08-18,fikir değiştirdim,690.00,79.44,evet
+S111834,U602,2,2026-08-19,üründen memnun kalmadım,580.00,159.77,hayır
+S112371,U501,1,2026-08-19,geç teslimat,1190.00,97.79,evet
+S112438,U408,2,2026-08-19,hasarlı geldi,1380.00,105.59,hayır
+S112741,U603,2,2026-08-19,üründen memnun kalmadım,780.00,98.91,evet
+S112773,U502,3,2026-08-19,fikir değiştirdim,2370.00,92.89,evet
+S113045,U106,1,2026-08-19,üründen memnun kalmadım,3990.00,151.86,evet
+S113070,U601,1,2026-08-19,fikir değiştirdim,1290.00,82.56,evet
+S113162,U202,1,2026-08-19,beden uymadı,2790.00,99.85,evet
+S113171,U204,1,2026-08-19,beden uymadı,2290.00,101.01,evet
+S113382,U201,2,2026-08-19,beden uymadı,6980.00,162.73,evet
+S111888,U502,1,2026-08-20,yanlış ürün gönderildi,790.00,109.36,hayır
+S112195,U201,1,2026-08-20,yanlış ürün gönderildi,2443.00,119.81,evet
+S112398,U503,3,2026-08-20,hasarlı geldi,1239.00,91.67,hayır
+S112418,U606,2,2026-08-20,fikir değiştirdim,686.00,101.00,evet
+S112431,U501,1,2026-08-20,üründen memnun kalmadım,833.00,92.20,evet
+S112466,U205,1,2026-08-20,beden uymadı,1290.00,77.94,evet
+S112576,U303,3,2026-08-20,hasarlı geldi,3870.00,152.24,hayır
+S113127,U408,1,2026-08-20,hasarlı geldi,690.00,111.75,hayır
+S113246,U605,1,2026-08-20,geç teslimat,890.00,100.02,evet
+S114014,U203,1,2026-08-20,beden uymadı,3990.00,160.26,evet
+S112290,U405,1,2026-08-21,beden uymadı,1190.00,83.04,hayır
+S112324,U404,1,2026-08-21,üründen memnun kalmadım,1490.00,111.76,evet
+S112559,U105,1,2026-08-21,hasarlı geldi,1890.00,80.54,hayır
+S112664,U504,1,2026-08-21,hasarlı geldi,343.00,90.45,evet
+S112691,U402,1,2026-08-21,üründen memnun kalmadım,9900.00,91.76,evet
+S113270,U205,1,2026-08-21,beden uymadı,1290.00,104.15,evet
+S113490,U205,1,2026-08-21,üründen memnun kalmadım,1290.00,98.38,evet
+S113704,U606,1,2026-08-21,geç teslimat,490.00,92.25,evet
+S113707,U204,3,2026-08-21,hasarlı geldi,6870.00,90.32,hayır
+S113723,U405,1,2026-08-21,üründen memnun kalmadım,1190.00,96.32,evet
+S114089,U204,1,2026-08-21,üründen memnun kalmadım,2290.00,165.77,evet
+S114126,U101,1,2026-08-21,fikir değiştirdim,5490.00,96.56,evet
+S114159,U303,2,2026-08-21,fikir değiştirdim,1806.00,85.85,evet
+S114217,U201,1,2026-08-21,beden uymadı,3490.00,91.68,evet
+S112088,U206,1,2026-08-22,üründen memnun kalmadım,4490.00,94.71,evet
+S112301,U407,1,2026-08-22,geç teslimat,1183.00,98.05,evet
+S112330,U501,1,2026-08-22,fikir değiştirdim,833.00,98.02,hayır
+S112414,U202,1,2026-08-22,hasarlı geldi,2790.00,91.01,evet
+S113210,U103,1,2026-08-22,üründen memnun kalmadım,3290.00,106.31,hayır
+S113378,U204,1,2026-08-22,beden uymadı,1603.00,117.21,evet
+S113403,U301,1,2026-08-22,hasarlı geldi,2190.00,104.32,hayır
+S113427,U204,1,2026-08-22,üründen memnun kalmadım,2290.00,114.58,hayır
+S113854,U302,1,2026-08-22,üründen memnun kalmadım,3690.00,97.18,evet
+S114162,U205,1,2026-08-22,beden uymadı,1290.00,95.60,hayır
+S114304,U406,3,2026-08-22,beden uymadı,2970.00,86.72,evet
+S112314,U306,2,2026-08-23,fikir değiştirdim,966.00,86.76,evet
+S112515,U407,2,2026-08-23,üründen memnun kalmadım,2366.00,90.78,evet
+S112555,U505,1,2026-08-23,üründen memnun kalmadım,1390.00,102.09,evet
+S112880,U504,1,2026-08-23,üründen memnun kalmadım,490.00,83.94,evet
+S113029,U503,3,2026-08-23,geç teslimat,1770.00,105.05,hayır
+S113404,U501,1,2026-08-23,üründen memnun kalmadım,833.00,177.68,evet
+S113405,U406,1,2026-08-23,hasarlı geldi,990.00,171.51,evet
+S113493,U405,1,2026-08-23,fikir değiştirdim,833.00,176.76,evet
+S113568,U401,1,2026-08-23,beden uymadı,4893.00,83.91,evet
+S113752,U503,3,2026-08-23,geç teslimat,1239.00,83.20,evet
+S113849,U408,1,2026-08-23,fikir değiştirdim,690.00,92.75,evet
+S114121,U506,1,2026-08-23,üründen memnun kalmadım,890.00,81.97,evet
+S114340,U602,1,2026-08-23,geç teslimat,290.00,93.67,evet
+S112433,U202,1,2026-08-24,beden uymadı,2790.00,153.82,hayır
+S112514,U407,1,2026-08-24,hasarlı geldi,1183.00,157.39,hayır
+S112725,U203,1,2026-08-24,fikir değiştirdim,3990.00,177.65,hayır
+S112752,U408,1,2026-08-24,hasarlı geldi,690.00,105.05,evet
+S112856,U106,1,2026-08-24,geç teslimat,2793.00,86.73,evet
+S113160,U601,1,2026-08-24,üründen memnun kalmadım,903.00,78.62,evet
+S113302,U202,1,2026-08-24,beden uymadı,1953.00,91.55,hayır
+S113524,U504,1,2026-08-24,üründen memnun kalmadım,343.00,77.76,evet
+S114100,U606,1,2026-08-24,üründen memnun kalmadım,490.00,90.74,evet
+S114192,U104,2,2026-08-24,yanlış ürün gönderildi,4980.00,85.59,hayır
+S114319,U202,1,2026-08-24,beden uymadı,1953.00,86.01,evet
+S114498,U505,1,2026-08-24,üründen memnun kalmadım,1390.00,164.96,evet
+S112616,U202,1,2026-08-25,beden uymadı,2790.00,83.81,hayır
+S112875,U602,1,2026-08-25,fikir değiştirdim,290.00,79.52,evet
+S113033,U602,1,2026-08-25,üründen memnun kalmadım,203.00,100.07,evet
+S113236,U408,1,2026-08-25,üründen memnun kalmadım,690.00,111.08,evet
+S113253,U503,1,2026-08-25,geç teslimat,413.00,95.78,hayır
+S113390,U602,1,2026-08-25,fikir değiştirdim,203.00,115.51,evet
+S113909,U602,1,2026-08-25,beden uymadı,203.00,105.89,evet
+S114107,U501,1,2026-08-25,fikir değiştirdim,833.00,87.48,evet
+S114109,U203,1,2026-08-25,beden uymadı,3990.00,92.02,evet
+S114491,U506,1,2026-08-25,beden uymadı,890.00,158.30,evet
+S114714,U501,1,2026-08-25,hasarlı geldi,833.00,86.29,hayır
+S112857,U206,1,2026-08-26,hasarlı geldi,3143.00,95.31,hayır
+S112930,U104,1,2026-08-26,üründen memnun kalmadım,2490.00,79.86,hayır
+S113023,U406,2,2026-08-26,hasarlı geldi,1980.00,89.08,evet
+S113111,U202,2,2026-08-26,beden uymadı,3906.00,160.23,evet
+S113327,U603,1,2026-08-26,beden uymadı,390.00,89.83,evet
+S113403,U504,1,2026-08-26,beden uymadı,490.00,102.69,evet
+S113451,U206,1,2026-08-26,beden uymadı,4490.00,112.80,hayır
+S113592,U604,3,2026-08-26,fikir değiştirdim,1239.00,96.26,evet
+S114128,U406,1,2026-08-26,üründen memnun kalmadım,990.00,115.56,hayır
+S114284,U603,1,2026-08-26,fikir değiştirdim,273.00,159.12,hayır
+S114369,U501,1,2026-08-26,fikir değiştirdim,833.00,95.61,evet
+S114537,U301,1,2026-08-26,üründen memnun kalmadım,1533.00,102.63,evet
+S112716,U201,1,2026-08-27,üründen memnun kalmadım,2443.00,87.84,hayır
+S112777,U201,1,2026-08-27,beden uymadı,2443.00,107.15,hayır
+S112811,U207,1,2026-08-27,beden uymadı,3843.00,118.67,evet
+S112917,U602,1,2026-08-27,beden uymadı,203.00,122.37,evet
+S113147,U201,1,2026-08-27,üründen memnun kalmadım,3490.00,96.35,evet
+S113228,U105,1,2026-08-27,beden uymadı,1890.00,97.85,evet
+S113321,U405,1,2026-08-27,fikir değiştirdim,1190.00,91.14,evet
+S113571,U205,1,2026-08-27,beden uymadı,1290.00,81.79,evet
+S113853,U602,2,2026-08-27,fikir değiştirdim,580.00,80.27,hayır
+S113873,U502,1,2026-08-27,geç teslimat,790.00,93.15,evet
+S113904,U205,1,2026-08-27,beden uymadı,1290.00,88.52,hayır
+S114254,U405,1,2026-08-27,fikir değiştirdim,833.00,83.34,evet
+S114615,U301,1,2026-08-27,fikir değiştirdim,2190.00,94.50,evet
+S112832,U204,1,2026-08-28,üründen memnun kalmadım,1603.00,81.53,evet
+S113054,U404,2,2026-08-28,üründen memnun kalmadım,2980.00,83.94,evet
+S113635,U501,1,2026-08-28,hasarlı geldi,833.00,97.86,evet
+S114059,U501,1,2026-08-28,geç teslimat,833.00,88.11,evet
+S114207,U202,1,2026-08-28,beden uymadı,2790.00,79.54,hayır
+S114273,U502,1,2026-08-28,üründen memnun kalmadım,790.00,84.29,evet
+S114427,U202,1,2026-08-28,beden uymadı,1953.00,106.07,evet
+S114440,U501,1,2026-08-28,fikir değiştirdim,833.00,101.68,hayır
+S114497,U407,1,2026-08-28,fikir değiştirdim,1690.00,85.77,evet
+S114653,U205,1,2026-08-28,beden uymadı,903.00,92.31,hayır
+S114711,U204,1,2026-08-28,fikir değiştirdim,2290.00,105.36,hayır
+S114995,U302,1,2026-08-28,fikir değiştirdim,3690.00,92.35,evet
+S113502,U506,1,2026-08-29,geç teslimat,890.00,91.35,evet
+S113552,U302,1,2026-08-29,fikir değiştirdim,3690.00,98.16,evet
+S113865,U202,1,2026-08-29,üründen memnun kalmadım,2790.00,159.71,hayır
+S113871,U605,3,2026-08-29,üründen memnun kalmadım,2670.00,81.05,evet
+S113980,U602,1,2026-08-29,hasarlı geldi,203.00,91.40,hayır
+S114933,U606,2,2026-08-29,üründen memnun kalmadım,980.00,91.65,evet
+S113293,U405,1,2026-08-30,üründen memnun kalmadım,1190.00,98.52,evet
+S113684,U207,1,2026-08-30,beden uymadı,5490.00,77.95,evet
+S113787,U406,2,2026-08-30,üründen memnun kalmadım,1980.00,91.97,evet
+S114823,U606,1,2026-08-30,üründen memnun kalmadım,343.00,99.33,evet
+S115191,U404,1,2026-08-30,üründen memnun kalmadım,1043.00,98.96,evet
+S113539,U103,1,2026-08-31,geç teslimat,3290.00,107.69,evet
+S114192,U406,1,2026-08-31,yanlış ürün gönderildi,990.00,89.15,hayır
+S114485,U203,1,2026-08-31,hasarlı geldi,3990.00,100.74,hayır
+S114536,U304,1,2026-08-31,geç teslimat,1743.00,112.86,evet
+S114765,U306,1,2026-08-31,fikir değiştirdim,690.00,94.46,evet
+S115292,U202,1,2026-08-31,beden uymadı,2790.00,100.06,hayır
+S115324,U206,1,2026-08-31,beden uymadı,4490.00,89.65,evet
+S115373,U604,1,2026-08-31,üründen memnun kalmadım,590.00,82.81,evet
+S113336,U204,1,2026-09-01,beden uymadı,2290.00,114.74,hayır
+S113444,U205,1,2026-09-01,beden uymadı,1290.00,93.26,evet
+S113904,U601,1,2026-09-01,fikir değiştirdim,1290.00,82.29,evet
+S114000,U305,1,2026-09-01,üründen memnun kalmadım,1690.00,80.59,hayır
+S114062,U204,1,2026-09-01,yanlış ürün gönderildi,2290.00,78.56,evet
+S114343,U101,1,2026-09-01,hasarlı geldi,5490.00,83.94,hayır
+S114486,U405,1,2026-09-01,beden uymadı,833.00,119.20,evet
+S114917,U306,1,2026-09-01,hasarlı geldi,690.00,103.45,hayır
+S114967,U202,1,2026-09-01,hasarlı geldi,1953.00,87.67,hayır
+S115266,U301,2,2026-09-01,fikir değiştirdim,3066.00,91.82,evet
+S115306,U204,2,2026-09-01,beden uymadı,4580.00,91.48,evet
+S115327,U206,1,2026-09-01,beden uymadı,3143.00,82.41,evet
+S115400,U504,2,2026-09-01,beden uymadı,980.00,105.90,evet
+S115526,U205,1,2026-09-01,beden uymadı,1290.00,169.73,evet
+S113591,U506,1,2026-09-02,hasarlı geldi,623.00,95.20,hayır
+S113705,U203,2,2026-09-02,beden uymadı,7980.00,105.94,hayır
+S113800,U202,1,2026-09-02,beden uymadı,2790.00,119.17,hayır
+S113831,U204,2,2026-09-02,beden uymadı,4580.00,78.61,evet
+S113994,U601,1,2026-09-02,geç teslimat,1290.00,116.03,hayır
+S114193,U201,1,2026-09-02,beden uymadı,3490.00,80.30,hayır
+S114503,U601,1,2026-09-02,fikir değiştirdim,903.00,98.08,evet
+S114721,U201,1,2026-09-02,beden uymadı,2443.00,88.86,evet
+S114811,U603,1,2026-09-02,fikir değiştirdim,390.00,164.28,hayır
+S114828,U406,1,2026-09-02,üründen memnun kalmadım,693.00,171.13,evet
+S115016,U303,1,2026-09-02,fikir değiştirdim,1290.00,162.00,evet
+S115103,U104,1,2026-09-02,geç teslimat,2490.00,172.72,hayır
+S115565,U205,1,2026-09-02,beden uymadı,1290.00,101.00,evet
+S113606,U606,3,2026-09-03,üründen memnun kalmadım,1470.00,106.61,evet
+S113691,U501,1,2026-09-03,beden uymadı,833.00,88.37,evet
+S114131,U504,2,2026-09-03,fikir değiştirdim,686.00,94.49,evet
+S114291,U606,1,2026-09-03,fikir değiştirdim,490.00,86.66,hayır
+S114447,U304,1,2026-09-03,üründen memnun kalmadım,2490.00,114.01,evet
+S114804,U501,1,2026-09-03,üründen memnun kalmadım,833.00,92.87,evet
+S115547,U207,1,2026-09-03,fikir değiştirdim,5490.00,83.14,evet
+S115582,U202,1,2026-09-03,beden uymadı,2790.00,84.58,evet
+S113970,U602,1,2026-09-04,üründen memnun kalmadım,203.00,98.37,evet
+S114203,U203,1,2026-09-04,beden uymadı,3990.00,98.65,hayır
+S114401,U207,1,2026-09-04,beden uymadı,3843.00,104.95,evet
+S114652,U105,1,2026-09-04,beden uymadı,1323.00,109.84,evet
+S114923,U502,2,2026-09-04,hasarlı geldi,1580.00,87.74,hayır
+S115021,U405,1,2026-09-04,hasarlı geldi,1190.00,96.76,hayır
+S115159,U403,1,2026-09-04,geç teslimat,2890.00,87.18,evet
+S115197,U604,2,2026-09-04,hasarlı geldi,1180.00,117.27,evet
+S115211,U502,1,2026-09-04,üründen memnun kalmadım,790.00,93.00,evet
+S115243,U501,1,2026-09-04,hasarlı geldi,833.00,93.85,hayır
+S115309,U505,1,2026-09-04,fikir değiştirdim,973.00,79.96,evet
+S115504,U501,1,2026-09-04,geç teslimat,833.00,113.02,evet
+S114092,U502,1,2026-09-05,fikir değiştirdim,553.00,105.09,evet
+S114117,U602,1,2026-09-05,geç teslimat,290.00,80.02,hayır
+S114631,U606,1,2026-09-05,üründen memnun kalmadım,490.00,157.76,evet
+S114934,U408,1,2026-09-05,fikir değiştirdim,690.00,151.89,evet
+S114964,U205,1,2026-09-05,beden uymadı,1290.00,91.02,hayır
+S114071,U205,1,2026-09-06,beden uymadı,903.00,98.28,hayır
+S114288,U205,1,2026-09-06,beden uymadı,1290.00,92.30,evet
+S114390,U602,1,2026-09-06,üründen memnun kalmadım,290.00,162.04,evet
+S114391,U502,3,2026-09-06,beden uymadı,2370.00,84.92,evet
+S114489,U502,3,2026-09-06,hasarlı geldi,2370.00,99.29,evet
+S114549,U606,1,2026-09-06,geç teslimat,490.00,94.95,hayır
+S114659,U605,1,2026-09-06,geç teslimat,623.00,116.01,evet
+S115538,U204,1,2026-09-06,üründen memnun kalmadım,2290.00,82.62,hayır
+S115695,U202,1,2026-09-06,beden uymadı,2790.00,91.79,evet
+S114181,U501,1,2026-09-07,üründen memnun kalmadım,833.00,78.15,evet
+S114368,U501,1,2026-09-07,üründen memnun kalmadım,1190.00,100.51,hayır
+S114706,U602,1,2026-09-07,hasarlı geldi,203.00,88.94,evet
+S115068,U303,1,2026-09-07,geç teslimat,1290.00,102.26,evet
+S115082,U103,1,2026-09-07,üründen memnun kalmadım,2303.00,101.56,evet
+S115147,U502,2,2026-09-07,üründen memnun kalmadım,1580.00,78.81,evet
+S115214,U303,1,2026-09-07,beden uymadı,1290.00,113.58,evet
+S115399,U502,2,2026-09-07,yanlış ürün gönderildi,1580.00,98.31,evet
+S115586,U105,1,2026-09-07,fikir değiştirdim,1890.00,90.92,evet
+S115597,U501,1,2026-09-07,yanlış ürün gönderildi,833.00,88.17,hayır
+S115604,U606,1,2026-09-07,üründen memnun kalmadım,490.00,90.87,evet
+S115616,U205,1,2026-09-07,beden uymadı,1290.00,164.84,hayır
+S115641,U205,1,2026-09-07,beden uymadı,1290.00,104.44,evet
+S114496,U602,1,2026-09-08,hasarlı geldi,290.00,90.08,evet
+S114540,U207,1,2026-09-08,beden uymadı,5490.00,92.29,hayır
+S114872,U606,1,2026-09-08,hasarlı geldi,490.00,97.49,hayır
+S115084,U203,1,2026-09-08,üründen memnun kalmadım,3990.00,104.34,evet
+S115444,U201,1,2026-09-08,beden uymadı,2443.00,80.59,evet
+S115798,U603,2,2026-09-08,hasarlı geldi,780.00,148.03,evet
+S114367,U602,3,2026-09-09,hasarlı geldi,870.00,98.93,evet
+S114457,U204,1,2026-09-09,beden uymadı,2290.00,109.51,hayır
+S114474,U204,1,2026-09-09,beden uymadı,2290.00,100.45,evet
+S114568,U202,1,2026-09-09,üründen memnun kalmadım,2790.00,146.26,hayır
+S114661,U207,1,2026-09-09,beden uymadı,5490.00,93.01,evet
+S114813,U606,1,2026-09-09,beden uymadı,490.00,112.04,evet
+S115140,U401,1,2026-09-09,üründen memnun kalmadım,6990.00,97.74,evet
+S115219,U105,1,2026-09-09,yanlış ürün gönderildi,1890.00,89.96,hayır
+S115223,U606,2,2026-09-09,beden uymadı,980.00,79.97,evet
+S115505,U408,2,2026-09-09,hasarlı geldi,1380.00,110.98,evet
+S114428,U201,1,2026-09-10,beden uymadı,3490.00,83.92,evet
+S114521,U401,1,2026-09-10,geç teslimat,6990.00,119.22,evet
+S114529,U304,1,2026-09-10,fikir değiştirdim,2490.00,93.22,evet
+S114971,U503,2,2026-09-10,beden uymadı,1180.00,94.54,evet
+S114974,U103,1,2026-09-10,üründen memnun kalmadım,3290.00,87.95,evet
+S114974,U602,2,2026-09-10,fikir değiştirdim,580.00,90.14,evet
+S115051,U205,1,2026-09-10,beden uymadı,1290.00,156.47,hayır
+S115066,U501,1,2026-09-10,geç teslimat,833.00,93.82,evet
+S115681,U105,1,2026-09-10,fikir değiştirdim,1323.00,104.37,evet
+S115773,U501,1,2026-09-10,hasarlı geldi,833.00,103.29,hayır
+S114483,U601,1,2026-09-11,geç teslimat,1290.00,97.04,evet
+S114641,U502,1,2026-09-11,üründen memnun kalmadım,790.00,95.84,evet
+S114641,U603,1,2026-09-11,hasarlı geldi,390.00,105.22,evet
+S114789,U203,1,2026-09-11,beden uymadı,3990.00,87.95,hayır
+S115542,U501,2,2026-09-11,fikir değiştirdim,1666.00,101.75,evet
+S114653,U201,1,2026-09-12,beden uymadı,2443.00,81.83,evet
+S114889,U606,3,2026-09-12,geç teslimat,1470.00,88.70,evet
+S115087,U602,1,2026-09-12,üründen memnun kalmadım,290.00,95.54,evet
+S115322,U203,1,2026-09-12,beden uymadı,3990.00,82.93,evet
+S115376,U501,1,2026-09-12,hasarlı geldi,833.00,86.08,hayır
+S115501,U406,1,2026-09-12,fikir değiştirdim,990.00,89.53,evet
+S114811,U406,3,2026-09-13,geç teslimat,2970.00,168.28,evet
+S114837,U306,2,2026-09-13,beden uymadı,966.00,77.98,evet
+S114867,U401,1,2026-09-13,fikir değiştirdim,6990.00,85.81,evet
+S115017,U204,1,2026-09-13,üründen memnun kalmadım,2290.00,111.30,evet
+S115631,U602,2,2026-09-13,hasarlı geldi,406.00,174.30,hayır
+S114975,U204,1,2026-09-14,fikir değiştirdim,1603.00,82.40,hayır
+S115108,U502,2,2026-09-14,fikir değiştirdim,1106.00,90.69,evet
+S115134,U602,1,2026-09-14,hasarlı geldi,290.00,103.14,evet
+S115180,U404,1,2026-09-14,hasarlı geldi,1490.00,80.49,hayır
+S115209,U204,1,2026-09-14,hasarlı geldi,2290.00,86.86,hayır
+S115418,U406,1,2026-09-14,yanlış ürün gönderildi,693.00,106.13,evet
+S115458,U503,1,2026-09-14,üründen memnun kalmadım,590.00,104.39,hayır
+S115509,U606,1,2026-09-14,üründen memnun kalmadım,490.00,111.87,evet
+S115570,U102,1,2026-09-14,fikir değiştirdim,8900.00,112.23,evet
+S115592,U501,1,2026-09-14,üründen memnun kalmadım,1190.00,102.53,evet
+S115625,U501,1,2026-09-14,üründen memnun kalmadım,833.00,108.33,evet
+S115629,U405,1,2026-09-14,hasarlı geldi,1190.00,104.89,evet
+S115652,U204,1,2026-09-14,beden uymadı,1603.00,155.86,evet
+S115664,U306,1,2026-09-14,geç teslimat,483.00,82.54,evet
+S115766,U403,1,2026-09-14,yanlış ürün gönderildi,2890.00,95.18,evet

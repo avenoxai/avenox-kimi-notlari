@@ -1,0 +1,41 @@
+urun_id,urun_adi,kategori,liste_fiyati,birim_maliyet
+U101,Tepe Şişme Mont,Mont,5490.00,2636.00
+U102,Zirve Kar Montu,Mont,8900.00,4272.00
+U103,Yağmur Kesen Ceket,Mont,3290.00,1580.00
+U104,Rüzgarlık Ceket,Mont,2490.00,1195.00
+U105,Polar Ceket,Mont,1890.00,907.00
+U106,Softshell Mont,Mont,3990.00,1915.00
+U107,Kışlık Parka,Mont,6490.00,3115.00
+U201,Patika Trekking Botu,Ayakkabı,3490.00,1920.00
+U202,Kaya Yürüyüş Ayakkabısı,Ayakkabı,2790.00,1535.00
+U203,Su Geçirmez Bot,Ayakkabı,3990.00,2195.00
+U204,Hafif Koşu Patikası,Ayakkabı,2290.00,1260.00
+U205,Kamp Sandaleti,Ayakkabı,1290.00,710.00
+U206,Kışlık Termo Bot,Ayakkabı,4490.00,2470.00
+U207,Yürüyüş Ayakkabısı Pro,Ayakkabı,5490.00,3020.00
+U301,Sırt Çantası 30L,Sırt Çantası,2190.00,1095.00
+U302,Sırt Çantası 60L,Sırt Çantası,3690.00,1845.00
+U303,Günlük Çanta 18L,Sırt Çantası,1290.00,645.00
+U304,Su Geçirmez Duffel 40L,Sırt Çantası,2490.00,1245.00
+U305,Hidrasyon Çantası 12L,Sırt Çantası,1690.00,845.00
+U306,Bel Çantası,Sırt Çantası,690.00,345.00
+U401,İki Kişilik Çadır,Kamp Ekipmanı,6990.00,3705.00
+U402,Dört Kişilik Çadır,Kamp Ekipmanı,9900.00,5247.00
+U403,Uyku Tulumu -5C,Kamp Ekipmanı,2890.00,1532.00
+U404,Şişme Mat,Kamp Ekipmanı,1490.00,790.00
+U405,Kamp Ocağı,Kamp Ekipmanı,1190.00,631.00
+U406,Kamp Sandalyesi,Kamp Ekipmanı,990.00,525.00
+U407,Kamp Masası,Kamp Ekipmanı,1690.00,896.00
+U408,Kafa Lambası,Kamp Ekipmanı,690.00,366.00
+U501,Termos 1L,Termos ve Matara,1190.00,928.00
+U502,Termos 0.5L,Termos ve Matara,790.00,466.00
+U503,Çelik Matara 750ml,Termos ve Matara,590.00,336.00
+U504,Kamp Bardağı Seti,Termos ve Matara,490.00,275.00
+U505,Termos Sefertası,Termos ve Matara,1390.00,792.00
+U506,Filtreli Matara,Termos ve Matara,890.00,507.00
+U601,Trekking Baston Çifti,Aksesuar,1290.00,683.00
+U602,Merinos Çorap,Aksesuar,290.00,148.00
+U603,Bere ve Boyunluk Seti,Aksesuar,390.00,199.00
+U604,Eldiven,Aksesuar,590.00,301.00
+U605,Güneş Gözlüğü,Aksesuar,890.00,454.00
+U606,Kamp Çorabı 3'lü,Aksesuar,490.00,250.00

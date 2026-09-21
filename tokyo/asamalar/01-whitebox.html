@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tokyo Ara Sokak — 01 Whitebox</title>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#848484}
+  canvas{display:block}
+  #hud{position:fixed;top:10px;left:10px;padding:6px 9px;font:11px/1.5 ui-monospace,Menlo,monospace;
+       color:#eee;background:rgba(20,20,20,.45);border-radius:6px;pointer-events:none;white-space:pre}
+  #hint{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);padding:8px 14px;
+        font:12px ui-monospace,Menlo,monospace;color:#222;background:rgba(255,255,255,.78);
+        border-radius:999px;transition:opacity .3s;pointer-events:none}
+  #dot{position:fixed;left:50%;top:50%;width:4px;height:4px;margin:-2px;border-radius:50%;
+       background:rgba(255,255,255,.7);pointer-events:none}
+  #err{position:fixed;top:10px;left:50%;transform:translateX(-50%);max-width:80%;padding:8px 12px;
+       font:12px monospace;color:#fff;background:#b3261e;border-radius:6px;display:none;z-index:9}
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+</head>
+<body>
+<div id="hud">…</div>
+<div id="hint">Yürümek için tıkla — WASD + Fare · Shift: koş</div>
+<div id="dot"></div>
+<div id="err"></div>
+<script type="module">
+import * as THREE from 'three';
+
+const errBox = document.getElementById('err');
+function showErr(m){ errBox.style.display = 'block'; errBox.textContent = 'Hata: ' + m; }
+addEventListener('error', e => showErr(e.message));
+addEventListener('unhandledrejection', e => showErr(e.reason?.message || String(e.reason)));
+
+// ═══ AYARLAR ═══
+const CFG = {
+  clay: 0x9b9b9b,
+  fog: 0x848484, fogNear: 22, fogFar: 95,
+  eye: 1.7, radius: 0.35,
+  walk: 3.8, run: 6.4,
+};
+
+// ═══ RENDERER / SAHNE ═══
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(CFG.fog);
+scene.fog = new THREE.Fog(CFG.fog, CFG.fogNear, CFG.fogFar);
+
+const camera = new THREE.PerspectiveCamera(72, innerWidth / innerHeight, 0.05, 300);
+camera.rotation.order = 'YXZ';
+
+// whitebox aydınlatma: nötr, formu okutan clay ışığı (gece kurulumu sonra)
+const hemi = new THREE.HemisphereLight(0xffffff, 0x5a5a5a, 1.25);
+scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xffffff, 1.5);
+sun.position.set(-28, 42, 26);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -60, right: 60, top: 60, bottom: -60, near: 5, far: 140 });
+sun.shadow.camera.updateProjectionMatrix();
+sun.shadow.bias = -0.0004;
+sun.shadow.normalBias = 0.03;
+scene.add(sun);
+const fill = new THREE.DirectionalLight(0xffffff, 0.25);
+fill.position.set(30, 22, -38);
+scene.add(fill);
+const fill2 = new THREE.DirectionalLight(0xffffff, 0.35); // güney cepheleri kaldıran karşı dolgu
+fill2.position.set(15, 18, 55);
+scene.add(fill2);
+
+// ═══ MALZEMELER ═══
+// Şimdilik her şey tek clay instance'ı. Sonraki adımlar (beton, neon, ıslak zemin)
+// sadece bu kaydı değiştirecek; geometri MATS anahtarlarına bağlı.
+const clay = new THREE.MeshStandardMaterial({ color: CFG.clay, roughness: 1, metalness: 0 });
+const MATS = {
+  building: clay, ground: clay, sign: clay, door: clay, window: clay,
+  prop: clay, metal: clay, wire: clay, lantern: clay, drain: clay,
+};
+
+// ═══ GEOMETRİ YARDIMCILARI + ÇARPIŞMA ═══
+const colliders = []; // {x0,x1,z0,z1,y0,y1}
+const world = new THREE.Group();
+scene.add(world);
+
+function box(cx, cy, cz, sx, sy, sz, o = {}) {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(sx, sy, sz), MATS[o.mat || 'building']);
+  m.position.set(cx, cy, cz);
+  m.castShadow = o.cast ?? true;
+  m.receiveShadow = true;
+  world.add(m);
+  if (o.solid) colliders.push({ x0: cx - sx/2, x1: cx + sx/2, z0: cz - sz/2, z1: cz + sz/2, y0: cy - sy/2, y1: cy + sy/2 });
+  return m;
+}
+function cyl(cx, cy, cz, r, h, o = {}) {
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, 14), MATS[o.mat || 'prop']);
+  m.position.set(cx, cy, cz);
+  if (o.axis === 'x') m.rotation.z = Math.PI / 2;
+  if (o.axis === 'z') m.rotation.x = Math.PI / 2;
+  m.castShadow = o.cast ?? true;
+  m.receiveShadow = true;
+  world.add(m);
+  if (o.solid) colliders.push({ x0: cx - r, x1: cx + r, z0: cz - r, z1: cz + r, y0: cy - h/2, y1: cy + h/2 });
+  return m;
+}
+// bina kütlesi: x0..x1, z0..z1, yerden h'ye
+function mass(x0, x1, z0, z1, h, o = {}) {
+  return box((x0 + x1) / 2, h / 2, (z0 + z1) / 2, x1 - x0, h, z1 - z0, { solid: true, ...o });
+}
+function wire(ax, ay, az, bx, by, bz, sag = 0.6) {
+  const mid = new THREE.Vector3((ax + bx) / 2, Math.min(ay, by) - sag, (az + bz) / 2);
+  const curve = new THREE.QuadraticBezierCurve3(new THREE.Vector3(ax, ay, az), mid, new THREE.Vector3(bx, by, bz));
+  const geo = new THREE.TubeGeometry(curve, Math.max(10, Math.round(curve.getLength() * 0.8)), 0.022, 5);
+  const m = new THREE.Mesh(geo, MATS.wire);
+  m.castShadow = false;
+  world.add(m);
+}
+
+// cephe parçaları — dir: sokağa doğru çıkıntı yönü (+1 / -1)
+function bladeX(xWall, dir, z, y0, h) { // cepheye dik dikey tabela (±x bakan cepheler)
+  box(xWall + dir * 0.43, y0 + h / 2, z, 0.16, h, 0.62, { mat: 'sign', solid: true });
+  box(xWall + dir * 0.22, y0 + h - 0.15, z, 0.44, 0.07, 0.07, { mat: 'metal', cast: false });
+}
+function bandX(xWall, dir, z, w, y0) { // kapı üstü yatay bant
+  box(xWall + dir * 0.08, y0 + 0.36, z, 0.16, 0.72, w, { mat: 'sign', cast: false });
+}
+function bladeZ(zWall, dir, x, y0, h) { // ±z bakan cepheler
+  box(x, y0 + h / 2, zWall + dir * 0.43, 0.62, h, 0.16, { mat: 'sign', solid: true });
+  box(x, y0 + h - 0.15, zWall + dir * 0.22, 0.07, 0.07, 0.44, { mat: 'metal', cast: false });
+}
+function bandZ(zWall, dir, x, w, y0) {
+  box(x, y0 + 0.36, zWall + dir * 0.08, w, 0.72, 0.16, { mat: 'sign', cast: false });
+}
+function doorX(xWall, dir, z) {
+  box(xWall + dir * 0.035, 1.05, z, 0.07, 2.1, 1.05, { mat: 'door', cast: false });
+  box(xWall + dir * 0.38, 0.09, z, 0.76, 0.18, 1.3, { cast: false });
+}
+function doorZ(zWall, dir, x) {
+  box(x, 1.05, zWall + dir * 0.035, 1.05, 2.1, 0.07, { mat: 'door', cast: false });
+  box(x, 0.09, zWall + dir * 0.38, 1.3, 0.18, 0.76, { cast: false });
+}
+function winX(xWall, dir, z, y, w = 0.95, h = 1.1) { box(xWall + dir * 0.03, y, z, 0.06, h, w, { mat: 'window', cast: false }); }
+function winZ(zWall, dir, x, y, w = 0.95, h = 1.1) { box(x, y, zWall + dir * 0.03, w, h, 0.06, { mat: 'window', cast: false }); }
+function pipeX(xWall, dir, z, h) { cyl(xWall + dir * 0.09, h / 2, z, 0.055, h, { mat: 'metal' }); }
+function pipeZ(zWall, dir, x, h) { cyl(x, h / 2, zWall + dir * 0.09, 0.055, h, { mat: 'metal' }); }
+function acX(xWall, dir, z, y) { box(xWall + dir * 0.19, y, z, 0.38, 0.62, 0.85, { mat: 'metal' }); }
+function lantern(x, z, y = 2.75) {
+  cyl(x, y, z, 0.16, 0.42, { mat: 'lantern', cast: false });
+  cyl(x, y + 0.26, z, 0.055, 0.1, { mat: 'metal', cast: false });
+}
+
+// ═══ SOKAK PLANI ═══
+// Ana sokak x∈[-2.1, 2.1], z: +34 (cadde ağzı) → -26 (batıya dönüş).
+// Cephe hattı hiç düz değil: jog > 0 sokağa çıkıntı, jog < 0 girinti.
+const WX = -2.1, EX = 2.1;
+function westSeg(zS, zN, h, d, jog = 0) { const fx = WX + jog; mass(fx - d, fx, zN, zS, h); return fx; }
+function eastSeg(zS, zN, h, d, jog = 0) { const fx = EX - jog; mass(fx, fx + d, zN, zS, h); return fx; }
+
+const w1  = westSeg( 34,  28,  9, 13);        // cadde köşesi: otomatlar
+const w2  = westSeg( 28,  22, 12, 11,  0.5);  // çıkıntı
+const w3  = westSeg( 22,  16,  8, 12);
+const w4  = westSeg( 16,   9, 14, 10, -0.7);  // girinti: bisiklet cebi
+const w5  = westSeg(  9,   4,  7, 12);
+const w6  = westSeg(  4,  -2, 11, 13);
+const w7  = westSeg( -2,  -8,  9, 12);
+const w8  = westSeg( -8, -14, 13, 12);
+const w9  = westSeg(-14, -20,  8, 14,  0.4);
+const w10 = westSeg(-20, -26, 10, 16);        // dönüş köşesi
+
+const e1  = eastSeg( 34,  30, 10, 14);        // cadde köşesi
+const e2  = eastSeg( 30,  24,  8, 12);
+const e3  = eastSeg( 24,  17, 12, 13);        // çift tabelalı izakaya
+const e4  = eastSeg( 17,  12,  7, 11, -0.5);  // girinti: klima cebi
+const e5  = eastSeg( 12,   6,  9, 12,  0.5);  // çıkıntı
+const e6  = eastSeg(  6,   0, 14, 15);        // yüksek kör duvar (afiş sonra)
+const e7  = eastSeg(  0,  -8,  8, 10);
+// yan sokak ağzı: z ∈ [-11, -8]
+const e9  = eastSeg(-11, -17, 11, 12);
+const e10 = eastSeg(-17, -26,  9, 15);
+
+// kuzey ucu: sokağın kapandığı cephe + batıya dönüş kolu
+mass(-2.1, 16, -40, -26, 12);                 // TB: kapanış cephesi
+mass(-26, -18, -26, -16, 9);                  // dönüş güney duvarı dolgusu
+mass(-10.1, -2.1, -40, -30, 11);              // T1
+mass(-16, -10.1, -42, -29.5, 8);              // T2 (0.5 çıkıntılı)
+mass(-24, -16, -40, -30, 13);                 // T3
+for (let i = 0; i < 4; i++) {                 // çıkmaz merdiven
+  const h = 0.45 * (i + 1);
+  box(-24.4 - i * 0.75, h / 2, -28, 0.75, h, 3.8, { solid: true });
+}
+mass(-31, -27.4, -32, -24, 12);               // uç duvarı
+
+// yan sokak (z ∈ [-11,-8], x → 22) + avlu (x 22..29, z -14..-6)
+mass(12, 22, -8, -2, 7);                      // A: güney duvar
+mass(14, 24, -17, -11, 9);                    // B: kuzey duvar
+mass(29, 35, -16, -4, 10);                    // avlu doğu duvarı
+mass(22, 29, -18, -14, 8);                    // avlu kuzey kapama
+mass(22, 29, -6, -2, 9);                      // avlu güney kapama
+for (let i = 0; i < 6; i++) {                 // avludaki dış merdiven
+  const h = 0.32 * (i + 1);
+  box(28.2 - i * 0.5, h / 2, -13.2, 0.5, h, 1.1, { solid: true });
+}
+box(28.94, 2.95, -13.2, 0.07, 2.1, 1.05, { mat: 'door', cast: false });
+
+// ana cadde (z ∈ [34, 42], x ∈ [-40, 40])
+mass(-26, -15.2, 26, 34, 14);                 // NSt1
+mass(-40, -26, 24, 34, 11);                   // NSt2
+mass(16.2, 27, 25, 34, 12);                   // NSt3
+mass(27, 40, 23, 34, 15);                     // NSt4
+mass(-40, -24, 42, 56, 16);                   // SSt1
+mass(-24, -8, 42, 55, 12);                    // SSt2
+mass(-8, 2, 42, 56, 18);                      // SSt3
+mass(2, 6, 46, 52, 10);                       // karşı sokak dibi
+mass(6, 20, 42, 55, 13);                      // SSt4
+mass(20, 40, 42, 56, 17);                     // SSt5
+mass(-44, -40, 30, 46, 12);                   // cadde batı ucu
+mass(40, 44, 30, 46, 12);                     // cadde doğu ucu
+box(4, 0.55, 44, 4, 1.1, 0.1, { mat: 'metal', solid: true }); // karşı sokak parmakliği
+box(0, 0.07, 34.35, 80, 0.14, 0.3, { cast: false });          // kaldırımlar
+box(0, 0.07, 41.65, 80, 0.14, 0.3, { cast: false });
+
+// ═══ CEPHE DETAYLARI ═══
+doorX(w1, 1, 31); doorX(w3, 1, 19); doorX(w5, 1, 6.5); doorX(w7, 1, -5);
+doorX(e2, -1, 27); doorX(e3, -1, 20.5); doorX(e4, -1, 14.5); doorX(e7, -1, -4); doorX(e9, -1, -14);
+doorZ(-26, 1, 0.9);
+doorZ(-26, -1, -21);                          // dönüş koridoru güney duvarı
+doorZ(-8, -1, 16); doorZ(-11, 1, 18);
+doorZ(34, 1, -20); doorZ(34, 1, 21); doorZ(42, -1, -14); doorZ(42, -1, 12);
+
+for (const z of [10.6, 12.4, 14.2]) { winX(w4, 1, z, 5.6); winX(w4, 1, z, 8.2); }
+for (const z of [19, 21, 23])       { winX(e3, -1, z, 6.2); winX(e3, -1, z, 8.8); }
+winX(w6, 1, 1.2, 6.4); winX(w6, 1, 2.8, 6.4);
+winX(e6, -1, 3, 9.5);
+winX(w8, 1, -9.4, 7); winX(w8, 1, -11.2, 7);
+winZ(-26, 1, 0.4, 6.4); winZ(-26, 1, 1.6, 6.4);
+for (const x of [-5, -2.8]) { winZ(42, -1, x, 6); winZ(42, -1, x, 8.6); }
+winZ(34, 1, 22.5, 5.4); winZ(34, 1, 24.3, 5.4);
+
+// ═══ TABELA RİTMİ ═══ (karşılıklı çapraz; simetri yok)
+bladeX(w3, 1, 19, 3.4, 3.0);
+bladeX(w6, 1, 1, 4.2, 2.6);
+bladeX(w8, 1, -11, 3.2, 2.8);
+bandX(w9, 1, -17, 2.6, 3.1);
+bladeX(e3, -1, 21, 3.6, 3.2);
+bladeX(e3, -1, 21, 7.0, 2.4);
+bandX(e5, -1, 9, 3.0, 3.0);
+bladeX(e9, -1, -13.5, 4.6, 3.0);
+bladeZ(-11, 1, 8, 3.5, 2.4);                  // yan sokak içi
+bandZ(-26, 1, 0.9, 2.2, 2.6);                 // kapanış cephesi kapı üstü
+bandZ(-8, -1, 18.5, 2.2, 2.9);                // yan sokak güney duvar
+bandZ(-26, -1, -21, 2.0, 2.7);                // dönüş koridoru kapı üstü
+bladeZ(34, 1, 20, 4.0, 3.4);                  // cadde, NSt3 köşesi
+bandZ(42, -1, -2, 4.5, 3.2); bandZ(42, -1, 28, 5, 3.4);
+// dönüşten önce sokağın yarısını kapatan geçit tabelası
+box(-0.95, 4.6, -22, 2.3, 0.8, 0.2, { mat: 'sign' });
+box(-1.95, 5.15, -22, 0.06, 0.35, 0.06, { mat: 'metal', cast: false });
+
+// ═══ SOKAK MOBİLYASI ═══
+box(-1.72, 0.92, 31.3, 0.75, 1.83, 1.0, { mat: 'prop', solid: true });  // otomatlar
+box(-1.72, 0.92, 32.45, 0.75, 1.83, 1.0, { mat: 'prop', solid: true });
+box(-1.55, 2.5, 31.9, 1.15, 0.08, 2.9, { mat: 'metal', cast: false });  // otomat saçağı
+box(-1.55, 0.28, -24.6, 0.55, 0.55, 0.55, { mat: 'prop', solid: true }); // kasalar (dönüş)
+box(-1.5, 0.28, -23.9, 0.55, 0.55, 0.55, { mat: 'prop', solid: true });
+box(-1.52, 0.83, -24.25, 0.55, 0.55, 0.55, { mat: 'prop', solid: true });
+cyl(26.2, 0.43, -12.6, 0.3, 0.85, { solid: true });                     // avlu varilleri
+cyl(26.9, 0.43, -11.8, 0.3, 0.85, { solid: true });
+cyl(25.6, 0.43, -11.7, 0.3, 0.85, { solid: true });
+box(23.6, 0.28, -7.2, 0.55, 0.55, 0.55, { mat: 'prop', solid: true });
+box(23.65, 0.83, -7.25, 0.55, 0.55, 0.55, { mat: 'prop', solid: true });
+// bisiklet (w4 cebi)
+cyl(-2.45, 0.33, 11.95, 0.33, 0.045, { axis: 'x', mat: 'metal', cast: false });
+cyl(-2.45, 0.33, 13.05, 0.33, 0.045, { axis: 'x', mat: 'metal', cast: false });
+box(-2.45, 0.55, 12.5, 0.07, 0.5, 1.0, { mat: 'metal', cast: false });
+box(-2.45, 0.35, 12.5, 0.35, 0.35, 1.15, { mat: 'prop', solid: true });
+// klimalar
+acX(w8, 1, -10, 2.7); acX(e3, -1, 19, 3.5); acX(e7, -1, -4.5, 2.5);
+box(2.42, 0.35, 14.8, 0.4, 0.7, 0.9, { mat: 'metal', solid: true });
+box(2.42, 0.35, 15.9, 0.4, 0.7, 0.9, { mat: 'metal', solid: true });
+// borular
+pipeX(w6, 1, 3.2, 10.5); pipeX(e6, -1, 3.8, 13.5); pipeX(e10, -1, -21, 8.5); pipeZ(-26, 1, 1.7, 11.5); pipeZ(-26, -1, -19.2, 8.5);
+// köşe sunağı (dönüş köşesi detayı)
+box(-1.92, 1.05, -25.3, 0.36, 0.08, 0.5, { mat: 'prop', cast: false });
+box(-1.92, 1.26, -25.3, 0.26, 0.34, 0.3, { mat: 'prop', cast: false });
+box(-1.92, 1.47, -25.3, 0.34, 0.06, 0.38, { mat: 'prop', cast: false });
+// fener taslakları (ışık sonra)
+lantern(-1.85, 6.5); lantern(2.35, 14.5); lantern(-1.9, -5); lantern(0.9, -25.5, 2.8); lantern(24.5, -13.4);
+// elektrik direkleri + babalar
+cyl(-20, 4.75, 40.6, 0.14, 9.5, { mat: 'metal', solid: true });
+box(-20, 8.7, 40.6, 1.9, 0.12, 0.12, { mat: 'metal', cast: false });
+cyl(18, 4.75, 40.6, 0.14, 9.5, { mat: 'metal', solid: true });
+box(18, 8.7, 40.6, 1.9, 0.12, 0.12, { mat: 'metal', cast: false });
+for (const bx of [-6, -3, 0, 3, 6]) cyl(bx, 0.35, 35.2, 0.09, 0.7, { mat: 'metal', solid: true });
+// gider kanalı
+box(0, 0.02, 4.5, 0.45, 0.04, 58, { mat: 'drain', cast: false });
+box(-13, 0.02, -28, 21.5, 0.04, 0.45, { mat: 'drain', cast: false });
+box(13, 0.02, -9.5, 21.5, 0.04, 0.3, { mat: 'drain', cast: false });
+
+// ═══ KABLOLAR ═══
+for (const [z, y] of [[29.5, 6.5], [24.8, 7.5], [19.8, 5.8], [13.2, 8.2], [6.8, 6.2], [0.4, 7.0], [-5.2, 6.0], [-13.8, 7.8], [-18.6, 5.6], [-23.5, 6.8]])
+  wire(WX + 0.05, y, z, EX - 0.05, y + 0.3, z, 0.55);
+wire(-8, 6.5, -26.2, -8, 6.2, -29.8, 0.5);
+wire(-17, 7.2, -26.2, -17, 6.8, -29.5, 0.5);
+wire(8, 5.2, -8.2, 8, 5.5, -10.8, 0.4);
+wire(-20, 9.4, 40.6, 18, 9.4, 40.6, 1.4);
+wire(-20, 9.2, 40.6, -30, 10.8, 34.2, 0.7);
+wire(18, 9.2, 40.6, 12, 12, 42.2, 0.6);
+wire(-40, 9.5, 38, 40, 9.8, 38, 1.6);
+
+// ═══ ZEMİN + UFUK ═══
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(180, 180), MATS.ground);
+ground.rotation.x = -Math.PI / 2;
+ground.position.y = -0.01;
+ground.receiveShadow = true;
+scene.add(ground);
+
+for (const [x, z, w, d, h] of [
+  [-50, -45, 30, 22, 26], [-15, -60, 26, 20, 32], [25, -55, 30, 24, 22], [55, -25, 22, 26, 28],
+  [62, 15, 24, 22, 20], [48, 55, 30, 24, 30], [5, 68, 34, 22, 24], [-38, 60, 28, 24, 28],
+  [-62, 20, 24, 26, 22], [-58, -8, 20, 18, 30],
+]) box(x, h / 2, z, w, h, d, { cast: false });
+// çatı arkası orta katman (paralaks)
+box(-24, 7.5, 10, 14, 15, 18, { cast: false });
+box(-26, 6, -12, 16, 12, 14, { cast: false });
+box(20, 7, 22, 16, 14, 16, { cast: false });
+box(30, 8, -20, 18, 16, 16, { cast: false });
+
+// ═══ OYUNCU ═══
+const player = { x: 0.4, z: 27, yaw: 0, pitch: 0, vx: 0, vz: 0, bob: 0 };
+const qp = new URLSearchParams(location.search).get('p'); // ?p=x,z,yaw,pitch (kontrol pozları)
+if (qp) {
+  const [x, z, yaw, pitch] = qp.split(',').map(Number);
+  if (!isNaN(x)) player.x = x;
+  if (!isNaN(z)) player.z = z;
+  if (!isNaN(yaw)) player.yaw = yaw;
+  if (!isNaN(pitch)) player.pitch = pitch;
+}
+
+const keys = new Set();
+addEventListener('keydown', e => keys.add(e.code));
+addEventListener('keyup', e => keys.delete(e.code));
+addEventListener('blur', () => keys.clear());
+
+let locked = false;
+const hint = document.getElementById('hint');
+renderer.domElement.addEventListener('click', () => renderer.domElement.requestPointerLock());
+document.addEventListener('pointerlockchange', () => {
+  locked = document.pointerLockElement === renderer.domElement;
+  hint.style.opacity = locked ? 0 : 1;
+});
+addEventListener('mousemove', e => {
+  if (!locked) return;
+  player.yaw -= e.movementX * 0.0023;
+  player.pitch = Math.max(-1.45, Math.min(1.45, player.pitch - e.movementY * 0.0023));
+});
+
+const STEP_OVER = 0.45, HEAD = 1.65, R = CFG.radius;
+function slide(dx, dz) {
+  let nx = player.x + dx, nz = player.z + dz;
+  for (const c of colliders) {
+    if (c.y1 <= STEP_OVER || c.y0 >= HEAD) continue; // basamak üstünden, saçak altından geç
+    if (nx > c.x0 - R && nx < c.x1 + R && nz > c.z0 - R && nz < c.z1 + R) {
+      if (dx > 0) nx = Math.min(nx, c.x0 - R); else if (dx < 0) nx = Math.max(nx, c.x1 + R);
+      if (dz > 0) nz = Math.min(nz, c.z0 - R); else if (dz < 0) nz = Math.max(nz, c.z1 + R);
+    }
+  }
+  player.x = nx; player.z = nz;
+}
+
+function step(dt) {
+  const run = keys.has('ShiftLeft') || keys.has('ShiftRight');
+  const sp = run ? CFG.run : CFG.walk;
+  let ix = 0, iz = 0;
+  if (locked) {
+    if (keys.has('KeyW') || keys.has('ArrowUp')) iz += 1;
+    if (keys.has('KeyS') || keys.has('ArrowDown')) iz -= 1;
+    if (keys.has('KeyA') || keys.has('ArrowLeft')) ix -= 1;
+    if (keys.has('KeyD') || keys.has('ArrowRight')) ix += 1;
+  }
+  const sy = Math.sin(player.yaw), cy = Math.cos(player.yaw);
+  let wx = -sy * iz + cy * ix;      // ileri: (-sin, -cos), sağ: (cos, -sin)
+  let wz = -cy * iz - sy * ix;
+  const l = Math.hypot(wx, wz) || 1;
+  const on = ix !== 0 || iz !== 0;
+  const tx = (wx / l) * sp * (on ? 1 : 0);
+  const tz = (wz / l) * sp * (on ? 1 : 0);
+  const k = 1 - Math.exp(-10 * dt);
+  player.vx += (tx - player.vx) * k;
+  player.vz += (tz - player.vz) * k;
+  slide(player.vx * dt, 0);
+  slide(0, player.vz * dt);
+  const spd = Math.hypot(player.vx, player.vz);
+  player.bob += dt * spd * 1.7;
+  const bobY = Math.sin(player.bob * 2) * 0.02 * Math.min(spd / CFG.walk, 1);
+  camera.position.set(player.x, CFG.eye + bobY, player.z);
+  camera.rotation.y = player.yaw;
+  camera.rotation.x = player.pitch;
+}
+
+// ═══ HUD ═══
+const hud = document.getElementById('hud');
+let ema = 1 / 60, acc = 0, frames = 0;
+function updateHud(dt) {
+  ema += (dt - ema) * 0.08;
+  acc += dt; frames++;
+  if (acc > 0.2 || frames <= 5) {
+    acc = 0;
+    const i = renderer.info.render;
+    hud.textContent = `${Math.round(1 / ema)} FPS · ${(ema * 1000).toFixed(1)} ms\n${i.calls} draw call · ${(i.triangles / 1000).toFixed(1)}k üçgen`;
+  }
+}
+
+// ═══ DÖNGÜ ═══
+const clock = new THREE.Clock();
+function tick() {
+  requestAnimationFrame(tick);
+  const dt = Math.min(clock.getDelta(), 0.05);
+  step(dt);
+  renderer.render(scene, camera);
+  updateHud(dt);
+}
+tick();
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>

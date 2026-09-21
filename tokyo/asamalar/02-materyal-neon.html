@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ほたる横丁 — 02 Materyal + Neon</title>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#05070c}
+  canvas{display:block}
+  #hud{position:fixed;top:10px;left:10px;padding:6px 9px;font:11px/1.5 ui-monospace,Menlo,monospace;
+       color:#eee;background:rgba(10,10,14,.55);border-radius:6px;pointer-events:none;white-space:pre}
+  #hint{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);padding:8px 14px;
+        font:12px ui-monospace,Menlo,monospace;color:#dfe4ee;background:rgba(16,18,26,.8);
+        border-radius:999px;transition:opacity .3s;pointer-events:none}
+  #dot{position:fixed;left:50%;top:50%;width:4px;height:4px;margin:-2px;border-radius:50%;
+       background:rgba(255,255,255,.55);pointer-events:none}
+  #err{position:fixed;top:10px;left:50%;transform:translateX(-50%);max-width:80%;padding:8px 12px;
+       font:12px monospace;color:#fff;background:#b3261e;border-radius:6px;display:none;z-index:9}
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="hud">…</div>
+<div id="hint">Yürümek için tıkla — WASD + Fare · Shift: koş</div>
+<div id="dot"></div>
+<div id="err"></div>
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+const errBox = document.getElementById('err');
+function showErr(m){ errBox.style.display = 'block'; errBox.textContent = 'Hata: ' + m; }
+addEventListener('error', e => showErr(e.message));
+addEventListener('unhandledrejection', e => showErr(e.reason?.message || String(e.reason)));
+
+// ═══ AYARLAR ═══
+const CFG = {
+  fog: 0x05070c, fogNear: 18, fogFar: 85,
+  eye: 1.7, radius: 0.35,
+  walk: 3.8, run: 6.4,
+};
+const FONT = `"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif`;
+
+// ═══ RENDERER / SAHNE ═══
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+renderer.info.autoReset = false; // composer çok paslı: sayaçlar frame başına elle sıfırlanır
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(CFG.fog);
+scene.fog = new THREE.Fog(CFG.fog, CFG.fogNear, CFG.fogFar);
+
+const camera = new THREE.PerspectiveCamera(72, innerWidth / innerHeight, 0.05, 300);
+camera.rotation.order = 'YXZ';
+
+// ═══ GECE IŞIĞI ═══
+const hemi = new THREE.HemisphereLight(0x2a3a5f, 0x0a0c12, 0.85);
+scene.add(hemi);
+const moon = new THREE.DirectionalLight(0x91a7d0, 0.3);
+moon.position.set(24, 46, -18);
+moon.castShadow = true;
+moon.shadow.mapSize.set(2048, 2048);
+Object.assign(moon.shadow.camera, { left: -60, right: 60, top: 60, bottom: -60, near: 5, far: 160 });
+moon.shadow.camera.updateProjectionMatrix();
+moon.shadow.bias = -0.0004;
+moon.shadow.normalBias = 0.03;
+scene.add(moon);
+
+function pLight(x, y, z, c, i, d) {
+  const L = new THREE.PointLight(c, i, d, 1.6);
+  L.position.set(x, y, z);
+  scene.add(L);
+  return L;
+}
+
+// ═══ PROSEDÜREL DOKULAR ═══
+function cnv(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return [c, c.getContext('2d')]; }
+function tex(c) {
+  const t = new THREE.CanvasTexture(c);
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = 4;
+  return t;
+}
+function rgb(hex){ return [parseInt(hex.slice(1,3),16), parseInt(hex.slice(3,5),16), parseInt(hex.slice(5,7),16)]; }
+function shade(hex, v){ const c = rgb(hex).map(x => Math.max(0, Math.min(255, Math.round(x + v)))); return `rgb(${c[0]},${c[1]},${c[2]})`; }
+function mix(a, b, t){ const A = rgb(a), B = rgb(b); const c = A.map((x, i) => Math.round(x + (B[i] - x) * t)); return `rgb(${c[0]},${c[1]},${c[2]})`; }
+
+// tüm dünya dokuları: 1 canvas = 2 m (fitUV s=0.5 ile eşleşir)
+function concreteTex(base, stains) {
+  const [c, x] = cnv(256, 256);
+  x.fillStyle = base; x.fillRect(0, 0, 256, 256);
+  for (let i = 0; i < 2600; i++) {
+    x.fillStyle = Math.random() < 0.5 ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.045)';
+    x.fillRect(Math.random() * 256, Math.random() * 256, 1.6, 1.6);
+  }
+  for (let i = 0; i < stains; i++) {
+    const sx = Math.random() * 256, w = 6 + Math.random() * 26;
+    const g = x.createLinearGradient(0, 0, 0, 256);
+    g.addColorStop(0, 'rgba(18,18,20,0.25)'); g.addColorStop(1, 'rgba(18,18,20,0)');
+    x.fillStyle = g; x.fillRect(sx, 0, w, 256);
+  }
+  return tex(c);
+}
+function tileTex(base) {
+  const [c, x] = cnv(256, 256);
+  x.fillStyle = '#43454a'; x.fillRect(0, 0, 256, 256);
+  for (let i = 0; i < 8; i++) for (let j = 0; j < 8; j++) {
+    x.fillStyle = shade(base, (Math.random() - 0.5) * 16);
+    x.fillRect(i * 32 + 2, j * 32 + 2, 28, 28);
+    x.fillStyle = 'rgba(255,255,255,0.04)';
+    x.fillRect(i * 32 + 2, j * 32 + 2, 28, 2);
+  }
+  return tex(c);
+}
+function cladTex(base) {
+  const [c, x] = cnv(256, 256);
+  x.fillStyle = base; x.fillRect(0, 0, 256, 256);
+  for (let i = 0; i < 8; i++) {
+    x.fillStyle = shade(base, (Math.random() - 0.5) * 10);
+    x.fillRect(i * 32 + 1, 0, 30, 256);
+    x.fillStyle = 'rgba(0,0,0,0.35)'; x.fillRect(i * 32, 0, 2, 256);
+    x.fillStyle = 'rgba(255,255,255,0.08)'; x.fillRect(i * 32 + 30, 0, 2, 256);
+  }
+  for (let i = 0; i < 500; i++) { x.fillStyle = 'rgba(0,0,0,0.05)'; x.fillRect(Math.random() * 256, Math.random() * 256, 2, 1); }
+  return tex(c);
+}
+function asphaltTex() {
+  const [c, x] = cnv(256, 256);
+  x.fillStyle = '#2a2e35'; x.fillRect(0, 0, 256, 256);
+  for (let i = 0; i < 4200; i++) {
+    x.fillStyle = Math.random() < 0.6 ? 'rgba(0,0,0,0.09)' : 'rgba(255,255,255,0.03)';
+    x.fillRect(Math.random() * 256, Math.random() * 256, 1.5, 1.5);
+  }
+  for (let i = 0; i < 7; i++) {
+    const g = x.createRadialGradient(Math.random() * 256, Math.random() * 256, 4, 128, 128, 90);
+    g.addColorStop(0, 'rgba(10,11,14,0.35)'); g.addColorStop(1, 'rgba(10,11,14,0)');
+    x.fillStyle = g; x.fillRect(0, 0, 256, 256);
+  }
+  return tex(c);
+}
+function grateTex() {
+  const [c, x] = cnv(64, 64);
+  x.fillStyle = '#17191d'; x.fillRect(0, 0, 64, 64);
+  for (let i = 0; i < 8; i++) { x.fillStyle = '#07080a'; x.fillRect(i * 8 + 2, 2, 4, 60); }
+  return tex(c);
+}
+function shutterTex() {
+  const [c, x] = cnv(128, 256);
+  x.fillStyle = '#484c54'; x.fillRect(0, 0, 128, 256);
+  for (let y = 0; y < 256; y += 12) {
+    x.fillStyle = 'rgba(255,255,255,0.13)'; x.fillRect(0, y, 128, 3);
+    x.fillStyle = 'rgba(0,0,0,0.38)'; x.fillRect(0, y + 8, 128, 4);
+  }
+  for (let i = 0; i < 6; i++) {
+    const sx = Math.random() * 128;
+    const g = x.createLinearGradient(0, 0, 0, 256);
+    g.addColorStop(0, 'rgba(96,52,28,0.0)'); g.addColorStop(1, 'rgba(96,52,28,0.3)');
+    x.fillStyle = g; x.fillRect(sx, 100, 3 + Math.random() * 5, 156);
+  }
+  return tex(c);
+}
+function woodTex() {
+  const [c, x] = cnv(128, 128);
+  x.fillStyle = '#453322'; x.fillRect(0, 0, 128, 128);
+  for (let i = 0; i < 5; i++) {
+    x.fillStyle = shade('#453322', (Math.random() - 0.5) * 18);
+    x.fillRect(i * 26 + 1, 0, 24, 128);
+    x.fillStyle = 'rgba(0,0,0,0.4)'; x.fillRect(i * 26, 0, 2, 128);
+  }
+  for (let i = 0; i < 40; i++) { x.fillStyle = 'rgba(0,0,0,0.12)'; x.fillRect(Math.random() * 128, Math.random() * 128, 1, 8 + Math.random() * 20); }
+  return tex(c);
+}
+function metalDoorTex() {
+  const [c, x] = cnv(128, 128);
+  x.fillStyle = '#26292f'; x.fillRect(0, 0, 128, 128);
+  x.strokeStyle = 'rgba(255,255,255,0.09)'; x.lineWidth = 3; x.strokeRect(10, 6, 108, 116);
+  x.fillStyle = '#101216'; x.fillRect(44, 16, 40, 22);
+  for (let i = 0; i < 300; i++) { x.fillStyle = 'rgba(0,0,0,0.08)'; x.fillRect(Math.random() * 128, Math.random() * 128, 2, 1); }
+  return tex(c);
+}
+function laundryTex() { // cam kapı: içi yanan çamaşırhane
+  const [c, x] = cnv(128, 256);
+  const g = x.createLinearGradient(0, 0, 0, 256);
+  g.addColorStop(0, '#0e2833'); g.addColorStop(1, '#1d5064');
+  x.fillStyle = g; x.fillRect(0, 0, 128, 256);
+  for (let i = 0; i < 3; i++) { // makine yuvarlakları
+    x.fillStyle = '#0a1a22'; x.beginPath(); x.arc(24 + i * 40, 180, 13, 0, 7); x.fill();
+    x.fillStyle = '#7fd8ef'; x.beginPath(); x.arc(24 + i * 40, 180, 8, 0, 7); x.fill();
+  }
+  x.fillStyle = 'rgba(160,235,255,0.25)'; x.fillRect(0, 40, 128, 30); // florasan bandı
+  x.fillStyle = '#0b0d10';
+  x.fillRect(60, 0, 8, 256); x.fillRect(0, 118, 128, 6); // doğrama
+  return c;
+}
+function interiorTex(v) { // üst kat pencereleri: hayat var
+  const [c, x] = cnv(128, 128);
+  if (v === 3) { // televizyonlu oda
+    x.fillStyle = '#0a0d12'; x.fillRect(0, 0, 128, 128);
+    x.fillStyle = '#7fb8ff'; x.fillRect(34, 44, 60, 40);
+    x.fillStyle = 'rgba(127,184,255,0.25)'; x.fillRect(0, 30, 128, 70);
+  } else {
+    const g = x.createLinearGradient(0, 0, 0, 128);
+    g.addColorStop(0, '#5a3816'); g.addColorStop(1, '#9a6a2e');
+    x.fillStyle = g; x.fillRect(0, 0, 128, 128);
+    x.fillStyle = 'rgba(30,16,6,0.85)';
+    if (v === 0) x.fillRect(0, 0, 34, 128);            // sol perde
+    if (v === 1) { x.fillRect(94, 0, 34, 128); x.beginPath(); x.arc(40, 96, 14, 0, 7); x.arc(52, 104, 10, 0, 7); x.fill(); } // sağ perde + saksı
+    if (v === 2) x.fillRect(0, 84, 128, 10);           // raf
+    x.fillStyle = 'rgba(255,220,160,0.35)'; x.fillRect(0, 0, 128, 26);
+  }
+  x.fillStyle = '#0d0f13';
+  x.fillRect(60, 0, 8, 128); x.fillRect(0, 60, 128, 8); // doğrama
+  return c;
+}
+function vendingTex(kind) {
+  const [c, x] = cnv(128, 256);
+  x.fillStyle = kind === 'red' ? '#5a0d0d' : '#22303c'; x.fillRect(0, 0, 128, 256);
+  x.fillStyle = kind === 'red' ? '#d02020' : '#2a8fc8'; x.fillRect(0, 0, 128, 44);
+  x.fillStyle = '#fff'; x.font = `700 26px ${FONT}`; x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.fillText(kind === 'red' ? 'ドリンク' : 'のみもの', 64, 23);
+  const cans = ['#e33', '#3af', '#fa3', '#3f6', '#f6f', '#ff9', '#9ff', '#fc6'];
+  for (let r = 0; r < 4; r++) for (let i = 0; i < 3; i++) {
+    x.fillStyle = cans[(r * 3 + i) % 8];
+    x.fillRect(14 + i * 36, 58 + r * 34, 26, 24);
+    x.fillStyle = 'rgba(255,255,255,0.35)'; x.fillRect(14 + i * 36, 58 + r * 34, 26, 5);
+  }
+  x.fillStyle = '#0c0e12'; x.fillRect(0, 210, 128, 46);
+  x.fillStyle = 'rgba(255,255,255,0.12)'; x.fillRect(10, 222, 60, 12);
+  return c;
+}
+function lanternTex() {
+  const [c, x] = cnv(64, 64);
+  const g = x.createLinearGradient(0, 0, 0, 64);
+  g.addColorStop(0, '#e8b86a'); g.addColorStop(0.5, '#ffd9a0'); g.addColorStop(1, '#d89a4e');
+  x.fillStyle = g; x.fillRect(0, 0, 64, 64);
+  x.fillStyle = 'rgba(120,60,20,0.35)';
+  for (let y = 8; y < 64; y += 12) x.fillRect(0, y, 64, 2);
+  return c;
+}
+function drawGlow(x, txt, font, px, py, color, blur) {
+  x.font = font; x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.save();
+  x.shadowColor = color; x.shadowBlur = blur; x.fillStyle = color;
+  x.fillText(txt, px, py);
+  x.shadowBlur = blur / 2.5; x.fillStyle = mix(color, '#ffffff', 0.72);
+  x.fillText(txt, px, py);
+  x.restore();
+}
+function neonCanvas(o) {
+  const W = o.W, H = o.H;
+  const [c, x] = cnv(W, H);
+  x.fillStyle = o.bg || '#0a0a10'; x.fillRect(0, 0, W, H);
+  if (o.flip) { x.save(); x.translate(W, 0); x.scale(-1, 1); }
+  if (o.border) {
+    x.strokeStyle = o.border; x.lineWidth = 6;
+    x.shadowColor = o.border; x.shadowBlur = 9;
+    x.strokeRect(9, 9, W - 18, H - 18);
+    x.shadowBlur = 0;
+  }
+  const chars = [...o.text];
+  if (o.vertical) {
+    const subH = o.sub ? H * 0.13 : 0;
+    const cell = (H - subH - H * 0.03) / chars.length;
+    const fs = Math.min(cell * 0.86, W * 0.86);
+    chars.forEach((ch, i) => drawGlow(x, ch, `700 ${fs}px ${FONT}`, W / 2, H * 0.015 + cell * (i + 0.5), o.color, 9));
+    if (o.sub) {
+      const sfs = Math.min(H * 0.07, (W * 0.9) / o.sub.length);
+      drawGlow(x, o.sub, `700 ${sfs}px ${FONT}`, W / 2, H - subH / 2, o.color, 7);
+    }
+  } else {
+    const fs = Math.min(H * 0.58, (W * 0.94) / chars.length);
+    drawGlow(x, o.text, `700 ${fs}px ${FONT}`, W / 2, o.sub ? H * 0.38 : H / 2, o.color, 9);
+    if (o.sub) drawGlow(x, o.sub, `700 ${H * 0.2}px ${FONT}`, W / 2, H * 0.78, o.color, 7);
+  }
+  if (o.flip) x.restore();
+  return c;
+}
+
+// ═══ MALZEMELER ═══
+const std = o => new THREE.MeshStandardMaterial(o);
+function signMats(o) {
+  const mk = c => std({ map: tex(neonCanvas(c)), emissiveMap: tex(neonCanvas(c)), emissive: 0xffffff, emissiveIntensity: o.i || 1.75, roughness: 0.45, metalness: 0.1 });
+  return { f: mk({ ...o }), b: mk({ ...o, flip: true }) };
+}
+const MATS = {
+  conc:  std({ map: concreteTex('#787b80', 7), roughness: 0.92 }),
+  concD: std({ map: concreteTex('#565a60', 10), roughness: 0.94 }),
+  concW: std({ map: concreteTex('#7d7468', 8), roughness: 0.92 }),
+  tileW: std({ map: tileTex('#b5afa2'), roughness: 0.5 }),
+  tileG: std({ map: tileTex('#93a292'), roughness: 0.5 }),
+  tileB: std({ map: tileTex('#ab9c8c'), roughness: 0.5 }),
+  clad:  std({ map: cladTex('#6f767f'), roughness: 0.5, metalness: 0.5 }),
+  ground: std({ map: asphaltTex(), roughness: 0.97 }),
+  drain: std({ map: grateTex(), roughness: 0.5, metalness: 0.7 }),
+  metal: std({ color: 0x6d7076, roughness: 0.45, metalness: 0.8 }),
+  metalD: std({ color: 0x22252a, roughness: 0.5, metalness: 0.7 }),
+  frame: std({ color: 0x101216, roughness: 0.55, metalness: 0.6 }),
+  winFrame: std({ color: 0x16181c, roughness: 0.6, metalness: 0.4 }),
+  prop: std({ color: 0x8a6a1c, roughness: 0.6 }),
+  barrel: std({ color: 0x1c3234, roughness: 0.5, metalness: 0.7 }),
+  vermilion: std({ color: 0x7e2015, roughness: 0.65 }),
+  noren: std({ color: 0x1f2c50, roughness: 0.9 }),
+  paper: std({ map: tex(lanternTex()), emissiveMap: tex(lanternTex()), emissive: 0xffffff, emissiveIntensity: 1.8, roughness: 0.8 }),
+  wire: std({ color: 0x0a0b0d, roughness: 0.9 }),
+  dark: std({ color: 0x0b0d12, roughness: 1 }),
+};
+const doorMats = {
+  metalD: { face: std({ map: metalDoorTex(), roughness: 0.5, metalness: 0.7 }) },
+  wood: { face: std({ map: woodTex(), roughness: 0.8 }) },
+  laundry: (() => { const t = tex(laundryTex()); return { face: std({ map: t, emissiveMap: t, emissive: 0xffffff, emissiveIntensity: 1.6, roughness: 0.4 }) }; })(),
+};
+const litWinMats = [0, 1, 2].map(v => { const t = tex(interiorTex(v)); return std({ map: t, emissiveMap: t, emissive: 0xffffff, emissiveIntensity: 1.25, roughness: 0.6 }); });
+const tvMat = (() => { const t = tex(interiorTex(3)); return std({ map: t, emissiveMap: t, emissive: 0xffffff, emissiveIntensity: 1.6, roughness: 0.5 }); })();
+const darkWin = std({ color: 0x0b0d12, roughness: 0.15, metalness: 0.85 });
+const shutterMat = std({ map: shutterTex(), roughness: 0.55, metalness: 0.65 });
+const lampHeadMat = std({ color: 0xdfe9ff, emissive: 0xdfe9ff, emissiveIntensity: 2.4, roughness: 0.4 });
+const flickerMats = [];
+
+// ═══ GEOMETRİ YARDIMCILARI + ÇARPIŞMA ═══
+const colliders = [];
+const world = new THREE.Group();
+scene.add(world);
+
+function fitUV(geo, sx, sy, sz, s = 0.5) { // dünya ölçekli UV: 1 doku = 2 m
+  const uv = geo.attributes.uv, n = geo.attributes.normal;
+  for (let i = 0; i < uv.count; i++) {
+    const nx = Math.abs(n.getX(i)), ny = Math.abs(n.getY(i));
+    let u = uv.getX(i), v = uv.getY(i);
+    if (nx > 0.5) { u *= sz * s; v *= sy * s; }
+    else if (ny > 0.5) { u *= sx * s; v *= sz * s; }
+    else { u *= sx * s; v *= sy * s; }
+    uv.setXY(i, u, v);
+  }
+}
+function matOf(m) { return typeof m === 'string' ? MATS[m] : m; }
+function box(cx, cy, cz, sx, sy, sz, o = {}) {
+  const geo = new THREE.BoxGeometry(sx, sy, sz);
+  if (o.fit) fitUV(geo, sx, sy, sz);
+  const m = new THREE.Mesh(geo, o.mat ? matOf(o.mat) : MATS.conc);
+  m.position.set(cx, cy, cz);
+  m.castShadow = o.cast ?? true;
+  m.receiveShadow = true;
+  world.add(m);
+  if (o.solid) colliders.push({ x0: cx - sx/2, x1: cx + sx/2, z0: cz - sz/2, z1: cz + sz/2, y0: cy - sy/2, y1: cy + sy/2 });
+  return m;
+}
+function cyl(cx, cy, cz, r, h, o = {}) {
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, 14), o.mat ? matOf(o.mat) : MATS.metal);
+  m.position.set(cx, cy, cz);
+  if (o.axis === 'x') m.rotation.z = Math.PI / 2;
+  if (o.axis === 'z') m.rotation.x = Math.PI / 2;
+  m.castShadow = o.cast ?? true;
+  m.receiveShadow = true;
+  world.add(m);
+  if (o.solid) colliders.push({ x0: cx - r, x1: cx + r, z0: cz - r, z1: cz + r, y0: cy - h/2, y1: cy + h/2 });
+  return m;
+}
+function mass(x0, x1, z0, z1, h, o = {}) {
+  return box((x0 + x1) / 2, h / 2, (z0 + z1) / 2, x1 - x0, h, z1 - z0, { solid: true, fit: true, ...o });
+}
+function wire(ax, ay, az, bx, by, bz, sag = 0.6) {
+  const mid = new THREE.Vector3((ax + bx) / 2, Math.min(ay, by) - sag, (az + bz) / 2);
+  const curve = new THREE.QuadraticBezierCurve3(new THREE.Vector3(ax, ay, az), mid, new THREE.Vector3(bx, by, bz));
+  const geo = new THREE.TubeGeometry(curve, Math.max(10, Math.round(curve.getLength() * 0.8)), 0.022, 5);
+  const m = new THREE.Mesh(geo, MATS.wire);
+  m.castShadow = false;
+  world.add(m);
+}
+function h01(n) { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); }
+
+// ═══ CEPHE PARÇALARI ═══
+function doorX(xWall, dir, z, kind = 'metalD') {
+  const m = doorMats[kind].face, fr = MATS.frame;
+  box(xWall + dir * 0.06, 1.05, z, 0.12, 2.1, 1.05, { mat: dir > 0 ? [m, fr, fr, fr, fr, fr] : [fr, m, fr, fr, fr, fr], cast: false });
+  box(xWall + dir * 0.38, 0.09, z, 0.76, 0.18, 1.3, { mat: 'conc', fit: true, cast: false });
+}
+function doorZ(zWall, dir, x, kind = 'metalD') {
+  const m = doorMats[kind].face, fr = MATS.frame;
+  box(x, 1.05, zWall + dir * 0.06, 1.05, 2.1, 0.12, { mat: dir > 0 ? [fr, fr, fr, fr, m, fr] : [fr, fr, fr, fr, fr, m], cast: false });
+  box(x, 0.09, zWall + dir * 0.38, 1.3, 0.18, 0.76, { mat: 'conc', fit: true, cast: false });
+}
+let winCount = 0;
+function winMat() {
+  const i = winCount++, r = h01(i * 7.13 + 1.7);
+  if (r < 0.30) return litWinMats[Math.floor(h01(i * 3.1) * 3)];
+  if (r < 0.38) return tvMat;
+  return darkWin;
+}
+function winX(xWall, dir, z, y, w = 0.95, h = 1.1) {
+  box(xWall + dir * 0.015, y, z, 0.05, h + 0.14, w + 0.14, { mat: 'winFrame', cast: false });
+  const p = new THREE.Mesh(new THREE.PlaneGeometry(w, h), winMat());
+  p.position.set(xWall + dir * 0.045, y, z);
+  p.rotation.y = dir > 0 ? Math.PI / 2 : -Math.PI / 2;
+  p.receiveShadow = true;
+  world.add(p);
+}
+function winZ(zWall, dir, x, y, w = 0.95, h = 1.1) {
+  box(x, y, zWall + dir * 0.015, w + 0.14, h + 0.14, 0.05, { mat: 'winFrame', cast: false });
+  const p = new THREE.Mesh(new THREE.PlaneGeometry(w, h), winMat());
+  p.position.set(x, y, zWall + dir * 0.045);
+  if (dir < 0) p.rotation.y = Math.PI;
+  p.receiveShadow = true;
+  world.add(p);
+}
+function shutterX(xWall, dir, z, w = 1.9, h = 2.3) {
+  const p = new THREE.Mesh(new THREE.PlaneGeometry(w, h), shutterMat);
+  p.position.set(xWall + dir * 0.04, h / 2 + 0.02, z);
+  p.rotation.y = dir > 0 ? Math.PI / 2 : -Math.PI / 2;
+  p.receiveShadow = true;
+  world.add(p);
+  box(xWall + dir * 0.03, h + 0.07, z, 0.07, 0.14, w + 0.1, { mat: 'metalD', cast: false });
+}
+function shutterZ(zWall, dir, x, w = 1.9, h = 2.3) {
+  const p = new THREE.Mesh(new THREE.PlaneGeometry(w, h), shutterMat);
+  p.position.set(x, h / 2 + 0.02, zWall + dir * 0.04);
+  if (dir < 0) p.rotation.y = Math.PI;
+  p.receiveShadow = true;
+  world.add(p);
+  box(x, h + 0.07, zWall + dir * 0.03, w + 0.1, 0.14, 0.07, { mat: 'metalD', cast: false });
+}
+function pipeX(xWall, dir, z, h) { cyl(xWall + dir * 0.09, h / 2, z, 0.055, h, { mat: 'metal' }); }
+function pipeZ(zWall, dir, x, h) { cyl(x, h / 2, zWall + dir * 0.09, 0.055, h, { mat: 'metal' }); }
+function acX(xWall, dir, z, y) { box(xWall + dir * 0.19, y, z, 0.38, 0.62, 0.85, { mat: 'metal' }); }
+function lantern(x, z, y = 2.75) {
+  cyl(x, y, z, 0.16, 0.42, { mat: 'paper', cast: false });
+  cyl(x, y + 0.26, z, 0.055, 0.1, { mat: 'metalD', cast: false });
+}
+function norenX(xWall, dir, z, txt) {
+  const [c, x] = cnv(128, 64);
+  x.fillStyle = '#1f2c50'; x.fillRect(0, 0, 128, 64);
+  x.fillStyle = 'rgba(0,0,0,0.35)'; x.fillRect(42, 22, 3, 42); x.fillRect(84, 22, 3, 42);
+  x.fillStyle = '#e8ecf2'; x.font = `700 28px ${FONT}`; x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.fillText(txt, 64, 30);
+  const m = std({ map: tex(c), roughness: 0.9 });
+  const s = MATS.noren;
+  box(xWall + dir * 0.07, 1.86, z, 0.05, 0.5, 1.0, { mat: [m, m, s, s, s, s], cast: false });
+}
+function norenZ(zWall, dir, x0, txt) {
+  const [c, x] = cnv(128, 64);
+  x.fillStyle = '#1f2c50'; x.fillRect(0, 0, 128, 64);
+  x.fillStyle = 'rgba(0,0,0,0.35)'; x.fillRect(42, 22, 3, 42); x.fillRect(84, 22, 3, 42);
+  x.fillStyle = '#e8ecf2'; x.font = `700 28px ${FONT}`; x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.fillText(txt, 64, 30);
+  const m = std({ map: tex(c), roughness: 0.9 });
+  const s = MATS.noren;
+  box(x0, 1.86, zWall + dir * 0.07, 1.0, 0.5, 0.05, { mat: [s, s, s, s, m, m], cast: false });
+}
+function vending(x, z, kind) {
+  const body = std({ color: kind === 'red' ? 0x7e1414 : 0xcfd6dd, roughness: 0.35, metalness: 0.25 });
+  box(x, 0.92, z, 0.75, 1.83, 1.0, { mat: body, solid: true });
+  const t = tex(vendingTex(kind));
+  const front = std({ map: t, emissiveMap: t, emissive: 0xffffff, emissiveIntensity: 2.1, roughness: 0.4 });
+  const p = new THREE.Mesh(new THREE.PlaneGeometry(0.86, 1.62), front);
+  p.position.set(x + 0.385, 0.98, z);
+  p.rotation.y = Math.PI / 2;
+  world.add(p);
+}
+
+// ═══ NEON TABELALAR ═══
+function neonBladeX(xWall, dir, z, y0, h, o) {
+  const { f, b } = signMats({ ...o, vertical: true, W: 128, H: 512 });
+  const fr = MATS.frame;
+  box(xWall + dir * 0.43, y0 + h / 2, z, 0.16, h, 0.62, { mat: dir > 0 ? [f, b, fr, fr, fr, fr] : [b, f, fr, fr, fr, fr], solid: true });
+  box(xWall + dir * 0.22, y0 + h - 0.15, z, 0.44, 0.07, 0.07, { mat: 'metalD', cast: false });
+  if (o.flicker) flickerMats.push(f, b);
+}
+function neonBandX(xWall, dir, z, w, y0, o) {
+  const { f, b } = signMats({ ...o, vertical: false, W: 512, H: 128 });
+  const fr = MATS.frame;
+  box(xWall + dir * 0.08, y0 + 0.36, z, 0.16, 0.72, w, { mat: dir > 0 ? [f, b, fr, fr, fr, fr] : [b, f, fr, fr, fr, fr], cast: false });
+}
+function neonBladeZ(zWall, dir, x, y0, h, o) {
+  const { f, b } = signMats({ ...o, vertical: true, W: 128, H: 512 });
+  const fr = MATS.frame;
+  box(x, y0 + h / 2, zWall + dir * 0.43, 0.62, h, 0.16, { mat: dir > 0 ? [fr, fr, fr, fr, f, b] : [fr, fr, fr, fr, b, f], solid: true });
+  box(x, y0 + h - 0.15, zWall + dir * 0.22, 0.07, 0.07, 0.44, { mat: 'metalD', cast: false });
+  if (o.flicker) flickerMats.push(f, b);
+}
+function neonBandZ(zWall, dir, x, w, y0, o) {
+  const { f, b } = signMats({ ...o, vertical: false, W: 512, H: 128 });
+  const fr = MATS.frame;
+  box(x, y0 + 0.36, zWall + dir * 0.08, w, 0.72, 0.16, { mat: dir > 0 ? [fr, fr, fr, fr, f, b] : [fr, fr, fr, fr, b, f], cast: false });
+}
+
+// ═══ SOKAK PLANI ═══ (whitebox'tan doğrulanmış koordinatlar; sadece malzeme atandı)
+const WX = -2.1, EX = 2.1;
+function westSeg(zS, zN, h, d, jog = 0, mat = 'conc') { const fx = WX + jog; mass(fx - d, fx, zN, zS, h, { mat }); return fx; }
+function eastSeg(zS, zN, h, d, jog = 0, mat = 'conc') { const fx = EX - jog; mass(fx, fx + d, zN, zS, h, { mat }); return fx; }
+
+const w1  = westSeg( 34,  28,  9, 13, 0, 'concD');
+const w2  = westSeg( 28,  22, 12, 11,  0.5, 'tileB');
+const w3  = westSeg( 22,  16,  8, 12, 0, 'concW');
+const w4  = westSeg( 16,   9, 14, 10, -0.7, 'concD');
+const w5  = westSeg(  9,   4,  7, 12, 0, 'tileW');
+const w6  = westSeg(  4,  -2, 11, 13, 0, 'clad');
+const w7  = westSeg( -2,  -8,  9, 12, 0, 'conc');
+const w8  = westSeg( -8, -14, 13, 12, 0, 'tileG');
+const w9  = westSeg(-14, -20,  8, 14,  0.4, 'concW');
+const w10 = westSeg(-20, -26, 10, 16, 0, 'concD');
+
+const e1  = eastSeg( 34,  30, 10, 14, 0, 'conc');
+const e2  = eastSeg( 30,  24,  8, 12, 0, 'tileB');
+const e3  = eastSeg( 24,  17, 12, 13, 0, 'concD');
+const e4  = eastSeg( 17,  12,  7, 11, -0.5, 'tileW');
+const e5  = eastSeg( 12,   6,  9, 12,  0.5, 'concW');
+const e6  = eastSeg(  6,   0, 14, 15, 0, 'concD');
+const e7  = eastSeg(  0,  -8,  8, 10, 0, 'conc');
+const e9  = eastSeg(-11, -17, 11, 12, 0, 'tileG');
+const e10 = eastSeg(-17, -26,  9, 15, 0, 'concD');
+
+mass(-2.1, 16, -40, -26, 12, { mat: 'concW' });      // TB: kapanış cephesi (soba)
+mass(-26, -18, -26, -16, 9, { mat: 'conc' });       // F: dönüş güney duvarı (çamaşırhane)
+mass(-10.1, -2.1, -40, -30, 11, { mat: 'conc' });   // T1
+mass(-16, -10.1, -42, -29.5, 8, { mat: 'tileB' });  // T2
+mass(-24, -16, -40, -30, 13, { mat: 'concD' });     // T3
+for (let i = 0; i < 4; i++) {
+  const h = 0.45 * (i + 1);
+  box(-24.4 - i * 0.75, h / 2, -28, 0.75, h, 3.8, { solid: true, fit: true });
+}
+mass(-31, -27.4, -32, -24, 12, { mat: 'concD' });
+
+mass(12, 22, -8, -2, 7, { mat: 'tileG' });          // A
+mass(14, 24, -17, -11, 9, { mat: 'conc' });         // B
+mass(29, 35, -16, -4, 10, { mat: 'concD' });        // avlu doğu
+mass(22, 29, -18, -14, 8, { mat: 'conc' });         // avlu kuzey
+mass(22, 29, -6, -2, 9, { mat: 'tileW' });          // avlu güney
+for (let i = 0; i < 6; i++) {
+  const h = 0.32 * (i + 1);
+  box(28.2 - i * 0.5, h / 2, -13.2, 0.5, h, 1.1, { solid: true, fit: true });
+}
+box(28.94, 2.95, -13.2, 0.07, 2.1, 1.05, { mat: 'metalD', cast: false });
+
+mass(-26, -15.2, 26, 34, 14, { mat: 'conc' });      // NSt1
+mass(-40, -26, 24, 34, 11, { mat: 'concD' });       // NSt2
+mass(16.2, 27, 25, 34, 12, { mat: 'concW' });       // NSt3
+mass(27, 40, 23, 34, 15, { mat: 'clad' });          // NSt4
+mass(-40, -24, 42, 56, 16, { mat: 'concD' });       // SSt1
+mass(-24, -8, 42, 55, 12, { mat: 'conc' });         // SSt2
+mass(-8, 2, 42, 56, 18, { mat: 'clad' });           // SSt3
+mass(2, 6, 46, 52, 10, { mat: 'concD' });           // karşı sokak dibi
+mass(6, 20, 42, 55, 13, { mat: 'conc' });           // SSt4
+mass(20, 40, 42, 56, 17, { mat: 'tileW' });         // SSt5
+mass(-44, -40, 30, 46, 12, { mat: 'concD' });
+mass(40, 44, 30, 46, 12, { mat: 'concD' });
+box(4, 0.55, 44, 4, 1.1, 0.1, { mat: 'metalD', solid: true });
+box(0, 0.07, 34.35, 80, 0.14, 0.3, { mat: 'conc', fit: true, cast: false });
+box(0, 0.07, 41.65, 80, 0.14, 0.3, { mat: 'conc', fit: true, cast: false });
+
+// ═══ CEPHE DETAYLARI ═══
+doorX(w1, 1, 31); doorX(w3, 1, 19, 'wood'); doorX(w5, 1, 6.5); doorX(w7, 1, -5);
+doorX(e2, -1, 27); doorX(e3, -1, 20.5, 'wood'); doorX(e4, -1, 14.5); doorX(e7, -1, -4); doorX(e9, -1, -14);
+doorX(e5, -1, 8, 'wood');
+doorZ(-26, 1, 0.9, 'wood');
+doorZ(-26, -1, -21, 'laundry');
+doorZ(-8, -1, 16); doorZ(-11, 1, 18);
+doorZ(34, 1, -20); doorZ(34, 1, 21); doorZ(42, -1, -14); doorZ(42, -1, 12);
+norenX(w3, 1, 19, 'ほたる');
+norenZ(-26, 1, 0.9, '更科');
+shutterX(w5, 1, 8.1, 1.6); shutterX(w9, 1, -16.2, 2.0); shutterX(e2, -1, 26, 2.0); shutterX(e7, -1, -2, 1.8);
+shutterZ(34, 1, -19, 2.4); shutterZ(34, 1, 32, 2.6); shutterZ(42, -1, 10, 2.2);
+
+for (const z of [10.6, 12.4, 14.2]) { winX(w4, 1, z, 5.6); winX(w4, 1, z, 8.2); }
+for (const z of [19, 21, 23])       { winX(e3, -1, z, 6.2); winX(e3, -1, z, 8.8); }
+winX(w6, 1, 1.2, 6.4); winX(w6, 1, 2.8, 6.4);
+winX(e6, -1, 3, 9.5);
+winX(w8, 1, -9.4, 7); winX(w8, 1, -11.2, 7);
+winZ(-26, 1, 0.4, 6.4); winZ(-26, 1, 1.6, 6.4);
+for (const x of [-5, -2.8]) { winZ(42, -1, x, 6); winZ(42, -1, x, 8.6); }
+winZ(34, 1, 22.5, 5.4); winZ(34, 1, 24.3, 5.4);
+
+// ═══ TABELA RİTMİ — ほたる横丁 ═══
+neonBladeX(w3, 1, 19, 3.4, 3.0, { text: 'ほたる', sub: '居酒屋', color: '#ff5a2a' });
+neonBladeX(w6, 1, 1, 4.2, 2.6, { text: 'カラオケ', color: '#ff4fd8' });
+neonBladeX(w8, 1, -11, 3.2, 2.8, { text: 'ラーメン', sub: '一番', color: '#ff2a2a' });
+neonBandX(w9, 1, -17, 2.6, 3.1, { text: 'たばこ・酒', color: '#ffc46b' });
+neonBladeX(e3, -1, 21, 3.6, 3.2, { text: 'スナック', sub: '青い鳥', color: '#3ff2ff' });
+neonBladeX(e3, -1, 21, 7.0, 2.4, { text: 'カラオケ', color: '#b46bff' });
+neonBandX(e5, -1, 9, 3.0, 3.0, { text: '古書みみずく', color: '#ffb347' });
+neonBladeX(e9, -1, -13.5, 4.6, 3.0, { text: '占い', sub: '月の手', color: '#b46bff', flicker: true });
+neonBladeZ(-11, 1, 8, 3.5, 2.4, { text: '硝子', sub: 'バー', color: '#9fd0ff' });
+neonBladeZ(-26, 1, -0.9, 3.4, 3.0, { text: 'そば', sub: '更科', color: '#ff3b30' });
+neonBandZ(-26, 1, 0.9, 2.2, 2.6, { text: '更科', color: '#fff2d8', i: 1.5 });
+neonBandZ(-26, -1, -21, 2.0, 2.7, { text: 'ランドリー', color: '#7fe8ff', i: 1.6 });
+neonBladeZ(34, 1, 20, 4.0, 3.4, { text: 'パチンコ', sub: '大黒', color: '#ffd23f', i: 1.9 });
+neonBandZ(42, -1, -2, 4.5, 3.2, { text: '焼肉からし', color: '#ff6a2a' });
+neonBandZ(42, -1, 28, 5, 3.4, { text: 'コンビニ ジョイ 24H', color: '#bfffea', i: 1.55 });
+neonBandZ(-8, -1, 18.5, 2.2, 2.9, { text: '深夜食堂', color: '#ffe9c8', i: 1.5 });
+{ // geçit tabelası: sokağın adı
+  const { f, b } = signMats({ text: 'ほたる横丁', color: '#ffe08a', border: '#ff3b30', W: 512, H: 168, i: 2.2 });
+  const fr = MATS.frame;
+  box(-0.95, 4.6, -22, 2.3, 0.8, 0.2, { mat: [fr, fr, fr, fr, f, b] });
+  box(-1.95, 5.15, -22, 0.06, 0.35, 0.06, { mat: 'metalD', cast: false });
+}
+
+// ═══ SOKAK MOBİLYASI ═══
+vending(-1.72, 31.3, 'red');
+vending(-1.72, 32.45, 'white');
+box(-1.55, 2.5, 31.9, 1.15, 0.08, 2.9, { mat: 'metalD', cast: false });
+box(-1.55, 0.28, -24.6, 0.55, 0.55, 0.55, { mat: 'prop', solid: true });
+box(-1.5, 0.28, -23.9, 0.55, 0.55, 0.55, { mat: 'prop', solid: true });
+box(-1.52, 0.83, -24.25, 0.55, 0.55, 0.55, { mat: 'prop', solid: true });
+cyl(26.2, 0.43, -12.6, 0.3, 0.85, { mat: 'barrel', solid: true });
+cyl(26.9, 0.43, -11.8, 0.3, 0.85, { mat: 'barrel', solid: true });
+cyl(25.6, 0.43, -11.7, 0.3, 0.85, { mat: 'barrel', solid: true });
+box(23.6, 0.28, -7.2, 0.55, 0.55, 0.55, { mat: 'prop', solid: true });
+box(23.65, 0.83, -7.25, 0.55, 0.55, 0.55, { mat: 'prop', solid: true });
+cyl(-2.45, 0.33, 11.95, 0.33, 0.045, { axis: 'x', mat: 'metalD', cast: false });
+cyl(-2.45, 0.33, 13.05, 0.33, 0.045, { axis: 'x', mat: 'metalD', cast: false });
+box(-2.45, 0.55, 12.5, 0.07, 0.5, 1.0, { mat: 'metalD', cast: false });
+box(-2.45, 0.35, 12.5, 0.35, 0.35, 1.15, { mat: 'metalD', solid: true });
+acX(w8, 1, -10, 2.7); acX(e3, -1, 19, 3.5); acX(e7, -1, -4.5, 2.5);
+box(2.42, 0.35, 14.8, 0.4, 0.7, 0.9, { mat: 'metal', solid: true });
+box(2.42, 0.35, 15.9, 0.4, 0.7, 0.9, { mat: 'metal', solid: true });
+pipeX(w6, 1, 3.2, 10.5); pipeX(e6, -1, 3.8, 13.5); pipeX(e10, -1, -21, 8.5); pipeZ(-26, 1, 1.7, 11.5); pipeZ(-26, -1, -19.2, 8.5);
+box(-1.92, 1.05, -25.3, 0.36, 0.08, 0.5, { mat: 'vermilion', cast: false });
+box(-1.92, 1.26, -25.3, 0.26, 0.34, 0.3, { mat: 'vermilion', cast: false });
+box(-1.92, 1.47, -25.3, 0.34, 0.06, 0.38, { mat: 'vermilion', cast: false });
+lantern(-1.85, 6.5); lantern(2.35, 14.5); lantern(-1.9, -5); lantern(0.9, -25.5, 2.8); lantern(24.5, -13.4);
+cyl(-20, 4.75, 40.6, 0.14, 9.5, { mat: 'metalD', solid: true });
+box(-20, 8.7, 40.6, 1.9, 0.12, 0.12, { mat: 'metalD', cast: false });
+cyl(18, 4.75, 40.6, 0.14, 9.5, { mat: 'metalD', solid: true });
+box(18, 8.7, 40.6, 1.9, 0.12, 0.12, { mat: 'metalD', cast: false });
+for (const bx of [-6, -3, 0, 3, 6]) cyl(bx, 0.35, 35.2, 0.09, 0.7, { mat: 'metalD', solid: true });
+box(0, 0.02, 4.5, 0.45, 0.04, 58, { mat: 'drain', fit: true, cast: false });
+box(-13, 0.02, -28, 21.5, 0.04, 0.45, { mat: 'drain', fit: true, cast: false });
+box(13, 0.02, -9.5, 21.5, 0.04, 0.3, { mat: 'drain', fit: true, cast: false });
+
+// ═══ SOKAK LAMBALARI + NOKTA IŞIKLAR ═══
+function lampPost(x, z) {
+  cyl(x, 2.8, z, 0.09, 5.6, { mat: 'metalD', solid: true });
+  box(x, 5.5, z + 0.7, 0.08, 0.08, 1.4, { mat: 'metalD', cast: false });
+  box(x, 5.42, z + 1.35, 0.5, 0.12, 0.24, { mat: lampHeadMat, cast: false });
+  pLight(x, 5.1, z + 1.35, 0xdfe9ff, 14, 18);
+}
+lampPost(-14, 35.4); lampPost(14, 35.4);
+pLight(-1.15, 1.7, 31.85, 0xbfe0ff, 5, 7);    // otomat köşesi
+pLight(-0.9, 3.8, -21.8, 0xffd9a0, 6, 9);     // geçit tabelası
+pLight(-1.7, 2.5, 6.5, 0xffb46b, 4, 6);       // izakaya feneri
+pLight(0.9, 2.4, -25.2, 0xffc98a, 4, 6.5);    // soba kapısı
+pLight(24.5, 2.4, -13.1, 0xffb46b, 4, 7);     // avlu
+pLight(-21, 1.7, -26.8, 0x9fe8ff, 3, 6);      // çamaşırhane
+pLight(1.4, 3.8, -13.5, 0xb46bff, 2.5, 6);    // falcı
+pLight(20, 4.2, 33.6, 0xffd23f, 4.5, 9);      // pachinko
+pLight(1.4, 4.4, 21, 0x3ff2ff, 2.5, 6);       // snack bar
+pLight(-1.4, 4.2, 19, 0xff5a2a, 2.5, 6);      // hotaru
+pLight(-1.4, 4.8, 1, 0xff4fd8, 2.2, 6);       // karaoke
+pLight(-1.4, 4.2, -11, 0xff2a2a, 2.2, 6);     // ramen
+pLight(-1.0, 3.6, -17, 0xffc46b, 2.0, 5.5);   // tütüncü
+pLight(1.2, 3.6, 9, 0xffb347, 2.0, 5.5);      // kitapçı
+pLight(8, 3.2, -9.6, 0x9fd0ff, 2.0, 5);       // bar (yan sokak)
+pLight(0, 4.5, 33.5, 0xcfe0ff, 3, 11);        // cadde ağzı
+
+// ═══ KABLOLAR ═══
+for (const [z, y] of [[29.5, 6.5], [24.8, 7.5], [19.8, 5.8], [13.2, 8.2], [6.8, 6.2], [0.4, 7.0], [-5.2, 6.0], [-13.8, 7.8], [-18.6, 5.6], [-23.5, 6.8]])
+  wire(WX + 0.05, y, z, EX - 0.05, y + 0.3, z, 0.55);
+wire(-8, 6.5, -26.2, -8, 6.2, -29.8, 0.5);
+wire(-17, 7.2, -26.2, -17, 6.8, -29.5, 0.5);
+wire(8, 5.2, -8.2, 8, 5.5, -10.8, 0.4);
+wire(-20, 9.4, 40.6, 18, 9.4, 40.6, 1.4);
+wire(-20, 9.2, 40.6, -30, 10.8, 34.2, 0.7);
+wire(18, 9.2, 40.6, 12, 12, 42.2, 0.6);
+wire(-40, 9.5, 38, 40, 9.8, 38, 1.6);
+
+// ═══ ZEMİN + UFUK ═══
+const groundGeo = new THREE.PlaneGeometry(180, 180);
+{ const uv = groundGeo.attributes.uv; for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * 90, uv.getY(i) * 90); }
+const ground = new THREE.Mesh(groundGeo, MATS.ground);
+ground.rotation.x = -Math.PI / 2;
+ground.position.y = -0.01;
+ground.receiveShadow = true;
+scene.add(ground);
+
+for (const [x, z, w, d, h] of [
+  [-50, -45, 30, 22, 26], [-15, -60, 26, 20, 32], [25, -55, 30, 24, 22], [55, -25, 22, 26, 28],
+  [62, 15, 24, 22, 20], [48, 55, 30, 24, 30], [5, 68, 34, 22, 24], [-38, 60, 28, 24, 28],
+  [-62, 20, 24, 26, 22], [-58, -8, 20, 18, 30],
+]) box(x, h / 2, z, w, h, d, { mat: 'dark', cast: false });
+box(-24, 7.5, 10, 14, 15, 18, { mat: 'dark', cast: false });
+box(-26, 6, -12, 16, 12, 14, { mat: 'dark', cast: false });
+box(20, 7, 22, 16, 14, 16, { mat: 'dark', cast: false });
+box(30, 8, -20, 18, 16, 16, { mat: 'dark', cast: false });
+
+// ═══ BLOOM (neon parlaması) ═══
+const composer = new EffectComposer(renderer);
+composer.setPixelRatio(Math.min(devicePixelRatio, 2));
+composer.setSize(innerWidth, innerHeight);
+composer.addPass(new RenderPass(scene, camera));
+const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.45, 0.5, 0.85);
+composer.addPass(bloom);
+composer.addPass(new OutputPass());
+
+// ═══ OYUNCU ═══
+const player = { x: 0.4, z: 27, yaw: 0, pitch: 0, vx: 0, vz: 0, bob: 0 };
+const qp = new URLSearchParams(location.search).get('p'); // ?p=x,z,yaw,pitch
+if (qp) {
+  const [x, z, yaw, pitch] = qp.split(',').map(Number);
+  if (!isNaN(x)) player.x = x;
+  if (!isNaN(z)) player.z = z;
+  if (!isNaN(yaw)) player.yaw = yaw;
+  if (!isNaN(pitch)) player.pitch = pitch;
+}
+
+const keys = new Set();
+addEventListener('keydown', e => keys.add(e.code));
+addEventListener('keyup', e => keys.delete(e.code));
+addEventListener('blur', () => keys.clear());
+
+let locked = false;
+const hint = document.getElementById('hint');
+renderer.domElement.addEventListener('click', () => renderer.domElement.requestPointerLock());
+document.addEventListener('pointerlockchange', () => {
+  locked = document.pointerLockElement === renderer.domElement;
+  hint.style.opacity = locked ? 0 : 1;
+});
+addEventListener('mousemove', e => {
+  if (!locked) return;
+  player.yaw -= e.movementX * 0.0023;
+  player.pitch = Math.max(-1.45, Math.min(1.45, player.pitch - e.movementY * 0.0023));
+});
+
+const STEP_OVER = 0.45, HEAD = 1.65, R = CFG.radius;
+function slide(dx, dz) {
+  let nx = player.x + dx, nz = player.z + dz;
+  for (const c of colliders) {
+    if (c.y1 <= STEP_OVER || c.y0 >= HEAD) continue;
+    if (nx > c.x0 - R && nx < c.x1 + R && nz > c.z0 - R && nz < c.z1 + R) {
+      if (dx > 0) nx = Math.min(nx, c.x0 - R); else if (dx < 0) nx = Math.max(nx, c.x1 + R);
+      if (dz > 0) nz = Math.min(nz, c.z0 - R); else if (dz < 0) nz = Math.max(nz, c.z1 + R);
+    }
+  }
+  player.x = nx; player.z = nz;
+}
+
+function step(dt) {
+  const run = keys.has('ShiftLeft') || keys.has('ShiftRight');
+  const sp = run ? CFG.run : CFG.walk;
+  let ix = 0, iz = 0;
+  if (locked) {
+    if (keys.has('KeyW') || keys.has('ArrowUp')) iz += 1;
+    if (keys.has('KeyS') || keys.has('ArrowDown')) iz -= 1;
+    if (keys.has('KeyA') || keys.has('ArrowLeft')) ix -= 1;
+    if (keys.has('KeyD') || keys.has('ArrowRight')) ix += 1;
+  }
+  const sy = Math.sin(player.yaw), cy = Math.cos(player.yaw);
+  let wx = -sy * iz + cy * ix;
+  let wz = -cy * iz - sy * ix;
+  const l = Math.hypot(wx, wz) || 1;
+  const on = ix !== 0 || iz !== 0;
+  const tx = (wx / l) * sp * (on ? 1 : 0);
+  const tz = (wz / l) * sp * (on ? 1 : 0);
+  const k = 1 - Math.exp(-10 * dt);
+  player.vx += (tx - player.vx) * k;
+  player.vz += (tz - player.vz) * k;
+  slide(player.vx * dt, 0);
+  slide(0, player.vz * dt);
+  const spd = Math.hypot(player.vx, player.vz);
+  player.bob += dt * spd * 1.7;
+  const bobY = Math.sin(player.bob * 2) * 0.02 * Math.min(spd / CFG.walk, 1);
+  camera.position.set(player.x, CFG.eye + bobY, player.z);
+  camera.rotation.y = player.yaw;
+  camera.rotation.x = player.pitch;
+}
+
+// ═══ GECE HAYATI: neon titremesi + TV ═══
+let flT = 0;
+function nightLife(dt) {
+  flT += dt;
+  if (flT < 0.09) return;
+  flT = 0;
+  tvMat.emissiveIntensity = 1.3 + Math.random() * 1.3;
+  for (const m of flickerMats) m.emissiveIntensity = Math.random() < 0.14 ? 0.4 : 1.9;
+}
+
+// ═══ HUD ═══
+const hud = document.getElementById('hud');
+let ema = 1 / 60, acc = 0, frames = 0;
+function updateHud(dt) {
+  ema += (dt - ema) * 0.08;
+  acc += dt; frames++;
+  if (acc > 0.2 || frames <= 5) {
+    acc = 0;
+    const i = renderer.info.render;
+    hud.textContent = `${Math.round(1 / ema)} FPS · ${(ema * 1000).toFixed(1)} ms\n${i.calls} draw call · ${(i.triangles / 1000).toFixed(1)}k üçgen`;
+  }
+}
+
+// ═══ DÖNGÜ ═══
+const clock = new THREE.Clock();
+function tick() {
+  requestAnimationFrame(tick);
+  const dt = Math.min(clock.getDelta(), 0.05);
+  step(dt);
+  nightLife(dt);
+  renderer.info.reset();
+  composer.render();
+  updateHud(dt);
+}
+tick();
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+  composer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>

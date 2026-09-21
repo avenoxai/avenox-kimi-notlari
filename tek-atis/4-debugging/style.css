@@ -1,0 +1,182 @@
+:root {
+  --bg: #eef1f6;
+  --card: #ffffff;
+  --ink: #1b2330;
+  --muted: #6b7684;
+  --line: #e2e6ee;
+  --accent: #3d5afe;
+  --accent-soft: #eaeeff;
+  --high: #d94848;
+  --high-soft: #fdecec;
+  --mid: #c07c1e;
+  --mid-soft: #fdf3e2;
+  --low: #3f8f6b;
+  --low-soft: #e9f5ef;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 40px 16px 64px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 28px 28px 18px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(27, 35, 48, 0.08);
+}
+
+.app-header h1 { margin: 0; font-size: 26px; letter-spacing: -0.4px; }
+.subtitle { margin: 6px 0 22px; color: var(--muted); font-size: 14px; }
+
+.field {
+  height: 40px;
+  padding: 0 12px;
+  background: #fbfcfe;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  color: inherit;
+  font: inherit;
+  outline: none;
+}
+.field:focus { background: #fff; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+.task-form {
+  display: grid;
+  grid-template-columns: 1fr 120px 150px auto;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.primary {
+  height: 40px;
+  padding: 0 20px;
+  background: var(--accent);
+  border: 0;
+  border-radius: 9px;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.primary:hover { filter: brightness(1.07); }
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.filters { display: flex; gap: 6px; }
+.tools { display: flex; gap: 8px; }
+.tools .field { height: 34px; }
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+.filter:hover { background: #f3f5f9; }
+.filter.is-active { background: var(--accent-soft); border-color: #c8d1ff; color: var(--accent); }
+
+.badge {
+  min-width: 20px;
+  padding: 1px 6px;
+  background: #e5e9f0;
+  border-radius: 20px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+.filter.is-active .badge { background: #fff; color: var(--accent); }
+
+.task-list { list-style: none; margin: 0; padding: 0; }
+
+.task {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--line);
+}
+.task:last-child { border-bottom: 0; }
+
+.check { display: block; padding-top: 2px; cursor: pointer; }
+.check input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
+
+.task-body { flex: 1; min-width: 0; }
+.task-title { display: inline-block; max-width: 100%; font-weight: 500; word-break: break-word; cursor: text; }
+.task.is-done .task-title { color: var(--muted); text-decoration: line-through; }
+.task-meta { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
+
+.pill { padding: 2px 9px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.pill.high { background: var(--high-soft); color: var(--high); }
+.pill.mid { background: var(--mid-soft); color: var(--mid); }
+.pill.low { background: var(--low-soft); color: var(--low); }
+.due { color: var(--muted); font-size: 12.5px; }
+
+.edit-input {
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid var(--accent);
+  border-radius: 7px;
+  font: inherit;
+  outline: none;
+}
+
+.remove {
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 0;
+  border-radius: 7px;
+  color: #b3bcc9;
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+}
+.remove:hover { background: var(--high-soft); color: var(--high); }
+
+.empty { margin: 26px 0; color: var(--muted); text-align: center; }
+
+.app-footer {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12.5px;
+  text-align: center;
+}
+
+@media (max-width: 620px) {
+  .task-form { grid-template-columns: 1fr 1fr; }
+  .task-form .title-field { grid-column: span 2; }
+  .toolbar { align-items: stretch; }
+  .tools { flex: 1; }
+  .tools .field { flex: 1; }
+}

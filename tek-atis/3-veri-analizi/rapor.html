@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuzey Rüzgarı — Zarar Analizi | Mart–Ağustos 2026</title>
+<style>
+  :root { --ink:#1a2233; --mut:#5b6472; --pos:#1e9e6a; --neg:#d64550; --bg:#f6f7f9; --card:#ffffff; --line:#e6e8ee; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+        font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif; line-height:1.55; }
+  .wrap { max-width:880px; margin:0 auto; padding:40px 20px 80px; }
+  header { border-bottom:3px solid var(--ink); padding-bottom:18px; margin-bottom:8px; }
+  h1 { font-size:28px; margin:0 0 6px; letter-spacing:-.02em; }
+  h2 { font-size:20px; margin:44px 0 10px; padding-top:22px; border-top:1px solid var(--line); letter-spacing:-.01em; }
+  h3 { font-size:16px; margin:22px 0 6px; }
+  .sub { color:var(--mut); font-size:14px; }
+  .ozet { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; margin:22px 0; }
+  .kpi { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .kpi .v { font-size:24px; font-weight:700; letter-spacing:-.02em; }
+  .kpi .l { font-size:12.5px; color:var(--mut); margin-top:2px; }
+  .neg { color:var(--neg); } .poz { color:var(--pos); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 22px; margin:16px 0; }
+  .rank { display:flex; gap:14px; align-items:flex-start; }
+  .no { flex:0 0 34px; height:34px; border-radius:9px; background:var(--ink); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-weight:700; }
+  .etki { font-size:20px; font-weight:700; color:var(--neg); white-space:nowrap; }
+  .tag { display:inline-block; font-size:11.5px; font-weight:600; padding:2px 9px; border-radius:20px;
+         background:#fdecef; color:var(--neg); margin-left:8px; vertical-align:2px; }
+  .ok { background:#e7f6ef; color:var(--pos); }
+  table { border-collapse:collapse; width:100%; font-size:13px; margin:10px 0; }
+  th, td { padding:7px 9px; text-align:right; border-bottom:1px solid var(--line); }
+  th:first-child, td:first-child { text-align:left; }
+  th { color:var(--mut); font-weight:600; }
+  tr.hl td { font-weight:700; background:#fafbfc; }
+  svg { width:100%; height:auto; display:block; margin:6px 0 2px; }
+  .ax { font-size:11px; fill:var(--mut); font-family:inherit; }
+  .ax2 { font-size:12.5px; fill:var(--ink); font-family:inherit; }
+  .axv { font-size:12px; fill:var(--ink); font-weight:600; font-family:inherit; }
+  .lg { font-size:11.5px; fill:var(--mut); font-family:inherit; }
+  .cap { font-size:12.5px; color:var(--mut); margin:2px 0 0; }
+  ul { padding-left:20px; margin:8px 0; } li { margin:5px 0; }
+  .uc { background:#fff8ec; border:1px solid #f5dfa8; border-radius:14px; padding:20px 22px; }
+  .uc .n { font-weight:700; }
+  footer { margin-top:50px; font-size:12px; color:var(--mut); border-top:1px solid var(--line); padding-top:14px; }
+  .vars { font-size:13.5px; }
+</style></head><body><div class="wrap">
+
+<header>
+  <h1>Kuzey Rüzgarı: Satışlar büyürken neden zarar ediyoruz?</h1>
+  <div class="sub">Yönetim kurulu analiz raporu · Dönem: 1 Mart – 31 Ağustos 2026 · Hazırlanma: 21 Eylül 2026</div>
+</header>
+
+<div class="ozet">
+  <div class="kpi"><div class="v poz">+25%</div><div class="l">Ciro artışı (Mart → Ağustos, 5,2M → 6,5M)</div></div>
+  <div class="kpi"><div class="v neg">-2,1M TL</div><div class="l">6 aylık toplam faaliyet kârı</div></div>
+  <div class="kpi"><div class="v neg">-1,2M TL</div><div class="l">Ağustos aylık zararı (gidişat hızı)</div></div>
+  <div class="kpi"><div class="v">Nisan</div><div class="l">Son kârlı ay — Mayıs başabaş, Haziran'dan itibaren zarar</div></div>
+</div>
+
+<p><b>Tek cümlelik cevap:</b> Büyümenin kendisi kârlı değil; Mayıs ortasında aynı anda devreye giren üç karar —
+başabaşın altında getirisi olan TikTok reklam seferberliği, herkese açık hale gelen %30 hoş geldin kuponu ve
+koşulsuz bedava kargo — birim ekonomiyi bozdu; üzerine kronikleşmiş ayakkabı iade sorunu (%33) ve düşük marjlı
+termos satışlarının payının üç katına çıkması eklendi. Şirket Mart–Nisan'da ayda ~270K TL kâr ederken
+Ağustos'ta ayda -1,2M TL zarar ediyor.</p>
+
+<h2>Aylık kâr tablosu: kırılma Mayıs'ta</h2>
+<div class="card"><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg"><line x1="64" y1="256.0" x2="704" y2="256.0" stroke="#e6e8ee"/><text x="56" y="260.0" text-anchor="end" class="ax">-1,6M</text><line x1="64" y1="199.5" x2="704" y2="199.5" stroke="#e6e8ee"/><text x="56" y="203.5" text-anchor="end" class="ax">0,7M</text><line x1="64" y1="143.0" x2="704" y2="143.0" stroke="#e6e8ee"/><text x="56" y="147.0" text-anchor="end" class="ax">2,9M</text><line x1="64" y1="86.5" x2="704" y2="86.5" stroke="#e6e8ee"/><text x="56" y="90.5" text-anchor="end" class="ax">5,1M</text><line x1="64" y1="30.0" x2="704" y2="30.0" stroke="#e6e8ee"/><text x="56" y="34.0" text-anchor="end" class="ax">7,4M</text><rect x="80.0" y="85.6" width="21.9" height="131.0" rx="3" fill="#2563eb"/><rect x="186.7" y="75.3" width="21.9" height="141.2" rx="3" fill="#2563eb"/><rect x="293.3" y="71.7" width="21.9" height="144.8" rx="3" fill="#2563eb"/><rect x="400.0" y="68.5" width="21.9" height="148.0" rx="3" fill="#2563eb"/><rect x="506.7" y="60.7" width="21.9" height="155.9" rx="3" fill="#2563eb"/><rect x="613.3" y="53.2" width="21.9" height="163.3" rx="3" fill="#2563eb"/><rect x="104.9" y="210.4" width="21.9" height="6.1" rx="3" fill="#1e9e6a"/><rect x="211.6" y="209.0" width="21.9" height="7.5" rx="3" fill="#1e9e6a"/><rect x="318.2" y="216.5" width="21.9" height="1.5" rx="3" fill="#1e9e6a"/><rect x="424.9" y="216.5" width="21.9" height="1.5" rx="3" fill="#1e9e6a"/><rect x="531.6" y="216.5" width="21.9" height="1.5" rx="3" fill="#1e9e6a"/><rect x="638.2" y="216.5" width="21.9" height="1.5" rx="3" fill="#1e9e6a"/><rect x="129.8" y="216.5" width="21.9" height="1.5" rx="3" fill="#d64550"/><rect x="236.4" y="216.5" width="21.9" height="1.5" rx="3" fill="#d64550"/><rect x="343.1" y="216.5" width="21.9" height="1.5" rx="3" fill="#d64550"/><rect x="449.8" y="216.5" width="21.9" height="12.1" rx="3" fill="#d64550"/><rect x="556.4" y="216.5" width="21.9" height="23.5" rx="3" fill="#d64550"/><rect x="663.1" y="216.5" width="21.9" height="29.8" rx="3" fill="#d64550"/><text x="117.3" y="274" text-anchor="middle" class="ax">Mart</text><text x="224.0" y="274" text-anchor="middle" class="ax">Nisan</text><text x="330.7" y="274" text-anchor="middle" class="ax">Mayıs</text><text x="437.3" y="274" text-anchor="middle" class="ax">Haziran</text><text x="544.0" y="274" text-anchor="middle" class="ax">Temmuz</text><text x="650.7" y="274" text-anchor="middle" class="ax">Ağustos</text><line x1="64" y1="216.5" x2="704" y2="216.5" stroke="#1a2233" stroke-width="1"/><rect x="64" y="8" width="10" height="10" rx="2" fill="#2563eb"/><text x="78" y="17" class="lg">Ciro (ödenen)</text><rect x="195" y="8" width="10" height="10" rx="2" fill="#1e9e6a"/><text x="209" y="17" class="lg">Kâr</text><rect x="256" y="8" width="10" height="10" rx="2" fill="#d64550"/><text x="270" y="17" class="lg">Zarar</text></svg>
+<p class="cap">Ciro her ay artarken faaliyet kârı Haziran'dan itibaren negatife döndü ve her ay derinleşti.
+İadeler sipariş ayına yazıldı; kâr = net ciro + kargo tahsilatı − ürün maliyeti (satılabilir iadeler düşülerek) − kargo − iade kargosu − reklam − sabit gider.</p>
+<table><tr><th></th><th>Mart</th><th>Nisan</th><th>Mayıs</th><th>Haziran</th><th>Temmuz</th><th>Ağustos</th></tr><tr><td>Ciro (ödenen)</td><td>5.180K</td><td>5.586K</td><td>5.728K</td><td>5.853K</td><td>6.164K</td><td>6.460K</td></tr><tr><td>İade düşümü</td><td class=neg>-418K</td><td class=neg>-496K</td><td class=neg>-633K</td><td class=neg>-487K</td><td class=neg>-575K</td><td class=neg>-625K</td></tr><tr><td>Ürün maliyeti (net)</td><td class=neg>-2.673K</td><td class=neg>-2.893K</td><td class=neg>-2.967K</td><td class=neg>-3.238K</td><td class=neg>-3.578K</td><td class=neg>-3.790K</td></tr><tr><td>Kargo (net)</td><td class=neg>-160K</td><td class=neg>-179K</td><td class=neg>-260K</td><td class=neg>-372K</td><td class=neg>-414K</td><td class=neg>-448K</td></tr><tr class="hl"><td>Katkı payı</td><td>1.912K</td><td>1.996K</td><td>1.843K</td><td>1.728K</td><td>1.565K</td><td>1.563K</td></tr><tr><td>Reklam</td><td class=neg>-140K</td><td class=neg>-170K</td><td class=neg>-327K</td><td class=neg>-678K</td><td class=neg>-963K</td><td class=neg>-1.213K</td></tr><tr><td>Sabit giderler</td><td class=neg>-1.530K</td><td class=neg>-1.530K</td><td class=neg>-1.530K</td><td class=neg>-1.530K</td><td class=neg>-1.530K</td><td class=neg>-1.530K</td></tr><tr class="hl"><td>Faaliyet kârı</td><td>242K</td><td>296K</td><td class=neg>-13K</td><td class=neg>-480K</td><td class=neg>-928K</td><td class=neg>-1.179K</td></tr></table></div>
+
+<h2>Nedenler, kanıtları ve TL etkileri</h2>
+<p>Aşağıdaki etkiler 6 aylık toplam, bağımsız (tek başına düzeltilseydi) tahminlerdir; nedenler kısmen iç içe
+geçtiği için toplamları zararın kendisini aşar — sıralama ve öncelik için kullanılmalıdır.</p>
+
+<div class="card"><div class="rank"><div class="no">1</div><div style="flex:1">
+<h3 style="margin-top:2px">TikTok reklamları: getirisi maliyetinin altında <span class="tag">−-1,3M TL / 4 ay</span></h3>
+<p><b>Kanıt:</b> Mayıs'ta başlayan TikTok harcaması Ağustos'ta 915K TL/aya ulaştı
+(toplam 2,1M TL, tüm reklam bütçesinin %60'si). TikTok'tan atfedilen ciro 3,1M TL ama bu
+siparişlerin ürün, kargo ve iade maliyetleri düşüldüğünde katkı payı yalnız 820K TL (katkı marjı %26).
+<b>ROAS 1.49x; başabaş için 2.6x gerekiyordu.</b> Yani TikTok'a verilen her 1 TL, maliyetlerden sonra ~0.39 TL geri getirdi.
+Karşılaştırma: aynı dönemde Google 2,0M TL, Instagram 1,5M TL <i>net katkı</i> üretti — sorun reklamın kendisi değil, TikTok kanalı.</p>
+<table><tr><th>TikTok</th><th>Mayıs</th><th>Haziran</th><th>Temmuz</th><th>Ağustos</th><th>Toplam</th></tr><tr><td>Katkı payı</td><td>83K</td><td>208K</td><td>244K</td><td>286K</td><td>820K</td></tr><tr><td>Reklam harcaması</td><td>120K</td><td>401K</td><td>675K</td><td>915K</td><td>2.111K</td></tr><tr class="hl"><td>Net katkı</td><td class="neg">-37K</td><td class="neg">-193K</td><td class="neg">-431K</td><td class="neg">-629K</td><td class="neg">-1.290K</td></tr></table>
+<svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg"><line x1="64" y1="256.0" x2="704" y2="256.0" stroke="#e6e8ee"/><text x="56" y="260.0" text-anchor="end" class="ax">0,0M</text><line x1="64" y1="199.5" x2="704" y2="199.5" stroke="#e6e8ee"/><text x="56" y="203.5" text-anchor="end" class="ax">0,3M</text><line x1="64" y1="143.0" x2="704" y2="143.0" stroke="#e6e8ee"/><text x="56" y="147.0" text-anchor="end" class="ax">0,7M</text><line x1="64" y1="86.5" x2="704" y2="86.5" stroke="#e6e8ee"/><text x="56" y="90.5" text-anchor="end" class="ax">1,0M</text><line x1="64" y1="30.0" x2="704" y2="30.0" stroke="#e6e8ee"/><text x="56" y="34.0" text-anchor="end" class="ax">1,4M</text><rect x="91.3" y="244.0" width="52.0" height="12.0" fill="#2563eb"/><rect x="91.3" y="232.7" width="52.0" height="11.3" fill="#8b5cf6"/><rect x="91.3" y="232.7" width="52.0" height="0.5" fill="#d64550"/><rect x="91.3" y="232.7" width="52.0" height="0.5" fill="#14b8a6"/><text x="117.3" y="274" text-anchor="middle" class="ax">Mart</text><rect x="198.0" y="242.2" width="52.0" height="13.8" fill="#2563eb"/><rect x="198.0" y="229.1" width="52.0" height="13.1" fill="#8b5cf6"/><rect x="198.0" y="229.1" width="52.0" height="0.5" fill="#d64550"/><rect x="198.0" y="227.7" width="52.0" height="1.3" fill="#14b8a6"/><text x="224.0" y="274" text-anchor="middle" class="ax">Nisan</text><rect x="304.7" y="238.4" width="52.0" height="17.6" fill="#2563eb"/><rect x="304.7" y="221.6" width="52.0" height="16.8" fill="#8b5cf6"/><rect x="304.7" y="201.6" width="52.0" height="19.9" fill="#d64550"/><rect x="304.7" y="201.6" width="52.0" height="0.5" fill="#14b8a6"/><text x="330.7" y="274" text-anchor="middle" class="ax">Mayıs</text><rect x="411.3" y="231.9" width="52.0" height="24.1" fill="#2563eb"/><rect x="411.3" y="210.0" width="52.0" height="21.9" fill="#8b5cf6"/><rect x="411.3" y="143.2" width="52.0" height="66.7" fill="#d64550"/><rect x="411.3" y="143.2" width="52.0" height="0.5" fill="#14b8a6"/><text x="437.3" y="274" text-anchor="middle" class="ax">Haziran</text><rect x="518.0" y="231.7" width="52.0" height="24.3" fill="#2563eb"/><rect x="518.0" y="209.4" width="52.0" height="22.3" fill="#8b5cf6"/><rect x="518.0" y="97.1" width="52.0" height="112.4" fill="#d64550"/><rect x="518.0" y="95.7" width="52.0" height="1.4" fill="#14b8a6"/><text x="544.0" y="274" text-anchor="middle" class="ax">Temmuz</text><rect x="624.7" y="230.1" width="52.0" height="25.9" fill="#2563eb"/><rect x="624.7" y="206.4" width="52.0" height="23.7" fill="#8b5cf6"/><rect x="624.7" y="54.2" width="52.0" height="152.2" fill="#d64550"/><rect x="624.7" y="54.2" width="52.0" height="0.5" fill="#14b8a6"/><text x="650.7" y="274" text-anchor="middle" class="ax">Ağustos</text><rect x="64" y="8" width="10" height="10" rx="2" fill="#2563eb"/><text x="78" y="17" class="lg">Google</text><rect x="146" y="8" width="10" height="10" rx="2" fill="#8b5cf6"/><text x="160" y="17" class="lg">Instagram</text><rect x="249" y="8" width="10" height="10" rx="2" fill="#d64550"/><text x="263" y="17" class="lg">TikTok</text><rect x="331" y="8" width="10" height="10" rx="2" fill="#14b8a6"/><text x="345" y="17" class="lg">E-posta</text></svg>
+<svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg"><line x1="64" y1="256.0" x2="704" y2="256.0" stroke="#e6e8ee"/><text x="56" y="260.0" text-anchor="end" class="ax">0x</text><line x1="64" y1="199.5" x2="704" y2="199.5" stroke="#e6e8ee"/><text x="56" y="203.5" text-anchor="end" class="ax">6x</text><line x1="64" y1="143.0" x2="704" y2="143.0" stroke="#e6e8ee"/><text x="56" y="147.0" text-anchor="end" class="ax">11x</text><line x1="64" y1="86.5" x2="704" y2="86.5" stroke="#e6e8ee"/><text x="56" y="90.5" text-anchor="end" class="ax">17x</text><line x1="64" y1="30.0" x2="704" y2="30.0" stroke="#e6e8ee"/><text x="56" y="34.0" text-anchor="end" class="ax">23x</text><rect x="80.0" y="54.2" width="34.3" height="201.8" rx="3" fill="#2563eb"/><rect x="186.7" y="62.7" width="34.3" height="193.3" rx="3" fill="#2563eb"/><rect x="293.3" y="113.4" width="34.3" height="142.6" rx="3" fill="#2563eb"/><rect x="400.0" y="158.5" width="34.3" height="97.5" rx="3" fill="#2563eb"/><rect x="506.7" y="158.4" width="34.3" height="97.6" rx="3" fill="#2563eb"/><rect x="613.3" y="159.9" width="34.3" height="96.1" rx="3" fill="#2563eb"/><rect x="117.3" y="92.5" width="34.3" height="163.5" rx="3" fill="#8b5cf6"/><rect x="224.0" y="119.0" width="34.3" height="137.0" rx="3" fill="#8b5cf6"/><rect x="330.7" y="131.1" width="34.3" height="124.9" rx="3" fill="#8b5cf6"/><rect x="437.3" y="168.6" width="34.3" height="87.4" rx="3" fill="#8b5cf6"/><rect x="544.0" y="173.8" width="34.3" height="82.2" rx="3" fill="#8b5cf6"/><rect x="650.7" y="178.9" width="34.3" height="77.1" rx="3" fill="#8b5cf6"/><path d="M330.7,233.8 L437.3,238.6 L544.0,242.3 L650.7,242.5" fill="none" stroke="#d64550" stroke-width="2.5"/><circle cx="330.7" cy="233.8" r="3.5" fill="#d64550"/><circle cx="437.3" cy="238.6" r="3.5" fill="#d64550"/><circle cx="544.0" cy="242.3" r="3.5" fill="#d64550"/><circle cx="650.7" cy="242.5" r="3.5" fill="#d64550"/><text x="117.3" y="274" text-anchor="middle" class="ax">Mart</text><text x="224.0" y="274" text-anchor="middle" class="ax">Nisan</text><text x="330.7" y="274" text-anchor="middle" class="ax">Mayıs</text><text x="437.3" y="274" text-anchor="middle" class="ax">Haziran</text><text x="544.0" y="274" text-anchor="middle" class="ax">Temmuz</text><text x="650.7" y="274" text-anchor="middle" class="ax">Ağustos</text><line x1="64" y1="256.0" x2="704" y2="256.0" stroke="#1a2233" stroke-width="1"/><rect x="64" y="8" width="10" height="10" rx="2" fill="#2563eb"/><text x="78" y="17" class="lg">Google ROAS</text><rect x="181" y="8" width="10" height="10" rx="2" fill="#8b5cf6"/><text x="195" y="17" class="lg">Instagram ROAS</text><rect x="319" y="8" width="10" height="10" rx="2" fill="#d64550"/><text x="333" y="17" class="lg">TikTok ROAS</text></svg>
+<p class="cap">Sağdaki grafikte kırmızı çizgi TikTok ROAS: 2,2x'ten 1,4x'e düşüyor; harcama ise 7,6 kat arttı. Ölçek büyüdükçe verim düşüyor.</p>
+</div><div class="etki">−-1,3M</div></div></div>
+
+<div class="card"><div class="rank"><div class="no">2</div><div style="flex:1">
+<h3 style="margin-top:2px">HOSGELDIN30 kuponu istismarı: mevcut müşterilere %30 <span class="tag">−1,1M TL / 6 ay</span></h3>
+<p><b>Kanıt:</b> "İlk siparişe özel" olması gereken HOSGELDIN30 kodunu <b>mevcut müşteriler</b> Mart–Mayıs'ta ayda 2–12 siparişte kullanırken
+Haziran'da 318, Temmuz'da 691, Ağustos'ta 925 siparişte kullandı. Mevcut müşterilere verilen indirim toplamı <b>1.111.965 TL</b>
+(495 müşteri kodu 2+ kez, 48'i 3+ kez kullandı). Patlama TikTok kampanyasının hemen ardından başlıyor; kod büyük olasılıkla
+kupon sitelerine / sosyal medyaya sızdı. İndirim oranı ciroya oranla %4,7'den %10,5'e çıktı.</p>
+<p><b>Ağır sonuç:</b> Marjı sadece %22 olan <b>Termos 1L</b> (1.190 TL fiyat / 928 TL maliyet) %30 kuponla 833 TL'ye satılınca
+<b>maliyetin altında satış</b> oluştu: 1.304 satırda toplam 141.645 TL doğrudan zarar (tamamı HOSGELDIN30'lu).</p>
+<svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg"><line x1="64" y1="256.0" x2="704" y2="256.0" stroke="#e6e8ee"/><text x="56" y="260.0" text-anchor="end" class="ax">0K</text><line x1="64" y1="199.5" x2="704" y2="199.5" stroke="#e6e8ee"/><text x="56" y="203.5" text-anchor="end" class="ax">211K</text><line x1="64" y1="143.0" x2="704" y2="143.0" stroke="#e6e8ee"/><text x="56" y="147.0" text-anchor="end" class="ax">422K</text><line x1="64" y1="86.5" x2="704" y2="86.5" stroke="#e6e8ee"/><text x="56" y="90.5" text-anchor="end" class="ax">633K</text><line x1="64" y1="30.0" x2="704" y2="30.0" stroke="#e6e8ee"/><text x="56" y="34.0" text-anchor="end" class="ax">845K</text><rect x="91.3" y="182.5" width="52.0" height="73.5" fill="#14b8a6"/><rect x="91.3" y="182.1" width="52.0" height="0.5" fill="#d64550"/><text x="117.3" y="274" text-anchor="middle" class="ax">Mart</text><rect x="198.0" y="174.9" width="52.0" height="81.1" fill="#14b8a6"/><rect x="198.0" y="174.6" width="52.0" height="0.5" fill="#d64550"/><text x="224.0" y="274" text-anchor="middle" class="ax">Nisan</text><rect x="304.7" y="182.4" width="52.0" height="73.6" fill="#14b8a6"/><rect x="304.7" y="179.5" width="52.0" height="2.8" fill="#d64550"/><text x="330.7" y="274" text-anchor="middle" class="ax">Mayıs</text><rect x="411.3" y="186.0" width="52.0" height="70.0" fill="#14b8a6"/><rect x="411.3" y="137.7" width="52.0" height="48.3" fill="#d64550"/><text x="437.3" y="274" text-anchor="middle" class="ax">Haziran</text><rect x="518.0" y="191.7" width="52.0" height="64.3" fill="#14b8a6"/><rect x="518.0" y="84.2" width="52.0" height="107.5" fill="#d64550"/><text x="544.0" y="274" text-anchor="middle" class="ax">Temmuz</text><rect x="624.7" y="192.4" width="52.0" height="63.6" fill="#14b8a6"/><rect x="624.7" y="54.2" width="52.0" height="138.2" fill="#d64550"/><text x="650.7" y="274" text-anchor="middle" class="ax">Ağustos</text><rect x="64" y="8" width="10" height="10" rx="2" fill="#14b8a6"/><text x="78" y="17" class="lg">Yeni müşteri (amaçlanan)</text><rect x="272" y="8" width="10" height="10" rx="2" fill="#d64550"/><text x="286" y="17" class="lg">Mevcut müşteri (istismar)</text></svg>
+<p class="cap">Kırmızı dilim: kodun amaçlanmayan kullanımı (mevcut müşteriler). Haziran'da kontrolden çıkıyor.</p>
+</div><div class="etki">−1,1M</div></div></div>
+
+<div class="card"><div class="rank"><div class="no">3</div><div style="flex:1">
+<h3 style="margin-top:2px">Ayakkabıda %33 iade oranı: kronik ve pahalı <span class="tag">−1,0M TL / 6 ay</span></h3>
+<p><b>Kanıt:</b> Satılan her 3 ayakkabıdan 1'i iade ediliyor (1.804 satış → 599 iade); diğer tüm kategoriler %4.9 civarında.
+İade nedenlerinde açık ara lider "beden uymadı" (518 adet, 1,37M TL'lik iade; 435'i ayakkabı). Kanaldan bağımsız
+(%28–35 her kanalda yüksek) yani sorun reklam kitlesi değil, ürün/beden bilgisi. İade edilen ayakkabıların %41'i
+yeniden satılamıyor (giyildiği için stoğa dönemiyor).</p>
+<p><b>Hesap:</b> Ayakkabı, diğer kategorilerin oranında iade alsaydı ~510 daha az iade olurdu. Fazladan her iade
+~1.165 TL kaybedilen marj + 97 TL iade kargosu + %41 olasılıkla 1.658 TL maliyet yazık olması demek
+→ toplam <b>~1,0M TL</b>.</p>
+<svg viewBox="0 0 720 224" xmlns="http://www.w3.org/2000/svg"><text x="140" y="29" text-anchor="end" class="ax2">Ayakkabı</text><rect x="150" y="14" width="434.8" height="22" rx="4" fill="#d64550"/><text x="592.8" y="29" class="axv">%33.2</text><text x="140" y="63" text-anchor="end" class="ax2">Mont</text><rect x="150" y="48" width="75.3" height="22" rx="4" fill="#64748b"/><text x="233.3" y="63" class="axv">%5.7</text><text x="140" y="97" text-anchor="end" class="ax2">Aksesuar</text><rect x="150" y="82" width="72.2" height="22" rx="4" fill="#64748b"/><text x="230.2" y="97" class="axv">%5.5</text><text x="140" y="131" text-anchor="end" class="ax2">Sırt Çantası</text><rect x="150" y="116" width="68.1" height="22" rx="4" fill="#64748b"/><text x="226.1" y="131" class="axv">%5.2</text><text x="140" y="165" text-anchor="end" class="ax2">Kamp Ekipmanı</text><rect x="150" y="150" width="67.3" height="22" rx="4" fill="#64748b"/><text x="225.3" y="165" class="axv">%5.1</text><text x="140" y="199" text-anchor="end" class="ax2">Termos ve Matara</text><rect x="150" y="184" width="52.2" height="22" rx="4" fill="#64748b"/><text x="210.2" y="199" class="axv">%4.0</text></svg>
+<p class="cap">Bu sorun 6 aydır var (Mart'tan beri yüksek); yeni değil ama büyüme ayakkabı hacmini de büyüttüğü için faturası şişiyor.</p>
+</div><div class="etki">−1,0M</div></div></div>
+
+<div class="card"><div class="rank"><div class="no">4</div><div style="flex:1">
+<h3 style="margin-top:2px">Ürün miksi düşük marjlı termosa kaydı <span class="tag">−0,9M TL / 5 ay</span></h3>
+<p><b>Kanıt:</b> Termos &amp; Matara'nın ciro içindeki payı Mart'ta %8 iken Ağustos'ta %28.
+Kategori marjları sabitken bu kayma tek başına ortalama ürün maliyet oranını %51.3'den %55.2'e çıkardı.
+Kupon ve TikTok'un ucuz ürün satışını pompalaması bu kaymanın bir kısmını açıklıyor (örtüşme notu: Termos 1L'nin maliyet altı satışı
+2. maddede sayıldı) ama kayma organik kanalda da görülüyor; yani ayrıca bir fiyatlama/asortman kararı konusu.</p>
+<svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg"><line x1="64" y1="256.0" x2="704" y2="256.0" stroke="#e6e8ee"/><text x="56" y="260.0" text-anchor="end" class="ax">%0</text><line x1="64" y1="199.5" x2="704" y2="199.5" stroke="#e6e8ee"/><text x="56" y="203.5" text-anchor="end" class="ax">%13</text><line x1="64" y1="143.0" x2="704" y2="143.0" stroke="#e6e8ee"/><text x="56" y="147.0" text-anchor="end" class="ax">%25</text><line x1="64" y1="86.5" x2="704" y2="86.5" stroke="#e6e8ee"/><text x="56" y="90.5" text-anchor="end" class="ax">%38</text><line x1="64" y1="30.0" x2="704" y2="30.0" stroke="#e6e8ee"/><text x="56" y="34.0" text-anchor="end" class="ax">%51</text><rect x="94.3" y="219.9" width="43.0" height="36.1" rx="3" fill="#f59e0b"/><rect x="201.0" y="208.3" width="43.0" height="47.7" rx="3" fill="#f59e0b"/><rect x="307.7" y="194.4" width="43.0" height="61.6" rx="3" fill="#f59e0b"/><rect x="414.3" y="158.5" width="43.0" height="97.5" rx="3" fill="#f59e0b"/><rect x="521.0" y="142.9" width="43.0" height="113.1" rx="3" fill="#f59e0b"/><rect x="627.7" y="133.6" width="43.0" height="122.4" rx="3" fill="#f59e0b"/><path d="M117.3,54.2 L224.0,56.6 L330.7,58.4 L437.3,71.9 L544.0,86.3 L650.7,90.3" fill="none" stroke="#2563eb" stroke-width="2.5"/><circle cx="117.3" cy="54.2" r="3.5" fill="#2563eb"/><circle cx="224.0" cy="56.6" r="3.5" fill="#2563eb"/><circle cx="330.7" cy="58.4" r="3.5" fill="#2563eb"/><circle cx="437.3" cy="71.9" r="3.5" fill="#2563eb"/><circle cx="544.0" cy="86.3" r="3.5" fill="#2563eb"/><circle cx="650.7" cy="90.3" r="3.5" fill="#2563eb"/><text x="117.3" y="274" text-anchor="middle" class="ax">Mart</text><text x="224.0" y="274" text-anchor="middle" class="ax">Nisan</text><text x="330.7" y="274" text-anchor="middle" class="ax">Mayıs</text><text x="437.3" y="274" text-anchor="middle" class="ax">Haziran</text><text x="544.0" y="274" text-anchor="middle" class="ax">Temmuz</text><text x="650.7" y="274" text-anchor="middle" class="ax">Ağustos</text><line x1="64" y1="256.0" x2="704" y2="256.0" stroke="#1a2233" stroke-width="1"/><rect x="64" y="8" width="10" height="10" rx="2" fill="#f59e0b"/><text x="78" y="17" class="lg">Termos &amp; Matara payı (ciro içinde, %)</text><rect x="363" y="8" width="10" height="10" rx="2" fill="#2563eb"/><text x="377" y="17" class="lg">Net brüt marj (%)</text></svg>
+<p class="cap">Mavi çizgi: indirimler dahil net brüt marj — %45'den %37'e geriledi; düşüşün ~yarısı kupon, ~yarısı miks kaynaklı.</p>
+</div><div class="etki">−0,9M</div></div></div>
+
+<div class="card"><div class="rank"><div class="no">5</div><div style="flex:1">
+<h3 style="margin-top:2px">15 Mayıs'ta koşulsuz bedava kargo <span class="tag">−0,4M TL / 3,5 ay</span></h3>
+<p><b>Kanıt:</b> 15 Mayıs'a kadar 750 TL altı sepetlerden sabit 139 TL kargo ücreti alınıyordu (istisnasız: 557/557 sipariş).
+O tarihte ücret tüm siparişler için sıfırlandı; kargo maliyeti ise sipariş başına ~121 TL ile sabit kaldı. Sonraki 3,5 ayda
+750 TL altı 2,832 siparişten alınamayan ücret <b>393.648 TL</b>. Dolaylı etki daha büyük olabilir:
+küçük sepetli siparişlerin payı %13'den %25'e sıçradı (ortalama sepet 3.400 TL → 1.740 TL) —
+bedava kargo, kargo maliyeti marjı yiyen mini siparişleri teşvik ediyor.</p>
+<svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg"><line x1="64" y1="256.0" x2="704" y2="256.0" stroke="#e6e8ee"/><text x="56" y="260.0" text-anchor="end" class="ax">0K</text><line x1="64" y1="199.5" x2="704" y2="199.5" stroke="#e6e8ee"/><text x="56" y="203.5" text-anchor="end" class="ax">125K</text><line x1="64" y1="143.0" x2="704" y2="143.0" stroke="#e6e8ee"/><text x="56" y="147.0" text-anchor="end" class="ax">251K</text><line x1="64" y1="86.5" x2="704" y2="86.5" stroke="#e6e8ee"/><text x="56" y="90.5" text-anchor="end" class="ax">376K</text><line x1="64" y1="30.0" x2="704" y2="30.0" stroke="#e6e8ee"/><text x="56" y="34.0" text-anchor="end" class="ax">502K</text><rect x="80.0" y="171.9" width="34.3" height="84.1" rx="3" fill="#d64550"/><rect x="186.7" y="160.5" width="34.3" height="95.5" rx="3" fill="#d64550"/><rect x="293.3" y="130.8" width="34.3" height="125.2" rx="3" fill="#d64550"/><rect x="400.0" y="88.6" width="34.3" height="167.4" rx="3" fill="#d64550"/><rect x="506.7" y="69.4" width="34.3" height="186.6" rx="3" fill="#d64550"/><rect x="613.3" y="54.2" width="34.3" height="201.8" rx="3" fill="#d64550"/><rect x="117.3" y="244.0" width="34.3" height="12.0" rx="3" fill="#14b8a6"/><rect x="224.0" y="241.0" width="34.3" height="15.0" rx="3" fill="#14b8a6"/><rect x="330.7" y="248.0" width="34.3" height="8.0" rx="3" fill="#14b8a6"/><rect x="437.3" y="256.0" width="34.3" height="1.5" rx="3" fill="#14b8a6"/><rect x="544.0" y="256.0" width="34.3" height="1.5" rx="3" fill="#14b8a6"/><rect x="650.7" y="256.0" width="34.3" height="1.5" rx="3" fill="#14b8a6"/><text x="117.3" y="274" text-anchor="middle" class="ax">Mart</text><text x="224.0" y="274" text-anchor="middle" class="ax">Nisan</text><text x="330.7" y="274" text-anchor="middle" class="ax">Mayıs</text><text x="437.3" y="274" text-anchor="middle" class="ax">Haziran</text><text x="544.0" y="274" text-anchor="middle" class="ax">Temmuz</text><text x="650.7" y="274" text-anchor="middle" class="ax">Ağustos</text><line x1="64" y1="256.0" x2="704" y2="256.0" stroke="#1a2233" stroke-width="1"/><rect x="64" y="8" width="10" height="10" rx="2" fill="#d64550"/><text x="78" y="17" class="lg">Kargo maliyeti (mağaza)</text><rect x="265" y="8" width="10" height="10" rx="2" fill="#14b8a6"/><text x="279" y="17" class="lg">Müşteriden alınan kargo ücreti</text></svg>
+</div><div class="etki">−0,4M</div></div></div>
+
+<h2>Şüpheli görünüp suçsuz çıkanlar</h2>
+<div class="card"><ul>
+<li><b>Sabit giderler:</b> 6 ay boyunca kuruşu kuruşuna aynı (1,53M TL/ay). Artış yok, zararın sebebi olamaz.</li>
+<li><b>Google ve Instagram reklamları:</b> Harcama ~2 kat arttı ama katkı payı bazında hâlâ kârlılar
+(6 ayda Google 2,0M TL, Instagram 1,5M TL net katkı). Kesintiye değil, TikTok'a bakılmalı.</li>
+<li><b>"Hasarlı geldi" iadeleri:</b> 295.696 TL tutarında ama oran dönem boyu stabil ve toplam iadenin ~%9'u; kırılmayı açıklamıyor.</li>
+<li><b>BAHAR15 / KAMP10 kuponları:</b> Toplam 135.145 TL indirim — HOSGELDIN30'un yanında cüzi.</li>
+<li><b>Düşen ortalama sepet (3.408 → 1.737 TL):</b> Bağımsız bir neden değil; termos miksine kayışın, kupon istismarının ve
+bedava kargonun şişirdiği mini siparişlerin <i>belirtisi</i>.</li>
+<li><b>Mevsimsellik:</b> Kış ürünleri yazın satılıyor görünse de kategori marjları sabit; sorun ne sattığımız değil, hangi koşullarda sattığımız.</li>
+</ul></div>
+
+<h2>Yöntem ve varsayımlar</h2>
+<div class="card vars"><ul>
+<li>P&amp;L, sipariş ayı bazında kuruldu: iadeler (işlem tarihi Eylül'e sarkanlar dahil) ait oldukları siparişin ayına yazıldı.
+Satılabilir iade ürün maliyeti geri alındı sayıldı; "yeniden satılamaz" iadelerde maliyet zarar yazıldı.</li>
+<li>Kanal etkililiği, verideki son-tıklama atfına dayanır (siparişin <i>kanal</i> alanı). TikTok için ciro → katkı payı →
+reklam düşümü sırasıyla hesaplandı; organik kayma (kanibalizasyon) ölçülemediği için TikTok'un gerçek etkisi muhtemelen daha da kötüdür.</li>
+<li>Kupon istismarında "mevcut müşteri" = kodu ilk siparişi dışındaki bir siparişte kullanan müşteri. Bu müşterilerin
+indirimsiz de alışveriş yapacağı varsayıldı (kupon olmasa sepeti terk edenler olabilir; bu durumda gerçek etki biraz düşer).</li>
+<li>Ayakkabı iadesinin "fazla" kısmı, ayakkabı dışı kategorilerin ağırlıklı ortalama iade oranı (%4.9) referans alınarak hesaplandı.</li>
+<li>Bedava kargonun doğrudan etkisi, eski kuralın (750 TL altı = 139 TL) 15 Mayıs sonrası siparişlere uygulanmasıyla bulundu;
+davranışsal etki (mini sipariş patlaması) ayrıca ve tutucu biçimde sayılmadı.</li>
+<li>Kargo maliyeti sipariş başına ~121 TL'de sabit kaldığı için kargo firması zammı bir neden olarak elendi.</li>
+</ul></div>
+
+<div class="uc"><h2 style="border:none;margin-top:0;padding-top:0">Yarın sabah ilk yapılacak üç şey</h2>
+<ol>
+<li><span class="n">TikTok reklamlarını duraklat.</span> Katkı bazında başabaş ROAS ~2,6x; kanal 1,4x'te. Durdurma anında
+aylık ~629K TL kanamayı keser. Yeniden açılacaksa hedef: katkı bazlı ROAS ≥ 3x olan daraltılmış kampanyalar.</li>
+<li><span class="n">HOSGELDIN30'u bugün iptal et, kodu yalnız ilk siparişle sınırlı tek kullanımlık yeni kodla değiştir.</span>
+Mevcut müşterilere akan indirim Ağustos hızıyla ayda ~516K TL. Aynı anda Termos 1L gibi düşük marjlı
+ürünleri kupon kapsamından çıkar (maliyet altı satışı bitirir).</li>
+<li><span class="n">Ayakkabıda iade seferberliği başlat ve 750 TL altına kargo ücretini geri getir.</span>
+Beden tablosunu ölçülerle netleştir, "beden uymadı" iadelerini ürün bazında izle (en çok hangi modelden?), iade edilen
+ayakkabının satılabilirlik kontrolünü sıkılaştır. Eski kargo kuralının dönüşü ayda ~112K TL getirir;
+eşiği 1.000 TL'ye çıkarmak mini siparişleri de disipline eder.</li>
+</ol>
+<p class="cap" style="margin-top:10px">Bu üç adımın Ağustos gidişat hızındaki toplam etkisi ayda ~1,2–1,4M TL; şirketi tek başına
+başabaşa yaklaştırır. Termos miks kayması ve fiyatlama ise bir sonraki haftanın gündemi olmalı.</p></div>
+
+<footer>Kaynak: veri/ klasöründeki 5 CSV (21.211 sipariş satırı, 1.525 iade, 1.156 reklam günü). Analiz: analiz.py ·
+Tüm tutarlar TL · Grafikler rapora gömülüdür, dosya çevrimdışı açılabilir.</footer>
+</div></body></html>

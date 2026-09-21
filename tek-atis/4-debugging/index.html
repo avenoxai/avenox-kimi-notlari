@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yapılacaklar</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>Yapılacaklar</h1>
+      <p class="subtitle">Günlük işlerini tek listede topla.</p>
+    </header>
+
+    <form id="task-form" class="task-form" autocomplete="off">
+      <input id="task-title" class="field title-field" type="text" placeholder="Yeni görev başlığı" />
+      <select id="task-priority" class="field">
+        <option value="düşük">Düşük</option>
+        <option value="orta" selected>Orta</option>
+        <option value="yüksek">Yüksek</option>
+      </select>
+      <input id="task-due" class="field" type="date" />
+      <button type="submit" class="primary">Ekle</button>
+    </form>
+
+    <div class="toolbar">
+      <div class="filters" id="filters">
+        <button type="button" class="filter is-active" data-filter="all">
+          Tümü <span class="badge" id="count-all">0</span>
+        </button>
+        <button type="button" class="filter" data-filter="active">
+          Aktif <span class="badge" id="count-active">0</span>
+        </button>
+        <button type="button" class="filter" data-filter="done">
+          Tamamlanan <span class="badge" id="count-done">0</span>
+        </button>
+      </div>
+      <div class="tools">
+        <input id="search" class="field" type="search" placeholder="Görevlerde ara" />
+        <select id="sort" class="field">
+          <option value="created">Eklenme sırası</option>
+          <option value="priority">Önceliğe göre</option>
+          <option value="due">Tarihe göre</option>
+        </select>
+      </div>
+    </div>
+
+    <ul id="task-list" class="task-list"></ul>
+    <p id="empty-state" class="empty" hidden>Gösterilecek görev yok.</p>
+
+    <footer class="app-footer">
+      <span>Başlığı düzenlemek için üzerine çift tıkla.</span>
+    </footer>
+  </main>
+
+  <script src="store.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

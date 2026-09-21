@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NÖBET — Gece Çalışanların Kahvesi</title>
+<meta name="description" content="NÖBET; hemşireler, yazılımcılar, fırıncılar ve şehri gece ayakta tutan herkes için 00:00–05:00 arasında kavurulan küçük parti kahve.">
+<meta name="theme-color" content="#06090F">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2306090F'/%3E%3Ccircle cx='25' cy='23' r='10' fill='%23EFEBE0'/%3E%3Ccircle cx='29' cy='20' r='9' fill='%2306090F'/%3E%3Crect x='30' y='34' width='6' height='6' rx='1' fill='%23E8913F'/%3E%3Crect x='30' y='44' width='6' height='6' rx='1' fill='%23E8913F'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06090F; --bg2:#080D16; --panel:#0B1120; --panel2:#0D1322;
+  --line:rgba(239,235,224,.09); --line2:rgba(239,235,224,.16);
+  --ink:#EFEBE0; --muted:#8E96AB; --soft:#B9C0CF; --dim:#5A6478;
+  --ember:#E8913F; --ember2:#C96F2E; --dawn:#DDB868;
+  --ease:cubic-bezier(.2,.6,.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'Fraunces',Georgia,serif; font-weight:340;
+  font-size:1.02rem; line-height:1.65;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+::selection{background:var(--ember);color:#120C05}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#1A2338;border-radius:99px}
+:focus-visible{outline:2px solid var(--ember);outline-offset:3px;border-radius:4px}
+img,svg{display:block}
+button{font-family:inherit}
+.mono{font-family:'Space Mono',monospace}
+
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")}
+header,main,footer{position:relative;z-index:1}
+.container{width:min(1200px,92%);margin-inline:auto}
+
+h1,h2,h3{font-weight:560;letter-spacing:-.01em}
+.eyebrow{display:flex;align-items:center;gap:14px;font-family:'Space Mono',monospace;
+  font-size:.68rem;letter-spacing:.22em;color:var(--muted);margin-bottom:22px}
+.eyebrow::before{content:'';width:36px;height:1px;background:var(--ember)}
+
+/* ---------- buttons ---------- */
+.btn{font-family:'Space Mono',monospace;font-size:.78rem;letter-spacing:.1em;
+  padding:14px 24px;border-radius:99px;border:1px solid transparent;cursor:pointer;
+  transition:all .25s var(--ease);display:inline-flex;align-items:center;gap:9px;
+  text-decoration:none;white-space:nowrap}
+.btn-solid{background:var(--ember);color:#120C05;font-weight:700}
+.btn-solid:hover{background:#F2A257;transform:translateY(-2px);box-shadow:0 10px 28px rgba(232,145,63,.28)}
+.btn-ghost{border-color:var(--line2);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--ember);color:var(--ember)}
+.btn-sm{padding:11px 17px;font-size:.7rem}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:50;
+  background:rgba(6,9,15,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:baseline;gap:11px;text-decoration:none;color:var(--ink);
+  font-family:'Fraunces',serif;font-weight:700;font-size:1.32rem;letter-spacing:.02em}
+.logo .tag{font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.22em;color:var(--muted)}
+.omark{position:relative}
+.omark .dots{position:absolute;top:-.06em;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;gap:.07em;align-items:center}
+.omark .dots i{width:.1em;height:.1em;border-radius:1.5px;background:var(--ember);animation:blink 1s steps(1) infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.12}}
+.nav-links{display:flex;gap:30px}
+.nav-links a{color:var(--muted);text-decoration:none;font-family:'Space Mono',monospace;
+  font-size:.72rem;letter-spacing:.1em;transition:color .25s}
+.nav-links a:hover{color:var(--ink)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.clock{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--muted);letter-spacing:.06em}
+.clock .cl{color:var(--ember);animation:blink 1s steps(1) infinite}
+.cart-btn{position:relative;background:none;border:1px solid var(--line2);color:var(--ink);
+  border-radius:99px;padding:10px 19px;font-family:'Space Mono',monospace;font-size:.7rem;
+  letter-spacing:.1em;cursor:pointer;transition:border-color .25s}
+.cart-btn:hover{border-color:var(--ember)}
+.cart-btn .n{position:absolute;top:-8px;right:-8px;background:var(--ember);color:#120C05;
+  font-weight:700;border-radius:50%;width:20px;height:20px;display:grid;place-items:center;font-size:.62rem}
+.cart-btn .n.pop{animation:pop .45s var(--ease)}
+@keyframes pop{40%{transform:scale(1.45)}}
+
+/* ---------- hero ---------- */
+.hero{padding:158px 0 92px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:64px;align-items:center}
+h1{font-size:clamp(2.7rem,5.6vw,4.4rem);line-height:1.05}
+h1 .it{font-style:italic;color:var(--ember);font-weight:480}
+.lede{margin-top:28px;max-width:34rem;color:var(--muted);font-size:1.06rem}
+.lede b{color:var(--ink);font-weight:600}
+.hero-cta{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+.hero-meta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;align-items:center}
+.chip2{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);
+  border-radius:99px;padding:9px 15px;font-family:'Space Mono',monospace;font-size:.66rem;
+  letter-spacing:.06em;color:var(--muted)}
+.dotp{width:7px;height:7px;border-radius:50%;background:var(--ember);animation:pulse 2s infinite;flex:none}
+.dotp.off{background:#3A445C;animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,145,63,.5)}70%{box-shadow:0 0 0 9px rgba(232,145,63,0)}100%{box-shadow:0 0 0 0 rgba(232,145,63,0)}}
+.rate{display:flex;align-items:center;gap:11px;margin-top:26px;font-family:'Space Mono',monospace;
+  font-size:.68rem;color:var(--muted);letter-spacing:.05em}
+.rate .st{color:var(--ember);letter-spacing:3px;font-size:.8rem}
+
+/* hero window scene */
+.win{position:relative;border-radius:30px;border:1px solid var(--line);
+  background:linear-gradient(180deg,#0B1220,#070B13);padding:16px;
+  box-shadow:0 40px 90px rgba(0,0,0,.55)}
+.win::before{content:'';position:absolute;inset:-50px -30px auto;height:320px;z-index:-1;
+  background:radial-gradient(closest-side,rgba(232,145,63,.13),transparent);filter:blur(12px)}
+.win svg{width:100%;height:auto;border-radius:20px}
+.win-cap{display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:13px 8px 3px;font-family:'Space Mono',monospace;font-size:.62rem;
+  letter-spacing:.14em;color:var(--muted)}
+.win-cap .live{display:flex;align-items:center;gap:8px}
+.tw{animation:twk 3.4s ease-in-out infinite}
+.tw2{animation:twk 4.6s ease-in-out infinite 1.2s}
+.tw3{animation:twk 5.8s ease-in-out infinite .6s}
+@keyframes twk{50%{opacity:.15}}
+.flk{animation:flk 5s steps(2) infinite}
+.flk2{animation:flk 7.4s steps(2) infinite 1.6s}
+.flk3{animation:flk 6.2s steps(2) infinite 3.1s}
+@keyframes flk{50%{opacity:.25}}
+.steam path{animation:rise 3.4s ease-in-out infinite;opacity:0}
+.steam path:nth-child(2){animation-delay:1.1s}
+.steam path:nth-child(3){animation-delay:2.2s}
+@keyframes rise{0%{transform:translateY(7px);opacity:0}30%{opacity:.5}100%{transform:translateY(-13px);opacity:0}}
+
+/* ---------- marquee ---------- */
+.marquee{border-block:1px solid var(--line);padding:17px 0;overflow:hidden;background:rgba(255,255,255,.015)}
+.mq-track{display:flex;width:max-content;animation:mq 32s linear infinite;
+  font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.24em;color:var(--muted)}
+.mq-track span{white-space:nowrap;padding-right:52px}
+.mq-track b{color:var(--ember);font-weight:400;padding:0 4px}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+.sec{padding:112px 0;scroll-margin-top:60px}
+.sec-alt{background:var(--bg2);border-block:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:34px;margin-bottom:58px}
+h2{font-size:clamp(2rem,4vw,3.05rem);line-height:1.12;max-width:24ch}
+.sec-sub{color:var(--muted);max-width:38ch;font-size:.95rem;padding-bottom:6px}
+.swap{color:var(--ember);font-style:italic;transition:opacity .3s;display:inline-block}
+.swap.out{opacity:0}
+
+/* story */
+.story{display:grid;grid-template-columns:1.08fr .92fr;gap:72px;align-items:start}
+.prose p{color:var(--soft);margin-bottom:20px;font-size:1.02rem;line-height:1.78}
+.prose .pull{border-left:2px solid var(--ember);padding:8px 0 8px 22px;font-style:italic;
+  color:var(--ink);font-size:1.24rem;line-height:1.5;margin:30px 0}
+.sig{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.14em;color:var(--dim);margin-top:30px}
+.pillars{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.pillar{display:flex;gap:19px;padding:26px 4px;border-bottom:1px solid var(--line);align-items:flex-start}
+.pillar .ic{flex:none;width:46px;height:46px;border:1px solid var(--line);border-radius:13px;
+  display:grid;place-items:center;color:var(--ember);background:rgba(232,145,63,.05)}
+.pillar h3{font-size:1.06rem;font-weight:620;margin-bottom:6px}
+.pillar p{color:var(--muted);font-size:.9rem;line-height:1.65}
+.pillar .no{margin-left:auto;font-family:'Space Mono',monospace;color:#2A3450;font-size:.78rem;flex:none}
+
+/* ---------- products ---------- */
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card{border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;
+  background:linear-gradient(180deg,#0D1322,#090E18);
+  transition:transform .35s var(--ease),border-color .35s,box-shadow .35s}
+.card:hover{transform:translateY(-6px);border-color:var(--acc);box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.bag-wrap{position:relative;padding:28px 0 22px;border-bottom:1px solid var(--line);
+  background:radial-gradient(110% 80% at 50% 0%,var(--accSoft),transparent 62%)}
+.bag{margin-inline:auto;height:238px;width:auto;transition:transform .45s var(--ease);
+  filter:drop-shadow(0 18px 22px rgba(0,0,0,.5))}
+.card:hover .bag{transform:rotate(-2deg) translateY(-4px)}
+.badge{position:absolute;top:14px;right:14px;z-index:2;background:var(--ember);color:#120C05;
+  font-family:'Space Mono',monospace;font-size:.56rem;font-weight:700;letter-spacing:.12em;
+  padding:5px 10px;border-radius:99px}
+.bag-label{position:absolute;left:50%;top:104px;width:146px;text-align:center;
+  transform:translateX(-50%) rotate(-1.6deg);background:#EFE7D6;color:#191307;
+  border-radius:3px;padding:10px 10px 11px;box-shadow:0 14px 26px rgba(0,0,0,.45)}
+.bag-label::before{content:'';position:absolute;top:-9px;left:50%;width:46px;height:14px;
+  transform:translateX(-50%) rotate(-4deg);background:rgba(232,145,63,.85);border-radius:1px}
+.l-micro{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:.14em;color:#6B5F49}
+.l-time{font-family:'Space Mono',monospace;font-weight:700;font-size:22px;line-height:1.15;margin-top:3px;color:#171106}
+.l-name{font-family:'Fraunces',serif;font-style:italic;font-size:12.5px;color:#3A2E1B;margin-top:1px}
+.l-dots{display:flex;gap:3px;justify-content:center;margin-top:6px}
+.l-dots i{width:5px;height:5px;border-radius:50%;border:1px solid #171106}
+.l-dots i.on{background:#171106}
+.card-body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:12px;flex:1}
+.card-body h3{font-size:1.28rem;font-weight:620}
+.p-moment{color:var(--soft);font-style:italic;font-size:.9rem;margin-top:-8px}
+.p-origin{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;color:var(--muted)}
+.notes{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);border-radius:99px;padding:4px 11px;
+  font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.04em}
+.roast{display:flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;
+  font-size:.6rem;letter-spacing:.14em;color:var(--muted)}
+.rdots{display:flex;gap:4px}
+.rdots i{width:7px;height:7px;border-radius:50%;background:#222C42}
+.rdots i.on{background:var(--acc)}
+.buy{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:10px}
+.price{font-family:'Space Mono',monospace;font-weight:700;font-size:1.06rem}
+.price small{display:block;font-weight:400;color:var(--muted);font-size:.6rem;letter-spacing:.1em;margin-top:3px}
+
+/* set banner */
+.set{margin-top:26px;border:1px solid rgba(232,145,63,.35);border-radius:22px;
+  background:linear-gradient(90deg,rgba(232,145,63,.09),rgba(232,145,63,.02) 45%,#0A0F1A);
+  display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:center;padding:28px 32px}
+.set .bags{display:flex;align-items:flex-end}
+.set .bags svg{width:46px;height:auto;filter:drop-shadow(0 10px 14px rgba(0,0,0,.5))}
+.set .bags svg+svg{margin-left:-13px}
+.set h3{font-size:1.32rem;font-weight:620}
+.set p{color:var(--muted);font-size:.9rem;margin-top:6px;max-width:48ch}
+.set-right{display:flex;flex-direction:column;align-items:flex-end;gap:9px}
+.set .old{font-family:'Space Mono',monospace;color:var(--muted);text-decoration:line-through;font-size:.78rem}
+.set .new{font-family:'Space Mono',monospace;font-weight:700;font-size:1.45rem;color:var(--ember)}
+
+/* ---------- timeline ---------- */
+.tline{display:grid;grid-template-columns:repeat(5,1fr);gap:26px;position:relative}
+.tline::before{content:'';position:absolute;top:9px;left:1%;right:1%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(239,235,224,.18),rgba(232,145,63,.55),rgba(239,235,224,.18),transparent)}
+.tl{position:relative;padding-top:36px}
+.tl::before{content:'';position:absolute;top:4px;left:0;width:11px;height:11px;border-radius:50%;
+  background:var(--bg2);border:2px solid var(--ember)}
+.tl .tt{font-family:'Space Mono',monospace;font-weight:700;color:var(--ember);font-size:1.05rem;letter-spacing:.04em}
+.tl h3{font-size:1rem;margin:9px 0 6px;font-weight:620}
+.tl p{color:var(--muted);font-size:.85rem;line-height:1.6}
+
+/* ---------- subscription ---------- */
+.subs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.sub{border:1px solid var(--line);border-radius:22px;padding:32px 28px;background:var(--panel);
+  display:flex;flex-direction:column;position:relative}
+.sub .tier{font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.22em;color:var(--muted)}
+.sub .amt{margin:18px 0 3px;font-family:'Space Mono',monospace;font-weight:700;font-size:2.05rem}
+.sub .amt span{font-size:.82rem;color:var(--muted);font-weight:400}
+.sub .per{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--dim);letter-spacing:.1em}
+.sub ul{list-style:none;margin:24px 0 28px;display:flex;flex-direction:column;gap:11px}
+.sub li{display:flex;gap:11px;color:var(--soft);font-size:.9rem;line-height:1.5}
+.sub li::before{content:'→';color:var(--ember);font-family:'Space Mono',monospace;flex:none}
+.sub .btn{margin-top:auto;justify-content:center}
+.sub.feat{border-color:var(--ember);background:linear-gradient(180deg,rgba(232,145,63,.1),#0B1120 45%);
+  transform:translateY(-10px)}
+.f-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--ember);
+  color:#120C05;font-family:'Space Mono',monospace;font-size:.56rem;font-weight:700;
+  letter-spacing:.14em;padding:6px 13px;border-radius:99px;white-space:nowrap}
+.sub-note{margin-top:24px;text-align:center;font-family:'Space Mono',monospace;
+  font-size:.64rem;color:var(--dim);letter-spacing:.08em}
+
+/* ---------- quotes ---------- */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.q{border:1px solid var(--line);border-radius:22px;padding:32px 28px;background:var(--panel);
+  display:flex;flex-direction:column}
+.q .qm{font-family:'Fraunces',serif;font-size:3.4rem;line-height:.4;color:var(--ember);margin:14px 0 22px}
+.q p{font-style:italic;font-size:1rem;line-height:1.72;color:#D8DCE6;flex:1}
+.q footer{margin-top:24px;padding-top:17px;border-top:1px solid var(--line);
+  font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--muted)}
+.q footer b{display:block;color:var(--ink);font-size:.76rem;margin-bottom:5px;font-weight:400}
+
+/* ---------- cta ---------- */
+.cta{text-align:center;padding:130px 0 120px}
+.giant{font-family:'Fraunces',serif;font-weight:800;font-size:clamp(4.4rem,15vw,11rem);
+  line-height:.92;color:transparent;-webkit-text-stroke:1.5px rgba(239,235,224,.28);
+  letter-spacing:.02em;user-select:none}
+.giant .cl{-webkit-text-stroke:0;color:var(--ember);animation:blink 1s steps(1) infinite}
+.cta h2{margin:36px auto 0;max-width:26ch}
+.cta .now{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--muted);
+  letter-spacing:.14em;margin-top:20px}
+.cta .btn{margin-top:34px}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--line);padding:74px 0 0;background:#05080E}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px;padding-bottom:64px}
+.foot .blurb{color:var(--muted);font-size:.88rem;max-width:34ch;margin-top:18px;line-height:1.7}
+.foot h4{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.22em;
+  color:var(--dim);margin-bottom:18px;font-weight:400}
+.foot ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.foot a{color:var(--soft);text-decoration:none;font-size:.88rem;transition:color .25s}
+.foot a:hover{color:var(--ember)}
+.foot li{color:var(--muted);font-size:.88rem;line-height:1.6}
+.foot-mark{font-family:'Fraunces',serif;font-weight:800;font-size:clamp(4rem,12.5vw,9.5rem);
+  line-height:1;color:transparent;-webkit-text-stroke:1px rgba(239,235,224,.11);
+  text-align:center;user-select:none;letter-spacing:.05em;padding-bottom:20px}
+.foot-bar{border-top:1px solid var(--line);padding:24px 0;display:flex;
+  justify-content:space-between;gap:14px;flex-wrap:wrap;
+  font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;color:var(--dim)}
+.foot-bar a{color:var(--dim);text-decoration:none}
+.foot-bar a:hover{color:var(--ember)}
+
+/* ---------- cart ---------- */
+.overlay{position:fixed;inset:0;background:rgba(3,5,9,.62);backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;transition:.35s;z-index:60}
+.overlay.on{opacity:1;pointer-events:auto}
+.cart{position:fixed;top:0;right:0;height:100dvh;width:min(430px,100%);z-index:70;
+  background:#0A0F1B;border-left:1px solid var(--line);display:flex;flex-direction:column;
+  transform:translateX(103%);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.cart.on{transform:none}
+.cart-head{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;
+  border-bottom:1px solid var(--line);font-family:'Space Mono',monospace;
+  letter-spacing:.16em;font-size:.8rem}
+.cart-head .n{color:var(--ember)}
+.x{background:none;border:1px solid var(--line);color:var(--muted);width:35px;height:35px;
+  border-radius:50%;cursor:pointer;font-size:.85rem;transition:.25s}
+.x:hover{color:var(--ink);border-color:var(--line2)}
+.ship{padding:16px 24px;border-bottom:1px solid var(--line)}
+.ship .t{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.08em;
+  color:var(--muted);display:flex;justify-content:space-between;gap:10px}
+.ship .t b{color:var(--ember);font-weight:400}
+.track{height:4px;background:#1A2338;border-radius:99px;margin-top:11px;overflow:hidden}
+.track i{display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--ember2),var(--ember));transition:width .55s var(--ease)}
+.cart-body{flex:1;overflow-y:auto;padding:6px 24px}
+.empty{text-align:center;padding:76px 12px;color:var(--muted)}
+.empty .m{font-family:'Fraunces',serif;font-size:3rem;color:#2A3450;margin-bottom:16px}
+.empty p{font-style:italic;margin-bottom:26px;line-height:1.6}
+.ci{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--line);align-items:center}
+.ci-thumb{flex:none;width:44px}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-size:.92rem;font-weight:600}
+.ci-var{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);
+  letter-spacing:.08em;margin-top:4px}
+.ci-qty{display:inline-flex;align-items:center;gap:13px;margin-top:11px;
+  border:1px solid var(--line);border-radius:99px;padding:4px 13px}
+.ci-qty button{background:none;border:none;color:var(--muted);font-family:'Space Mono',monospace;
+  font-size:1rem;cursor:pointer;padding:0 2px;transition:color .2s}
+.ci-qty button:hover{color:var(--ember)}
+.ci-qty span{font-family:'Space Mono',monospace;font-size:.78rem;min-width:15px;text-align:center}
+.ci-right{text-align:right;display:flex;flex-direction:column;gap:9px;align-items:flex-end}
+.ci-price{font-family:'Space Mono',monospace;font-weight:700;font-size:.9rem}
+.ci-del{background:none;border:none;color:var(--dim);font-family:'Space Mono',monospace;
+  font-size:.56rem;letter-spacing:.1em;cursor:pointer;text-decoration:underline;
+  text-underline-offset:3px;transition:color .2s}
+.ci-del:hover{color:#E0654F}
+.cart-foot{border-top:1px solid var(--line);padding:20px 24px 26px}
+.row-t{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;
+  font-size:.72rem;color:var(--muted);margin-bottom:8px}
+.row-t.tt{color:var(--ink);font-weight:700;font-size:.95rem;margin:14px 0 18px}
+.cart-foot .btn{width:100%;justify-content:center;padding:17px}
+.fine{font-family:'Space Mono',monospace;font-size:.56rem;color:var(--dim);
+  text-align:center;margin-top:13px;letter-spacing:.06em;line-height:1.8}
+.ok{text-align:center;padding:64px 14px}
+.ok .badge-ok{width:66px;height:66px;border-radius:50%;border:1px solid var(--ember);
+  display:grid;place-items:center;margin:0 auto 24px;color:var(--ember)}
+.ok h3{font-size:1.5rem;margin-bottom:13px}
+.ok p{color:var(--muted);font-size:.9rem;line-height:1.7;max-width:32ch;margin-inline:auto}
+.ok .ord{font-family:'Space Mono',monospace;color:var(--ember);letter-spacing:.14em;
+  margin:18px 0 28px;font-size:.78rem;border:1px dashed rgba(232,145,63,.4);
+  display:inline-block;padding:11px 19px;border-radius:10px}
+
+/* toast */
+.toast{position:fixed;left:24px;bottom:24px;z-index:80;background:#101728;
+  border:1px solid rgba(232,145,63,.4);color:var(--ink);padding:15px 21px;border-radius:14px;
+  font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.05em;
+  transform:translateY(22px);opacity:0;pointer-events:none;transition:.35s var(--ease);
+  box-shadow:0 20px 44px rgba(0,0,0,.5);max-width:min(360px,calc(100vw - 48px))}
+.toast.on{transform:none;opacity:1}
+.toast b{color:var(--ember);font-weight:400}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}
+
+/* ---------- responsive ---------- */
+@media(max-width:1024px){
+  .grid4{grid-template-columns:repeat(2,1fr)}
+  .story{grid-template-columns:1fr;gap:48px}
+  .tline{display:flex;overflow-x:auto;gap:34px;padding-bottom:16px;scroll-snap-type:x mandatory}
+  .tline::before{display:none}
+  .tl{min-width:210px;scroll-snap-align:start}
+  .subs{grid-template-columns:1fr;max-width:520px;margin-inline:auto}
+  .sub.feat{transform:none}
+  .quotes{grid-template-columns:1fr;max-width:640px;margin-inline:auto}
+  .set{grid-template-columns:1fr;text-align:center;justify-items:center;gap:22px}
+  .set-right{align-items:center}
+  .set .bags{justify-content:center}
+}
+@media(max-width:880px){
+  .nav-links{display:none}
+  .hero{padding:128px 0 76px}
+  .hero-grid{grid-template-columns:1fr;gap:52px}
+  .win{max-width:460px;margin-inline:auto;width:100%}
+  .sec-head{grid-template-columns:1fr;gap:18px;margin-bottom:44px}
+  .sec{padding:86px 0}
+}
+@media(max-width:620px){
+  .grid4{grid-template-columns:1fr;max-width:400px;margin-inline:auto}
+  .clock.nav-clock{display:none}
+  .logo .tag{display:none}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:34px}
+  .cta{padding:96px 0 90px}
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .hero-cta .btn{justify-content:center}
+  .set{padding:24px 20px}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- shared gradients for all code-drawn artwork -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#182540"/><stop offset=".55" stop-color="#0D1526"/><stop offset="1" stop-color="#070B14"/>
+    </linearGradient>
+    <radialGradient id="halo" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#E8913F" stop-opacity=".26"/><stop offset="1" stop-color="#E8913F" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bagG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1B2438"/><stop offset=".5" stop-color="#131B2D"/><stop offset="1" stop-color="#0D1322"/>
+    </linearGradient>
+    <linearGradient id="scr" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E8913F" stop-opacity=".34"/><stop offset="1" stop-color="#E8913F" stop-opacity=".05"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<canvas id="stars"></canvas>
+<div class="grain"></div>
+
+<header class="nav">
+  <div class="container nav-in">
+    <a class="logo" href="#top" aria-label="NÖBET ana sayfa">
+      <span>N<span class="omark">O<span class="dots"><i></i><i></i></span></span>BET</span>
+      <span class="tag">GECE KAVURMA ATÖLYESİ</span>
+    </a>
+    <nav class="nav-links" aria-label="Sayfa içi">
+      <a href="#hikaye">HİKAYE</a>
+      <a href="#kahveler">KAHVELER</a>
+      <a href="#surec">SÜREÇ</a>
+      <a href="#abonelik">ABONELİK</a>
+    </nav>
+    <div class="nav-right">
+      <span class="clock nav-clock js-clock" aria-label="Şu anki saat">--<span class="cl">:</span>--<span class="cl">:</span>--</span>
+      <button class="cart-btn" id="cartOpen" aria-label="Sepeti aç">SEPET<span class="n" id="cartN">0</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow rv">İSTANBUL · 00:00–05:00 ARASI KAVURULUR</div>
+        <h1 class="rv d1">Şehir uyur.<br><span class="it">Sen çalışırsın.</span><br>Kahve bizden.</h1>
+        <p class="lede rv d2">NÖBET; hemşireler, yazılımcılar, fırıncılar ve gece boyu şehri ayakta tutan herkes için, her gece <b>00:00–05:00</b> arasında kavurulan küçük parti kahvedir. Paketin, vardiyandan önce kapındadır.</p>
+        <div class="hero-cta rv d3">
+          <a class="btn btn-solid" href="#kahveler">KAHVELERİ GÖR ↓</a>
+          <a class="btn btn-ghost" href="#hikaye">HİKAYEYİ OKU</a>
+        </div>
+        <div class="hero-meta rv d4">
+          <span class="chip2" id="roastStatus"><i class="dotp"></i> KAVRUM OCAĞI: ŞU AN YANIYOR</span>
+          <span class="chip2">SENİN SAATİN&nbsp;<span class="clock js-clock">--<span class="cl">:</span>--<span class="cl">:</span>--</span></span>
+        </div>
+        <div class="rate rv d4">
+          <span class="st">★★★★★</span>
+          <span>4,9 / 5 — 2.140 gece çalışanı oy verdi</span>
+        </div>
+      </div>
+
+      <div class="win rv d2" role="img" aria-label="Gece penceresi: ay, şehir silueti, buğusu tüten bir kahve fincanı ve ekranı açık bir dizüstü">
+        <svg viewBox="0 0 480 560">
+          <rect x="6" y="6" width="468" height="548" rx="28" fill="url(#sky)" stroke="rgba(239,235,224,.14)"/>
+          <circle cx="372" cy="108" r="88" fill="url(#halo)"/>
+          <circle cx="372" cy="108" r="40" fill="#EDE5CF"/>
+          <circle cx="360" cy="98" r="7" fill="#0D1526" opacity=".10"/>
+          <circle cx="382" cy="118" r="5" fill="#0D1526" opacity=".10"/>
+          <circle cx="372" cy="126" r="3.5" fill="#0D1526" opacity=".08"/>
+          <g fill="#DDE3F0">
+            <circle cx="52" cy="60" r="1.4" opacity=".7"/><circle cx="108" cy="42" r="1.1" opacity=".5"/>
+            <circle cx="170" cy="86" r="1.5" opacity=".8" class="tw"/><circle cx="236" cy="50" r="1.1" opacity=".45"/>
+            <circle cx="300" cy="70" r="1.3" opacity=".6" class="tw2"/><circle cx="66" cy="150" r="1.2" opacity=".5"/>
+            <circle cx="130" cy="130" r="1" opacity=".4"/><circle cx="212" cy="160" r="1.4" opacity=".65" class="tw3"/>
+            <circle cx="430" cy="52" r="1.2" opacity=".55"/><circle cx="446" cy="180" r="1.3" opacity=".5" class="tw"/>
+            <circle cx="30" cy="230" r="1.1" opacity=".4"/><circle cx="268" cy="120" r="1" opacity=".4"/>
+          </g>
+          <!-- window mullions -->
+          <path d="M240 6v464M6 240h468" stroke="rgba(239,235,224,.09)" stroke-width="3"/>
+          <!-- back skyline -->
+          <path fill="#0B1224" d="M6 470V360h34v-42h26v42h30V330h40v-26h22v26h36v-38h30v38h34V312h36v34h28v-20h24v34h32v-26h30v36h28v100z"/>
+          <!-- front skyline -->
+          <path fill="#060A14" d="M6 470V400h44v-56h30v56h40V372h48v-40h26v40h42v-62h34v62h44V384h46v-34h30v34h40v-24h44v110z"/>
+          <!-- lit windows -->
+          <g>
+            <rect x="58" y="362" width="7" height="9" fill="#E8A34F" opacity=".9"/>
+            <rect x="58" y="386" width="7" height="9" fill="#E8A34F" opacity=".5"/>
+            <rect x="72" y="374" width="7" height="9" fill="#9FB4E8" opacity=".55"/>
+            <rect x="128" y="388" width="7" height="9" fill="#E8A34F" opacity=".85" class="flk"/>
+            <rect x="142" y="404" width="7" height="9" fill="#E8A34F" opacity=".4"/>
+            <rect x="180" y="350" width="7" height="9" fill="#E8A34F" opacity=".9"/>
+            <rect x="194" y="366" width="7" height="9" fill="#E8A34F" opacity=".55" class="flk2"/>
+            <rect x="246" y="330" width="7" height="9" fill="#E8A34F" opacity=".8"/>
+            <rect x="260" y="352" width="7" height="9" fill="#9FB4E8" opacity=".5"/>
+            <rect x="246" y="374" width="7" height="9" fill="#E8A34F" opacity=".45" class="flk3"/>
+            <rect x="318" y="398" width="7" height="9" fill="#E8A34F" opacity=".85"/>
+            <rect x="332" y="412" width="7" height="9" fill="#E8A34F" opacity=".5"/>
+            <rect x="372" y="366" width="7" height="9" fill="#E8A34F" opacity=".9" class="flk2"/>
+            <rect x="386" y="382" width="7" height="9" fill="#E8A34F" opacity=".4"/>
+            <rect x="418" y="392" width="7" height="9" fill="#E8A34F" opacity=".75" class="flk"/>
+            <rect x="432" y="408" width="7" height="9" fill="#9FB4E8" opacity=".5"/>
+          </g>
+          <!-- sill -->
+          <path d="M6 470h468v56a28 28 0 0 1-28 28H34a28 28 0 0 1-28-28z" fill="#0C1220"/>
+          <path d="M6 470h468" stroke="rgba(239,235,224,.16)"/>
+          <!-- laptop -->
+          <g transform="translate(338 470)">
+            <rect x="-46" y="-54" width="92" height="54" rx="5" fill="#0A0F1C" stroke="#23304C"/>
+            <rect x="-42" y="-50" width="84" height="46" rx="3" fill="url(#scr)"/>
+            <rect x="-34" y="-42" width="30" height="4" rx="2" fill="#E8913F" opacity=".85"/>
+            <rect x="-34" y="-33" width="46" height="4" rx="2" fill="#E8913F" opacity=".5"/>
+            <rect x="-34" y="-24" width="22" height="4" rx="2" fill="#E8913F" opacity=".65"/>
+            <rect x="-34" y="-15" width="38" height="4" rx="2" fill="#E8913F" opacity=".35"/>
+            <path d="M-52 0h104l9 9H-61z" fill="#141C30"/>
+          </g>
+          <!-- cup -->
+          <g transform="translate(148 452)">
+            <g class="steam" stroke="#EDE5CF" stroke-width="2.4" fill="none" stroke-linecap="round">
+              <path transform="translate(-12 0)" d="M0 0c-5-9 5-15 0-24c-5-9 5-15 0-24"/>
+              <path transform="translate(0 4)" d="M0 0c-5-9 5-15 0-24c-5-9 5-15 0-24"/>
+              <path transform="translate(12 0)" d="M0 0c-5-9 5-15 0-24c-5-9 5-15 0-24"/>
+            </g>
+            <ellipse cx="0" cy="22" rx="46" ry="8" fill="#141C30"/>
+            <path d="M-30-22h60l-6 38q-2 10-12 10h-24q-10 0-12-10z" fill="#18223A" stroke="rgba(239,235,224,.2)"/>
+            <path d="M30-16q20 3 13 19q-5 11-17 9" fill="none" stroke="#18223A" stroke-width="7"/>
+            <ellipse cx="0" cy="-22" rx="30" ry="6" fill="#0A0F1C"/>
+            <ellipse cx="0" cy="-22" rx="23" ry="4" fill="#2A1A0E"/>
+            <path d="M-14-23q14-3 28 0" stroke="#E8913F" stroke-width="1.6" fill="none" opacity=".55"/>
+          </g>
+        </svg>
+        <div class="win-cap">
+          <span class="live"><i class="dotp"></i> CANLI — ŞEHİR UYURKEN</span>
+          <span class="clock js-clock">--<span class="cl">:</span>--<span class="cl">:</span>--</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="mq-track">
+      <span>GECE KAVURULUR <b>☾</b> ŞAFAKTA KAPINDA <b>☾</b> KÜÇÜK PARTİ — 12 KG OCAK <b>☾</b> HER PAKETTE KAVRUM SAATİ <b>☾</b> 22:00 · 00:30 · 03:47 · 05:30 <b>☾</b> ŞEHİR UYURKEN <b>☾</b></span>
+      <span>GECE KAVURULUR <b>☾</b> ŞAFAKTA KAPINDA <b>☾</b> KÜÇÜK PARTİ — 12 KG OCAK <b>☾</b> HER PAKETTE KAVRUM SAATİ <b>☾</b> 22:00 · 00:30 · 03:47 · 05:30 <b>☾</b> ŞEHİR UYURKEN <b>☾</b></span>
+    </div>
+  </div>
+
+  <!-- ============ STORY ============ -->
+  <section class="sec" id="hikaye">
+    <div class="container">
+      <div class="eyebrow rv">01 — HİKAYE</div>
+      <h2 class="rv d1" style="margin-bottom:52px">Bu kahve <span class="swap" id="swap">hemşireler</span> için<br>gece kavurulur.</h2>
+      <div class="story">
+        <div class="prose rv d2">
+          <p>NÖBET, 2023'te Karaköy'de eski bir matbaanın bodrum katında kuruldu. Kurucumuz bir gece vardiyasından çıkıp düzgün bir kahve içmek istediğinde şehrin kapalı olduğunu fark etti: gündüz kavurulan kahve, gece içene hep bir gün bayat geliyordu.</p>
+          <p>Biz de saati tersine çevirdik. Kavurma ocağımız her gece 00:00'da yanar, 05:00'te söner. Çekirdekler şehir uyurken dinlenir, paketler şafakla yola çıkar. Sen vardiyana başlamadan kahven kapındadır — hâlâ sıcak sayılır.</p>
+          <p class="pull">"Gündüz kahvesi iki uyku arasıdır.<br>Nöbet kahvesi bir çalışma arkadaşıdır."</p>
+          <p>Dört harman, gecenin dört anı için. Koyuluk saat ilerledikçe artar; 05:30'da şafakla yumuşar. Her paketin arkasında o gecenin kavrum saati el damgasıyla yazar — çünkü tazelik bir vaat değil, bir saattir.</p>
+          <div class="sig">— NÖBET EKİBİ · GECE VARDİYASI</div>
+        </div>
+        <div class="pillars rv d3">
+          <div class="pillar">
+            <span class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a7 7 0 0 0 9.5 9.5z"/></svg></span>
+            <div>
+              <h3>Gece kavrum</h3>
+              <p>Drum her gece 00:00'da ısınır. Gündüz tek parti bile kavurmayız; kahvemiz geceye aittir.</p>
+            </div>
+            <span class="no">/01</span>
+          </div>
+          <div class="pillar">
+            <span class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1.5 3-2.5 4.5-2.5 7.5a2.5 2.5 0 0 0 5 .5C15.5 9.5 17 9 17 7c1.8 1.8 3 4 3 6a8 8 0 1 1-16 0c0-4 3.5-7.5 8-10z"/></svg></span>
+            <div>
+              <h3>Küçük parti</h3>
+              <p>12 kiloluk ocak, parti başına en fazla 9 kg çekirdek. Her partinin tadımı 03:47'de, gecenin en sessiz anında yapılır.</p>
+            </div>
+            <span class="no">/02</span>
+          </div>
+          <div class="pillar">
+            <span class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3.5 8.5L12 13l8.5-4.5M12 13v8"/></svg></span>
+            <div>
+              <h3>Vardiya teslimi</h3>
+              <p>Teslim saatini mesaine göre seçersin. Şehir içinde 22:00–06:00 arası kuryeyle elden teslim ederiz.</p>
+            </div>
+            <span class="no">/03</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCTS ============ -->
+  <section class="sec sec-alt" id="kahveler">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow rv">02 — SEÇKİ</div>
+          <h2 class="rv d1">Kavrum takvimi:<br>gecenin dört saati.</h2>
+        </div>
+        <p class="sec-sub rv d2">Her harman, gece vardiyasının bir anına eşlik edecek şekilde kavurulur. Koyuluk saat ilerledikçe artar; şafakla yumuşar.</p>
+      </div>
+
+      <div class="grid4">
+        <!-- 22:00 -->
+        <article class="card rv d1" style="--acc:#C98246;--accSoft:rgba(201,130,70,.15)">
+          <div class="bag-wrap">
+            <svg class="bag" viewBox="0 0 200 260" aria-hidden="true">
+              <path d="M40 40h120l7 196q0 12-12 12H45q-12 0-12-12z" fill="url(#bagG)" stroke="rgba(239,235,224,.12)"/>
+              <path d="M49 50l-6 190" stroke="rgba(0,0,0,.35)" stroke-width="3" fill="none"/>
+              <path d="M158 50l6 190" stroke="rgba(255,255,255,.06)" stroke-width="3" fill="none"/>
+              <rect x="33" y="14" width="134" height="26" rx="4" fill="#0B101D" stroke="rgba(239,235,224,.14)"/>
+              <path d="M60 14v26M100 14v26M140 14v26" stroke="rgba(239,235,224,.08)"/>
+              <rect x="33" y="46" width="134" height="5" style="fill:var(--acc)" opacity=".9"/>
+              <circle cx="150" cy="66" r="5.5" fill="none" style="stroke:var(--acc)" stroke-width="1.5"/>
+              <path d="M40 224h120" stroke="rgba(0,0,0,.3)"/>
+            </svg>
+            <div class="bag-label">
+              <div class="l-micro">NÖBET · GECE KAVURUMU</div>
+              <div class="l-time">22:00</div>
+              <div class="l-name">İlk Işıklar</div>
+              <div class="l-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>İlk Işıklar</h3>
+            <p class="p-moment">Vardiya başlarken, ilk yudum.</p>
+            <p class="p-origin">KOLOMBİYA — HUILA · YIKANMIŞ</p>
+            <div class="notes"><span class="chip">karamel</span><span class="chip">kakao</span><span class="chip">portakal kabuğu</span></div>
+            <div class="roast">KAVRUM <span class="rdots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span> 3/5</div>
+            <div class="buy">
+              <div class="price">₺340<small>250 G · ÇEKİRDEK</small></div>
+              <button class="btn btn-solid btn-sm add" data-id="p2200">SEPETE EKLE</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 00:30 -->
+        <article class="card rv d2" style="--acc:#A85A32;--accSoft:rgba(168,90,50,.15)">
+          <div class="bag-wrap">
+            <svg class="bag" viewBox="0 0 200 260" aria-hidden="true">
+              <path d="M40 40h120l7 196q0 12-12 12H45q-12 0-12-12z" fill="url(#bagG)" stroke="rgba(239,235,224,.12)"/>
+              <path d="M49 50l-6 190" stroke="rgba(0,0,0,.35)" stroke-width="3" fill="none"/>
+              <path d="M158 50l6 190" stroke="rgba(255,255,255,.06)" stroke-width="3" fill="none"/>
+              <rect x="33" y="14" width="134" height="26" rx="4" fill="#0B101D" stroke="rgba(239,235,224,.14)"/>
+              <path d="M60 14v26M100 14v26M140 14v26" stroke="rgba(239,235,224,.08)"/>
+              <rect x="33" y="46" width="134" height="5" style="fill:var(--acc)" opacity=".9"/>
+              <circle cx="150" cy="66" r="5.5" fill="none" style="stroke:var(--acc)" stroke-width="1.5"/>
+              <path d="M40 224h120" stroke="rgba(0,0,0,.3)"/>
+            </svg>
+            <div class="bag-label">
+              <div class="l-micro">NÖBET · GECE KAVURUMU</div>
+              <div class="l-time">00:30</div>
+              <div class="l-name">Derin Odak</div>
+              <div class="l-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>Derin Odak</h3>
+            <p class="p-moment">Gece yarısını geçince, ikinci perde.</p>
+            <p class="p-origin">BREZİLYA + ETİYOPYA · DOĞAL</p>
+            <div class="notes"><span class="chip">bitter çikolata</span><span class="chip">fındık</span><span class="chip">esmer şeker</span></div>
+            <div class="roast">KAVRUM <span class="rdots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span> 4/5</div>
+            <div class="buy">
+              <div class="price">₺360<small>250 G · ÇEKİRDEK</small></div>
+              <button class="btn btn-solid btn-sm add" data-id="p0030">SEPETE EKLE</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 03:47 -->
+        <article class="card rv d3" style="--acc:#E8913F;--accSoft:rgba(232,145,63,.17)">
+          <div class="bag-wrap">
+            <span class="badge">İMZA HARMAN</span>
+            <svg class="bag" viewBox="0 0 200 260" aria-hidden="true">
+              <path d="M40 40h120l7 196q0 12-12 12H45q-12 0-12-12z" fill="url(#bagG)" stroke="rgba(239,235,224,.12)"/>
+              <path d="M49 50l-6 190" stroke="rgba(0,0,0,.35)" stroke-width="3" fill="none"/>
+              <path d="M158 50l6 190" stroke="rgba(255,255,255,.06)" stroke-width="3" fill="none"/>
+              <rect x="33" y="14" width="134" height="26" rx="4" fill="#0B101D" stroke="rgba(239,235,224,.14)"/>
+              <path d="M60 14v26M100 14v26M140 14v26" stroke="rgba(239,235,224,.08)"/>
+              <rect x="33" y="46" width="134" height="5" style="fill:var(--acc)" opacity=".9"/>
+              <circle cx="150" cy="66" r="5.5" fill="none" style="stroke:var(--acc)" stroke-width="1.5"/>
+              <path d="M40 224h120" stroke="rgba(0,0,0,.3)"/>
+            </svg>
+            <div class="bag-label">
+              <div class="l-micro">NÖBET · GECE KAVURUMU</div>
+              <div class="l-time">03:47</div>
+              <div class="l-name">Sessiz Saat</div>
+              <div class="l-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>Sessiz Saat</h3>
+            <p class="p-moment">Gecenin en derin anı için espresso.</p>
+            <p class="p-origin">NÖBET ESPRESSO HARMANI · 3 BÖLGE</p>
+            <div class="notes"><span class="chip">pekmez</span><span class="chip">kuru incir</span><span class="chip">duman</span></div>
+            <div class="roast">KAVRUM <span class="rdots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span> 5/5</div>
+            <div class="buy">
+              <div class="price">₺390<small>250 G · ÇEKİRDEK</small></div>
+              <button class="btn btn-solid btn-sm add" data-id="p0347">SEPETE EKLE</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 05:30 -->
+        <article class="card rv d4" style="--acc:#DDB868;--accSoft:rgba(221,184,104,.14)">
+          <div class="bag-wrap">
+            <svg class="bag" viewBox="0 0 200 260" aria-hidden="true">
+              <path d="M40 40h120l7 196q0 12-12 12H45q-12 0-12-12z" fill="url(#bagG)" stroke="rgba(239,235,224,.12)"/>
+              <path d="M49 50l-6 190" stroke="rgba(0,0,0,.35)" stroke-width="3" fill="none"/>
+              <path d="M158 50l6 190" stroke="rgba(255,255,255,.06)" stroke-width="3" fill="none"/>
+              <rect x="33" y="14" width="134" height="26" rx="4" fill="#0B101D" stroke="rgba(239,235,224,.14)"/>
+              <path d="M60 14v26M100 14v26M140 14v26" stroke="rgba(239,235,224,.08)"/>
+              <rect x="33" y="46" width="134" height="5" style="fill:var(--acc)" opacity=".9"/>
+              <circle cx="150" cy="66" r="5.5" fill="none" style="stroke:var(--acc)" stroke-width="1.5"/>
+              <path d="M40 224h120" stroke="rgba(0,0,0,.3)"/>
+            </svg>
+            <div class="bag-label">
+              <div class="l-micro">NÖBET · GECE KAVURUMU</div>
+              <div class="l-time">05:30</div>
+              <div class="l-name">Şafak</div>
+              <div class="l-dots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>Şafak</h3>
+            <p class="p-moment">Vardiya biterken, yumuşak iniş.</p>
+            <p class="p-origin">ETİYOPYA — YIRGACHEFFE · YIKANMIŞ</p>
+            <div class="notes"><span class="chip">bergamot</span><span class="chip">şeftali</span><span class="chip">yasemin</span></div>
+            <div class="roast">KAVRUM <span class="rdots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span> 2/5</div>
+            <div class="buy">
+              <div class="price">₺380<small>250 G · ÇEKİRDEK</small></div>
+              <button class="btn btn-solid btn-sm add" data-id="p0530">SEPETE EKLE</button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- set -->
+      <div class="set rv">
+        <div class="bags" aria-hidden="true">
+          <svg viewBox="0 0 200 260" style="color:#C98246"><path d="M40 40h120l7 196q0 12-12 12H45q-12 0-12-12z" fill="url(#bagG)"/><rect x="33" y="14" width="134" height="26" rx="4" fill="#0B101D"/><rect x="33" y="46" width="134" height="5" fill="currentColor"/><rect x="70" y="96" width="60" height="44" rx="3" fill="#EFE7D6"/></svg>
+          <svg viewBox="0 0 200 260" style="color:#A85A32"><path d="M40 40h120l7 196q0 12-12 12H45q-12 0-12-12z" fill="url(#bagG)"/><rect x="33" y="14" width="134" height="26" rx="4" fill="#0B101D"/><rect x="33" y="46" width="134" height="5" fill="currentColor"/><rect x="70" y="96" width="60" height="44" rx="3" fill="#EFE7D6"/></svg>
+          <svg viewBox="0 0 200 260" style="color:#E8913F"><path d="M40 40h120l7 196q0 12-12 12H45q-12 0-12-12z" fill="url(#bagG)"/><rect x="33" y="14" width="134" height="26" rx="4" fill="#0B101D"/><rect x="33" y="46" width="134" height="5" fill="currentColor"/><rect x="70" y="96" width="60" height="44" rx="3" fill="#EFE7D6"/></svg>
+          <svg viewBox="0 0 200 260" style="color:#DDB868"><path d="M40 40h120l7 196q0 12-12 12H45q-12 0-12-12z" fill="url(#bagG)"/><rect x="33" y="14" width="134" height="26" rx="4" fill="#0B101D"/><rect x="33" y="46" width="134" height="5" fill="currentColor"/><rect x="70" y="96" width="60" height="44" rx="3" fill="#EFE7D6"/></svg>
+        </div>
+        <div>
+          <h3>Tüm Gece Seti</h3>
+          <p>Dört saatin dördü de tek kutuda: vardiyanın tamamı için 4 × 250 g. İlk kez tanışanlar için doğru başlangıç.</p>
+        </div>
+        <div class="set-right">
+          <div><span class="old">₺1.470</span> &nbsp;<span class="new">₺1.290</span></div>
+          <button class="btn btn-solid add" data-id="set">SETİ SEPETE EKLE</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section class="sec" id="surec">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow rv">03 — SÜREÇ</div>
+          <h2 class="rv d1">Bir gecenin kronolojisi.</h2>
+        </div>
+        <p class="sec-sub rv d2">Sen ekrana, hastaya, hamura bakarken biz ocağa bakarız. Her gece aynı ritüel, aynı saatler.</p>
+      </div>
+      <div class="tline">
+        <div class="tl rv d1"><div class="tt">00:00</div><h3>Ocak yanar</h3><p>Drum 196°C'ye ısınır; gecenin ilk partisi düşer. Mahalledeki tek ışık bizim bacadan çıkar.</p></div>
+        <div class="tl rv d2"><div class="tt">01:30</div><h3>İlk çatlak</h3><p>Çekirdekler ilk çatlağını verir; kavrumcu kayıt defterine notunu düşer, parti dinlenmeye alınır.</p></div>
+        <div class="tl rv d3"><div class="tt">03:47</div><h3>Kupa testi</h3><p>Gecenin en sessiz anında her parti tadılır. Masadan geçemeyen parti asla pakete girmez.</p></div>
+        <div class="tl rv d4"><div class="tt">05:00</div><h3>Paketleme</h3><p>Valfli paketler mühürlenir; kavrum saati el damgasıyla basılır. Etiketteki saat senin gecendir.</p></div>
+        <div class="tl rv d4"><div class="tt">06:00</div><h3>Yola çıkış</h3><p>Kuryeler şehir uyanmadan dağıtıma başlar. Sen vardiyana girerken paketin kapındadır.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SUBSCRIPTION ============ -->
+  <section class="sec sec-alt" id="abonelik">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow rv">04 — ABONELİK</div>
+          <h2 class="rv d1">Nöbetin düzenli olsun.</h2>
+        </div>
+        <p class="sec-sub rv d2">Kahven, vardiya takvimine göre otomatik gelsin. %15 indirimli; dilediğin zaman duraklat ya da iptal et.</p>
+      </div>
+      <div class="subs">
+        <div class="sub rv d1">
+          <div class="tier">SOLO NÖBET</div>
+          <div class="amt">₺320<span>/ay</span></div>
+          <div class="per">1 PAKET · AYDA BİR</div>
+          <ul>
+            <li>Ayda 1 × 250 g, dilediğin harman</li>
+            <li>Harmanı her ay değiştirebilirsin</li>
+            <li>Vardiya gününe göre teslim</li>
+          </ul>
+          <button class="btn btn-ghost add" data-id="sub1">ABONELİĞİ BAŞLAT</button>
+        </div>
+        <div class="sub feat rv d2">
+          <span class="f-badge">EN ÇOK TERCİH EDİLEN</span>
+          <div class="tier">ÇİFT VARDİYA</div>
+          <div class="amt">₺590<span>/ay</span></div>
+          <div class="per">2 PAKET · AYDA BİR</div>
+          <ul>
+            <li>Ayda 2 × 250 g, iki farklı harman</li>
+            <li>Önce yeni kavrumları tadarsın</li>
+            <li>Kargo her zaman bedava</li>
+            <li>Nöbetçi rozeti + sürpriz numuneler</li>
+          </ul>
+          <button class="btn btn-solid add" data-id="sub2">ABONELİĞİ BAŞLAT</button>
+        </div>
+        <div class="sub rv d3">
+          <div class="tier">EKİP NÖBETİ</div>
+          <div class="amt">₺1.090<span>/ay</span></div>
+          <div class="per">4 PAKET · AYDA BİR</div>
+          <ul>
+            <li>Gece çalışan ekipler ve stüdyolar için</li>
+            <li>Hastane, radyo, yazılım ofisi favorisi</li>
+            <li>Faturalandırma ve tek temas noktası</li>
+          </ul>
+          <button class="btn btn-ghost add" data-id="sub3">ABONELİĞİ BAŞLAT</button>
+        </div>
+      </div>
+      <p class="sub-note rv">İLK TESLİMAT: SIRADAKİ GECE KAVRUMUNDA — 05:00 KARGOSUYLA</p>
+    </div>
+  </section>
+
+  <!-- ============ QUOTES ============ -->
+  <section class="sec" id="sozler">
+    <div class="container">
+      <div class="eyebrow rv">05 — SÖZLER</div>
+      <h2 class="rv d1" style="margin-bottom:56px">Gece vardiyasından notlar.</h2>
+      <div class="quotes">
+        <blockquote class="q rv d1">
+          <div class="qm">"</div>
+          <p>Yoğun bakımda saat 04:00'ün bir adı vardır. Bizim koğuşta ona "Nöbet saati" denir; kettle kaynar, herkes sırasını bilir. O kahve olmadan o saat geçmiyor.</p>
+          <footer><b>ECE D.</b>YOĞUN BAKIM HEMŞİRESİ · 8 YILDIR GECE NÖBETİ</footer>
+        </blockquote>
+        <blockquote class="q rv d2">
+          <div class="qm">"</div>
+          <p>Deploy gecesi üç kişi bir paket 03:47 bitiriyoruz. Kod mu iyi, kahve mi iyi, hâlâ emin değilim. Ama ikisi olmadan release çıkmıyor.</p>
+          <footer><b>MERT K.</b>YAZILIM GELİŞTİRİCİ · UZAKTAN, GECE TAKIMI</footer>
+        </blockquote>
+        <blockquote class="q rv d3">
+          <div class="qm">"</div>
+          <p>Fırında hamur 03:00'te mayalanır, ben 02:50'de demlerim. Şafak'ın bergamotu ilk ekmek kokusuna çok yakışıyor. Müşteri ne içtiğimi soruyor.</p>
+          <footer><b>SELİM A.</b>FIRINCI · 03:00–11:00 VARDİYASI</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta">
+    <div class="container">
+      <div class="giant rv" aria-hidden="true">03<span class="cl">:</span>47</div>
+      <h2 class="rv d1">Hâlâ uyanıksan,<br><span style="font-style:italic;color:var(--ember);font-weight:480">kahven de öyle olsun.</span></h2>
+      <p class="now rv d2">ŞU AN SENİN SAATİN — <span class="clock js-clock">--<span class="cl">:</span>--<span class="cl">:</span>--</span> · KAVRUM <span id="ctaOpen">BU GECE 00:00'DA</span></p>
+      <a class="btn btn-solid rv d3" href="#kahveler">KAHVENİ SEÇ</a>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#top"><span>N<span class="omark">O<span class="dots"><i></i><i></i></span></span>BET</span></a>
+        <p class="blurb">Gece çalışanların kahvesi. İstanbul'da 00:00–05:00 arasında kavurulur, şafakta yola çıkar.</p>
+      </div>
+      <div>
+        <h4>KEŞFET</h4>
+        <ul>
+          <li><a href="#hikaye">Hikayemiz</a></li>
+          <li><a href="#kahveler">Kavrum takvimi</a></li>
+          <li><a href="#abonelik">Nöbet aboneliği</a></li>
+          <li><a href="#sozler">Gece sözleri</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>YARDIM</h4>
+        <ul>
+          <li><a href="#kahveler">Kargo ve teslimat</a></li>
+          <li><a href="#kahveler">Öğütme rehberi</a></li>
+          <li><a href="#abonelik">Abonelik yönetimi</a></li>
+          <li><a href="#top">Sık sorulanlar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>İLETİŞİM</h4>
+        <ul>
+          <li>Kavurma Atölyesi:<br>Karaköy, İstanbul</li>
+          <li>Sadece 00:00–05:00 açık</li>
+          <li><a href="mailto:merhaba@nobetkahve.co">merhaba@nobetkahve.co</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-mark" aria-hidden="true">NÖBET</div>
+    <div class="foot-bar">
+      <span>© <span id="year">2026</span> NÖBET KAHVE — TÜM HAKLARI GECEYE AİTTİR</span>
+      <span>BU SİTE DAHİL HER ŞEY 03:00–05:00 ARASINDA ÜRETİLDİ</span>
+      <a href="#top">YUKARI DÖN ↑</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ CART ============ -->
+<div class="overlay" id="overlay"></div>
+<aside class="cart" id="cart" role="dialog" aria-modal="true" aria-label="Sepet">
+  <header class="cart-head">
+    <span>SEPET <span class="n" id="cartN2">(0)</span></span>
+    <button class="x" id="cartClose" aria-label="Sepeti kapat">✕</button>
+  </header>
+  <div class="ship" id="ship">
+    <div class="t"><span id="shipTxt">₺500 ÜZERİ KARGO BEDAVA</span><b id="shipLeft"></b></div>
+    <div class="track"><i id="shipFill"></i></div>
+  </div>
+  <div class="cart-body" id="cartBody"></div>
+  <footer class="cart-foot" id="cartFoot"></footer>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- live clocks + roastery status ---------- */
+const pad=n=>String(n).padStart(2,'0');
+function tick(){
+  const d=new Date();
+  const t=`${pad(d.getHours())}<span class="cl">:</span>${pad(d.getMinutes())}<span class="cl">:</span>${pad(d.getSeconds())}`;
+  $$('.js-clock').forEach(el=>el.innerHTML=t);
+  const h=d.getHours(), open=h<5;
+  const st=$('#roastStatus');
+  if(st) st.innerHTML=open
+    ? '<i class="dotp"></i> KAVRUM OCAĞI: ŞU AN YANIYOR'
+    : '<i class="dotp off"></i> KAVRUM OCAĞI: 00:00\'DA YANACAK';
+  const co=$('#ctaOpen');
+  if(co) co.textContent=open?'ŞU AN OCAKTA':'BU GECE 00:00\'DA';
+}
+tick(); setInterval(tick,1000);
+$('#year').textContent=new Date().getFullYear();
+
+/* ---------- rotating professions ---------- */
+const words=['hemşireler','yazılımcılar','fırıncılar','güvenlik görevlileri','radyocular','nöbetçi eczacılar','fener bekçileri'];
+if(!RM){
+  let wi=0; const sw=$('#swap');
+  setInterval(()=>{
+    sw.classList.add('out');
+    setTimeout(()=>{ wi=(wi+1)%words.length; sw.textContent=words[wi]; sw.classList.remove('out'); },320);
+  },2400);
+}
+
+/* ---------- star field ---------- */
+const cv=$('#stars'), cx=cv.getContext('2d');
+let W,H,stars=[],meteor=null,lastMeteor=0;
+function sizeStars(){
+  const dpr=Math.min(devicePixelRatio||1,2);
+  W=innerWidth; H=innerHeight;
+  cv.width=W*dpr; cv.height=H*dpr;
+  cv.style.width=W+'px'; cv.style.height=H+'px';
+  cx.setTransform(dpr,0,0,dpr,0,0);
+  const n=Math.round(Math.min(130,W*H/14000));
+  stars=Array.from({length:n},()=>({
+    x:Math.random()*W, y:Math.pow(Math.random(),1.6)*H,
+    r:.4+Math.random()*1.1, a:.18+Math.random()*.55,
+    sp:.4+Math.random()*1.2, ph:Math.random()*Math.PI*2
+  }));
+}
+function drawStars(t){
+  cx.clearRect(0,0,W,H);
+  for(const s of stars){
+    const tw=RM?1:(.6+.4*Math.sin(t*.001*s.sp+s.ph));
+    cx.globalAlpha=s.a*tw;
+    cx.fillStyle='#DDE3F0';
+    cx.beginPath(); cx.arc(s.x,s.y,s.r,0,7); cx.fill();
+  }
+  cx.globalAlpha=1;
+  if(!RM){
+    if(!meteor && t-lastMeteor>7000+Math.random()*6000){
+      meteor={x:W*(.15+Math.random()*.7), y:H*Math.random()*.3, vx:6+Math.random()*3, vy:2.4+Math.random()*1.4, life:1};
+      lastMeteor=t;
+    }
+    if(meteor){
+      const m=meteor;
+      const g=cx.createLinearGradient(m.x,m.y,m.x-m.vx*9,m.y-m.vy*9);
+      g.addColorStop(0,`rgba(239,235,224,${.8*m.life})`); g.addColorStop(1,'rgba(239,235,224,0)');
+      cx.strokeStyle=g; cx.lineWidth=1.4;
+      cx.beginPath(); cx.moveTo(m.x,m.y); cx.lineTo(m.x-m.vx*9,m.y-m.vy*9); cx.stroke();
+      m.x+=m.vx; m.y+=m.vy; m.life-=.02;
+      if(m.life<=0||m.x>W+100) meteor=null;
+    }
+    requestAnimationFrame(drawStars);
+  }
+}
+sizeStars();
+addEventListener('resize',sizeStars);
+requestAnimationFrame(drawStars);
+
+/* ---------- scroll reveal ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+}),{threshold:.14});
+$$('.rv').forEach(el=>io.observe(el));
+
+/* ---------- shop data ---------- */
+const P={
+  p2200:{t:'22:00', n:'İlk Işıklar',            v:'250 G · TEK SEFERLİK', pr:340,  acc:'#C98246'},
+  p0030:{t:'00:30', n:'Derin Odak',             v:'250 G · TEK SEFERLİK', pr:360,  acc:'#A85A32'},
+  p0347:{t:'03:47', n:'Sessiz Saat',            v:'250 G · TEK SEFERLİK', pr:390,  acc:'#E8913F'},
+  p0530:{t:'05:30', n:'Şafak',                  v:'250 G · TEK SEFERLİK', pr:380,  acc:'#DDB868'},
+  set:  {t:'SET',   n:'Tüm Gece Seti',          v:'4 × 250 G · TEK KUTU', pr:1290, acc:'#E8913F'},
+  sub1: {t:'AYLIK', n:'Abonelik — Solo Nöbet',  v:'1 PAKET/AY',           pr:320,  acc:'#C98246'},
+  sub2: {t:'AYLIK', n:'Abonelik — Çift Vardiya',v:'2 PAKET/AY',           pr:590,  acc:'#E8913F'},
+  sub3: {t:'AYLIK', n:'Abonelik — Ekip Nöbeti', v:'4 PAKET/AY',           pr:1090, acc:'#DDB868'},
+};
+const SHIP_FREE=500, fmt=n=>'₺'+n.toLocaleString('tr-TR');
+
+let cart=[];
+try{ cart=JSON.parse(localStorage.getItem('nobet-cart-v1')||'[]'); }catch(e){ cart=[]; }
+const save=()=>localStorage.setItem('nobet-cart-v1',JSON.stringify(cart));
+const count=()=>cart.reduce((a,l)=>a+l.q,0);
+const total=()=>cart.reduce((a,l)=>a+l.q*P[l.id].pr,0);
+
+function thumb(acc){
+  return `<svg viewBox="0 0 200 260" style="color:${acc};width:44px;height:auto">
+    <path d="M40 40h120l7 196q0 12-12 12H45q-12 0-12-12z" fill="url(#bagG)"/>
+    <rect x="33" y="14" width="134" height="26" rx="4" fill="#0B101D"/>
+    <rect x="33" y="46" width="134" height="5" fill="currentColor"/>
+    <rect x="66" y="92" width="68" height="50" rx="3" fill="#EFE7D6"/>
+    <rect x="74" y="102" width="52" height="5" rx="2" fill="#171106" opacity=".8"/>
+    <rect x="74" y="113" width="34" height="4" rx="2" fill="#171106" opacity=".45"/>
+  </svg>`;
+}
+
+function render(){
+  $('#cartN').textContent=count();
+  $('#cartN2').textContent=`(${count()})`;
+  const body=$('#cartBody'), foot=$('#cartFoot');
+  const t=total();
+  const left=Math.max(0,SHIP_FREE-t);
+  $('#shipFill').style.width=Math.min(100,t/SHIP_FREE*100)+'%';
+  $('#shipLeft').textContent = t===0 ? '' : (left>0 ? fmt(left)+' KALDI' : 'KARGO BEDAVA ✓');
+  if(!cart.length){
+    body.innerHTML=`<div class="empty">
+      <div class="m">☾</div>
+      <p>Sepetin şu an sessiz.<br>Tıpkı 03:47'deki şehir gibi.</p>
+      <button class="btn btn-ghost btn-sm" id="goShop">KAHVELERE GÖZ AT</button>
+    </div>`;
+    foot.innerHTML='';
+    const gs=$('#goShop');
+    if(gs) gs.onclick=()=>{ closeCart(); location.hash='#kahveler'; };
+    return;
+  }
+  body.innerHTML=cart.map(l=>{ const p=P[l.id]; return `
+    <div class="ci" data-id="${l.id}">
+      <div class="ci-thumb">${thumb(p.acc)}</div>
+      <div class="ci-info">
+        <div class="ci-name">${p.t} · ${p.n}</div>
+        <div class="ci-var">${p.v}</div>
+        <div class="ci-qty">
+          <button data-act="dec" aria-label="Azalt">−</button>
+          <span>${l.q}</span>
+          <button data-act="inc" aria-label="Arttır">+</button>
+        </div>
+      </div>
+      <div class="ci-right">
+        <div class="ci-price">${fmt(p.pr*l.q)}</div>
+        <button class="ci-del" data-act="del">KALDIR</button>
+      </div>
+    </div>`; }).join('');
+  const shipCost = t>=SHIP_FREE ? 0 : 39;
+  foot.innerHTML=`
+    <div class="row-t"><span>ARA TOPLAM</span><span>${fmt(t)}</span></div>
+    <div class="row-t"><span>KARGO</span><span>${shipCost===0?'BEDAVA':fmt(shipCost)}</span></div>
+    <div class="row-t tt"><span>TOPLAM</span><span>${fmt(t+shipCost)}</span></div>
+    <button class="btn btn-solid" id="checkout">SİPARİŞİ TAMAMLA →</button>
+    <div class="fine">ÖĞÜTME TERCİHİNİ (ESPRESSO / FİLTRE / FRENCH PRESS)<br>SİPARİŞ NOTUNA YAZABİLİRSİN · GÜVENLİ ÖDEME</div>`;
+  $('#checkout').onclick=checkout;
+}
+
+function checkout(){
+  const d=new Date();
+  const ord=`NB-${pad(d.getHours())}${pad(d.getMinutes())}-${Math.floor(1000+Math.random()*9000)}`;
+  cart=[]; save(); render();
+  $('#cartN').textContent=0; $('#cartN2').textContent='(0)';
+  $('#shipFill').style.width='0%'; $('#shipLeft').textContent='';
+  $('#cartBody').innerHTML=`<div class="ok">
+    <div class="badge-ok"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></div>
+    <h3>Siparişin alındı.</h3>
+    <p>Kavrum listesine eklendin. Paketin sıradaki gece kavrumunda hazırlanır, şafakla yola çıkar.</p>
+    <div class="ord">SİPARİŞ № ${ord}</div>
+    <br><button class="btn btn-ghost btn-sm" id="cont">ALIŞVERİŞE DEVAM ET</button>
+  </div>`;
+  $('#cartFoot').innerHTML='';
+  $('#cont').onclick=closeCart;
+}
+
+/* ---------- cart actions ---------- */
+let toastT;
+function toast(html){
+  const el=$('#toast');
+  el.innerHTML=html; el.classList.add('on');
+  clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('on'),2400);
+}
+function add(id){
+  const line=cart.find(l=>l.id===id);
+  if(line) line.q++; else cart.push({id,q:1});
+  save(); render();
+  const b=$('#cartN'); b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop');
+  const p=P[id];
+  toast(`<b>${p.t}</b> · ${p.n} sepete eklendi ✓`);
+}
+$$('.add').forEach(b=>b.addEventListener('click',()=>add(b.dataset.id)));
+
+$('#cartBody').addEventListener('click',e=>{
+  const btn=e.target.closest('button'); if(!btn) return;
+  const row=e.target.closest('.ci'); if(!row) return;
+  const id=row.dataset.id, line=cart.find(l=>l.id===id); if(!line) return;
+  const act=btn.dataset.act;
+  if(act==='inc') line.q++;
+  if(act==='dec'){ line.q--; if(line.q<1) cart=cart.filter(l=>l.id!==id); }
+  if(act==='del') cart=cart.filter(l=>l.id!==id);
+  save(); render();
+});
+
+/* ---------- drawer ---------- */
+const cartEl=$('#cart'), overlay=$('#overlay');
+function openCart(){
+  render();
+  cartEl.classList.add('on'); overlay.classList.add('on');
+  document.body.style.overflow='hidden';
+  $('#cartClose').focus();
+}
+function closeCart(){
+  cartEl.classList.remove('on'); overlay.classList.remove('on');
+  document.body.style.overflow='';
+}
+$('#cartOpen').addEventListener('click',openCart);
+$('#cartClose').addEventListener('click',closeCart);
+overlay.addEventListener('click',closeCart);
+addEventListener('keydown',e=>{ if(e.key==='Escape') closeCart(); });
+
+render();
+</script>
+</body>
+</html>
